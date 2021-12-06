@@ -4,6 +4,7 @@ import { IDimension } from "./IDimension";
 
 export interface IShape {
 
+    getId(): number;
     getType(): string;
     draw(p: Point): void;
     move(newCenter: Point): void;

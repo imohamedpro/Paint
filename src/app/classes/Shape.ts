@@ -5,14 +5,20 @@ import { Point } from "./Point";
 
 export abstract class Shape implements IShape {
     readonly type: string;
+    readonly id: number;
     center?: Point;
     fill?: Color;
     stroke?: Color;
+    isSelected: boolean;
 
-    constructor(){
+    constructor(id: number){
+        this.id = id;
         this.type = '';
+        this.isSelected = false;
     }
-
+    getId(): number {
+        return this.id;
+    }
     getType(): string {
         return this.type;
     }
