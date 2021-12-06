@@ -11,9 +11,9 @@ export abstract class Shape implements IShape {
     stroke?: Color;
     isSelected: boolean;
 
-    constructor(id: number){
+    constructor(type: string, id: number){
         this.id = id;
-        this.type = '';
+        this.type = type;
         this.isSelected = false;
     }
     getId(): number {

@@ -14,6 +14,7 @@ export class SketchComponent implements OnInit {
    }
 
   ngOnInit(): void {
+    this.manager.createShape('circle', {x:50, y:50}, {red: 0, green: 100, blue: 30, alpha:100}, {red: 0, green: 100, blue: 30, alpha:100});
   }
   
 
