@@ -1,7 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Shape } from '../../classes/Shape';
-import { IShape } from '../../interfaces/IShape';
-import { ShapeFactoryService } from '../../services/shape-factory.service';
+import { ShapeManagerService } from '../../services/ShapeManager/shape-manager.service';
 
 @Component({
   selector: 'app-sketch',
@@ -9,13 +7,10 @@ import { ShapeFactoryService } from '../../services/shape-factory.service';
   styleUrls: ['./sketch.component.css']
 })
 export class SketchComponent implements OnInit {
-  shapes: IShape[];
-  selectedShapes;
-  factory: ShapeFactoryService;
-  constructor(factory: ShapeFactoryService) {
-    this.shapes = [];
-    this.selectedShapes = {};
-    this.factory = factory;
+  manager: ShapeManagerService;
+
+  constructor(manager: ShapeManagerService) {
+    this.manager = manager;
    }
 
   ngOnInit(): void {
