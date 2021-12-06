@@ -1,1 +1,3 @@
-export interface IDimension { }
+export interface IDimension { 
+    getDimensions(): Object;
+}

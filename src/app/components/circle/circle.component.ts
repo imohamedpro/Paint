@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+import { Shape } from '../../classes/Shape';
+import { IShape } from '../../interfaces/IShape'
 
 @Component({
   selector: '[shape=circle]',
@@ -6,10 +8,23 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./circle.component.css']
 })
 export class CircleComponent implements OnInit {
-
-  constructor() { }
-
-  ngOnInit(): void {
+  @Input() circle!: Shape; 
+  // styles = {
+  //   'fill': this.circle.fill.toString(),
+  //   'stroke' : this.circle.stroke.toString()
+  // }
+  constructor() { 
+    
   }
 
+  ngOnInit(): void {
+    console.log(this.circle.fill.toString());
+  }
+  fillColor(){
+    return `fill: ${this.circle.fill.toString()}`;
+  }
+
+  strokeColor(){
+    return `stroke: ${this.circle.fill.toString()}`;
+  }
 }

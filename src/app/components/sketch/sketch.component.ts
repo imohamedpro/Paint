@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Color } from '../../classes/Color';
+import { Shape } from '../../classes/Shape';
 import { ShapeManagerService } from '../../services/ShapeManager/shape-manager.service';
 
 @Component({
@@ -8,13 +10,12 @@ import { ShapeManagerService } from '../../services/ShapeManager/shape-manager.s
 })
 export class SketchComponent implements OnInit {
   manager: ShapeManagerService;
-
   constructor(manager: ShapeManagerService) {
     this.manager = manager;
    }
 
   ngOnInit(): void {
-    this.manager.createShape('circle', {x:50, y:50}, {red: 0, green: 100, blue: 30, alpha:100}, {red: 0, green: 100, blue: 30, alpha:100});
+    this.manager.createShape('circle', {x:100, y:100}, new Color(110, 100, 30, 0.5), new Color(0, 100, 30, 1));
   }
   
 

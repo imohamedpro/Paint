@@ -1,2 +1,5 @@
 
-<svg:circle cx="100" cy="100" r = "60"/>
+<svg:circle [attr.cx]= "circle.center.x"
+            [attr.cy]= "circle.center.y"
+            [attr.r] = "circle.dimensions[0]"
+            [attr.style] = "fillColor() + '; ' + strokeColor()"/>

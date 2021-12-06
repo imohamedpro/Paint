@@ -6,11 +6,11 @@ import { Point } from "./Point";
 export abstract class Shape implements IShape {
     readonly type: string;
     readonly id: number;
-    center?: Point;
-    fill?: Color;
-    stroke?: Color;
+    dimensions!: Array<number>;
+    center!: Point;
+    fill!: Color;
+    stroke!: Color;
     isSelected: boolean;
-
     constructor(type: string, id: number){
         this.id = id;
         this.type = type;
@@ -35,8 +35,12 @@ export abstract class Shape implements IShape {
          this.stroke = color;
      }
 
+    resize(newCenter: Point, newDimensions: Array<number>): void{
+        this.center = newCenter;
+        this.dimensions = newDimensions;
+     }
+
     abstract draw(p: Point): void;
-    abstract resize(newD: IDimension): void;
     abstract copy(): IShape;
     abstract delete(): void;
 

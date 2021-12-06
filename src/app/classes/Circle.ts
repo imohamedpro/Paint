@@ -1,5 +1,6 @@
 import { IDimension } from '../interfaces/IDimension';
 import { IShape } from '../interfaces/IShape';
+import { CircleDimensions } from './CircleDimensions';
 import { Point } from './Point';
 import {Shape} from './Shape'
 
@@ -12,9 +13,9 @@ export class Circle extends Shape {
     draw(p: Point): void {
         throw new Error('Method not implemented.');
     }
-    resize(newD: IDimension): void {
-        throw new Error('Method not implemented.');
-    }
+    // resize(newCenter: Point, newDimensions: Array<number>): void {
+    //     throw new Error('Method not implemented.');
+    // }
     copy(): IShape {
         throw new Error('Method not implemented.');
     }
