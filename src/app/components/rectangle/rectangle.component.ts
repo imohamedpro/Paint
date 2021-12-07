@@ -17,13 +17,13 @@ export class RectangleComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    console.log(this.rectangle.fill.toString());
+    console.log(this.rectangle.style.toString());
   }
-  fillColor(){
-    return `fill: ${this.rectangle.fill.toString()}`;
-  }
+  // fillColor(){
+  //   return `fill: ${this.rectangle.fill.toString()}`;
+  // }
 
-  strokeColor(){
-    return `stroke: ${this.rectangle.fill.toString()}`;
-  }
+  // strokeColor(){
+  //   return `stroke: ${this.rectangle.fill.toString()}`;
+  // }
 }

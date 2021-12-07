@@ -12,12 +12,16 @@ export class ShapeFactoryService {
 
   constructor() { }
   createShape(type: string, id: number): Shape{
-    switch(type){
+    let shape: Shape = new Circle(id);
+    switch (type){
       case 'circle':
-        return new Circle(id);
+        shape =  new Circle(id);
+        break;
       case 'rectangle':
-        return new Rectangle(id);
+        shape = new Rectangle(id);
+        break;
     }
-    return new Circle(id);
+
+    return shape;
   }
 }
