@@ -18,13 +18,13 @@ export class CircleComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    console.log(this.circle.fill.toString());
+    console.log(this.circle.style.toString());
   }
-  fillColor(){
-    return `fill: ${this.circle.fill.toString()}`;
-  }
+  // fillColor(){
+  //   return `fill: ${this.circle.fill.toString()}`;
+  // }
 
-  strokeColor(){
-    return `stroke: ${this.circle.fill.toString()}`;
-  }
+  // strokeColor(){
+  //   return `stroke: ${this.circle.fill.toString()}`;
+  // }
 }
