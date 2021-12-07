@@ -29,7 +29,7 @@ export class ShapeManagerService {
     shape.move(center);
     shape.setFill(fill);
     shape.setStroke(stroke);
-    shape.resize(center, [60]);
+    shape.resize(center, [100,100]);
     this.shapes.set(id, shape);
     // console.log(shape.fill.toString());
 
