@@ -16,6 +16,7 @@ export class SketchComponent implements OnInit {
 
   ngOnInit(): void {
     this.manager.createShape('circle', {x:100, y:100}, new Color(110, 100, 30, 0.5), new Color(0, 100, 30, 1));
+    this.manager.createShape('rectangle', {x:300, y:300}, new Color(110, 100, 30, 0.5), new Color(0, 100, 30, 1));
   }
   
 
