@@ -1,5 +1,5 @@
-import { Color } from "../classes/Color";
 import { Point } from "../classes/Point";
+import { Color } from "../classes/Style";
 import { IDimension } from "./IDimension";
 
 export interface IShape {

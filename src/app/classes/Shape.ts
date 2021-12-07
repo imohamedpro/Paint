@@ -1,15 +1,17 @@
 import { IDimension } from "../interfaces/IDimension";
 import { IShape } from "../interfaces/IShape";
-import { Color } from "./Color";
 import { Point } from "./Point";
+import { Color, Dimensions, Style } from "./Style";
 
 export abstract class Shape implements IShape {
     readonly type: string;
     readonly id: number;
     dimensions!: Array<number>;
     center!: Point;
-    fill!: Color;
-    stroke!: Color;
+    style!: Style;
+    // fill!: Color;
+    // stroke!: Color;
+    // strokeWidth!: number;
     isSelected: boolean;
     constructor(type: string, id: number){
         this.id = id;
@@ -28,11 +30,15 @@ export abstract class Shape implements IShape {
     }
 
     setFill(color: Color): void {
-        this.fill = color;
+        this.style.fillColor = color;
      }
 
      setStroke(color: Color): void {
-         this.stroke = color;
+         this.style.strokeColor = color;
+     }
+
+     setStrokeWidth(width: number): void {
+        this.style.strokeWidth = new Dimensions(width);
      }
 
     resize(newCenter: Point, newDimensions: Array<number>): void{
