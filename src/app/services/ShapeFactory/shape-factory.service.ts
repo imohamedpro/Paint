@@ -10,6 +10,16 @@ export class ShapeFactoryService {
 
   constructor() { }
   createShape(type: string, id: number): Shape{
-    return new Circle(id);
+    let shape: Shape = new Circle(id);
+    switch (type){
+
+
+      case 'circle':
+        shape =  new Circle(id);
+        break;
+
+    }
+
+    return shape;
   }
 }
