@@ -2,12 +2,13 @@ export class Style {
     fillColor!: FillColor;
     strokeColor!: StrokeColor;
     strokeWidth!: Dimensions;
-    cursor!: string;
+    cursor!: Cursor;
     toString(): string {
         let str: string = '';
         Object.values(this).forEach((value) => {
             str += `${value.toString()};`
         })
+        console.log(str);
         return str;
     }
 }
@@ -32,6 +33,15 @@ export class Color {
     }
 }
 
+export class Cursor {
+    type: string;
+    constructor(type: string){
+        this.type = type
+    }
+    toString(): string{
+        return `cursor: ${this.type}`
+    }
+}
 
 export class FillColor extends Color {
     override toString(): string {

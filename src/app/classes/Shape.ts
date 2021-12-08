@@ -1,7 +1,7 @@
 import { IDimension } from "../interfaces/IDimension";
 import { IShape } from "../interfaces/IShape";
 import { Point } from "./Point";
-import { Color, Dimensions, Style } from "./Style";
+import { Color, Cursor, Dimensions, Style } from "./Style";
 
 export abstract class Shape implements IShape {
     readonly type: string;
@@ -43,6 +43,10 @@ export abstract class Shape implements IShape {
 
      setStrokeWidth(width: number): void {
         this.style.strokeWidth = new Dimensions(width);
+     }
+
+     setCursor(type: string){
+         this.style.cursor = new Cursor(type);
      }
 
     resize(newCenter: Point, newDimensions: Array<number>): void{

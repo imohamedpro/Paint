@@ -1,6 +1,6 @@
+import { Shape } from 'src/app/classes/Shape';
 import { Component, HostListener, Input, OnInit } from '@angular/core';
 import { Point } from '../../classes/Point';
-import { Shape } from '../../classes/Shape';
 import { FillColor, StrokeColor } from '../../classes/Style';
 import { IShape } from '../../interfaces/IShape'
 import { ShapeManagerService } from '../../services/ShapeManager/shape-manager.service';
@@ -46,23 +46,25 @@ export class RectangleComponent implements OnInit{
 
   clicked(): void {
     if(!this.dragging){
-      // this.rectangle.isSelected = !this.rectangle.isSelected;
+      if(this.manager.selectedShapes.size == 0){  //first one to be clicked
+        this.manager.select(this.rectangle);
 
-      if(this.manager.selectedShapes.size == 0 || this.ctrl){
+      }else if (this.rectangle.isSelected){
+        this.manager.deselect(this.rectangle);
+
+      }else if(!this.rectangle.isSelected && this.ctrl) {
+        this.manager.select(this.rectangle);
+      }else{
         this.manager.clearSelected();
+        this.manager.select(this.rectangle);
       }
-      // this.rectangle.isSelected = true;
-      this.manager.select(this.rectangle);
-      // if(this.rectangle.isSelected){
-      //   this.manager.select(this.rectangle);
-      // }else{
-      //   this.manager.deselect(this.rectangle.id);
-      // }
-      this.rectangle.setFill(new FillColor(Math.floor(Math.random()*255),Math.floor(Math.random()*255),Math.floor(Math.random()*255), 1));
-      this.rectangle.setStroke(new StrokeColor(Math.floor(Math.random()*255),Math.floor(Math.random()*255),Math.floor(Math.random()*255), 1));
-      console.log(this.manager);
-    }
 
+      if(this.rectangle.isSelected){
+        this.rectangle.setFill(new FillColor(Math.floor(Math.random()*255),Math.floor(Math.random()*255),Math.floor(Math.random()*255), 1));
+        this.rectangle.setStroke(new StrokeColor(Math.floor(Math.random()*255),Math.floor(Math.random()*255),Math.floor(Math.random()*255), 1));
+        console.log(this.manager);
+      }
+    }
 
   }
   mouseDown(e: MouseEvent):void {
