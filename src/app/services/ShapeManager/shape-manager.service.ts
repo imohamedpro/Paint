@@ -43,6 +43,12 @@ export class ShapeManagerService {
   deselect(id: number){
     this.selectedShapes.delete(id);
   }
+  clearSelected(){
+    this.selectedShapes.forEach((shape) => {
+      shape.isSelected = false;
+    });
+    this.selectedShapes = new Map<number, Shape>();
+  }
 
   move(offset: Point){
     this.selectedShapes.forEach((shape) => {
