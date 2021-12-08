@@ -4,8 +4,8 @@ import {Shape} from './Shape'
 
 
 export class Rectangle extends Shape {
-    constructor(id: number){
-        super("rectangle", id);
+    constructor(id: number, center: Point){
+        super("rectangle", id, center);
     }
 
     draw(p: Point): void {

@@ -2,6 +2,7 @@ export class Style {
     fillColor!: FillColor;
     strokeColor!: StrokeColor;
     strokeWidth!: Dimensions;
+    cursor!: string;
     toString(): string {
         let str: string = '';
         Object.values(this).forEach((value) => {

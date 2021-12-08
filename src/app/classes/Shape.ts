@@ -13,12 +13,11 @@ export abstract class Shape implements IShape {
     // stroke!: Color;
     // strokeWidth!: number;
     isSelected: boolean;
-    isUpperLeftCornerClicked: boolean;
-    constructor(type: string, id: number){
+    constructor(type: string, id: number, center: Point){
         this.id = id;
         this.type = type;
+        this.center = center;
         this.isSelected = false;
-        this.isUpperLeftCornerClicked = false;
     }
     getId(): number {
         return this.id;
@@ -27,8 +26,11 @@ export abstract class Shape implements IShape {
         return this.type;
     }
 
-    move(newCenter: Point): void {
-        this.center = newCenter;
+    move(offset: Point): void {
+        this.center.shift(offset);
+        // this.center = offset;
+        // console.log(this.center);
+
     }
 
     setFill(color: Color): void {
@@ -76,24 +78,24 @@ export abstract class Shape implements IShape {
         }
     }
 
-    clickUpperLeftCorner(){
-        this.isUpperLeftCornerClicked = true;
-        console.log("mousedown");
-    }
+    // clickUpperLeftCorner(){
+    //     this.isUpperLeftCornerClicked = true;
+    //     console.log("mousedown");
+    // }
 
-    moveUpperLeftCorner(e: MouseEvent){
-        if(this.isUpperLeftCornerClicked && this.isSelected && e.which == 1){
-            e.stopPropagation();
-            let newCenter = new Point(this.center.x + e.movementX, this.center.y + e.movementY);
-            let newDimensions = [this.dimensions[0] - e.movementY, this.dimensions[1] - e.movementX];
-            this.resize(newCenter, newDimensions);
-            console.log(e.movementX + "  " + e.movementY)
-        }
-    }
+    // moveUpperLeftCorner(e: MouseEvent){
+    //     if(this.isUpperLeftCornerClicked && this.isSelected && e.which == 1){
+    //         e.stopPropagation();
+    //         let newCenter = new Point(this.center.x + e.movementX, this.center.y + e.movementY);
+    //         let newDimensions = [this.dimensions[0] - e.movementY, this.dimensions[1] - e.movementX];
+    //         this.resize(newCenter, newDimensions);
+    //         console.log(e.movementX + "  " + e.movementY)
+    //     }
+    // }
 
-    mouseUp(){
-        this.isUpperLeftCornerClicked = false;
-        console.log("mouseup");
-    }
+    // mouseUp(){
+    //     this.isUpperLeftCornerClicked = false;
+    //     console.log("mouseup");
+    // }
 
 }
