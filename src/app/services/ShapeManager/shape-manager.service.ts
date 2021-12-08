@@ -25,9 +25,9 @@ export class ShapeManagerService {
   }
   createShape(type: string, center:Point, fill: Color, stroke: Color, strokeWidth: number){
     let id = this.getAvailableId();
-    let shape = this.factory.createShape(type, id);
+    let shape = this.factory.createShape(type, id, center);
     shape.style = new Style();
-    shape.move(center);
+    // shape.move(center);
     shape.setFill(fill);
     shape.setStroke(stroke);
     shape.setStrokeWidth(strokeWidth);
@@ -35,5 +35,18 @@ export class ShapeManagerService {
     this.shapes.set(id, shape);
     // console.log(shape.fill.toString());
 
+  }
+
+  select(shape: Shape){
+   this.selectedShapes.set(shape.id, shape); 
+  }
+  deselect(id: number){
+    this.selectedShapes.delete(id);
+  }
+
+  move(offset: Point){
+    this.selectedShapes.forEach((shape) => {
+      shape.move(offset);
+    });
   }
 }

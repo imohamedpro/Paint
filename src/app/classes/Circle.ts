@@ -6,8 +6,8 @@ import {Shape} from './Shape'
 
 
 export class Circle extends Shape {
-    constructor(id: number){
-        super("circle", id);
+    constructor(id: number, center: Point){
+        super("circle", id, center);
     }
 
     draw(p: Point): void {

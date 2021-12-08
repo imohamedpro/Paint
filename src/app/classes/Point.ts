@@ -5,5 +5,8 @@ export class Point {
         this.x = x;
         this.y = y;
     }
-
+    shift(p: Point){
+        this.x += p.x;
+        this.y += p.y;
+    }
 }

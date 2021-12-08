@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Point } from '../../classes/Point';
 import { Shape } from '../../classes/Shape';
 import { FillColor, StrokeColor } from '../../classes/Style';
 import { ShapeManagerService } from '../../services/ShapeManager/shape-manager.service';
@@ -15,7 +16,8 @@ export class SketchComponent implements OnInit {
    }
 
   ngOnInit(): void {
-    this.manager.createShape('circle', {x:100, y:100}, new FillColor(110, 100, 30, 0.5), new StrokeColor(0, 100, 30, 1), 5);
+    this.manager.createShape('circle', new Point(100, 100), new FillColor(110, 100, 30, 0.5), new StrokeColor(0, 100, 30, 1), 5);
+    this.manager.createShape('circle', new Point(450, 450), new FillColor(110, 100, 30, 0.5), new StrokeColor(0, 100, 30, 1), 5);
 
   }
   
