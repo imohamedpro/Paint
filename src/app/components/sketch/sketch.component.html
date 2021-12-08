@@ -3,7 +3,8 @@
             [ngSwitch]="shape.value.getType()"
             [id]= "shape.key">
 
-        <svg:circle *ngIf="shape.value.isSelected" [attr.r] = "10"/> 
+        <!-- <svg:circle *ngIf="shape.value.isSelected" [attr.r] = "10"/>  -->
+
         <svg:g *ngSwitchCase= "'line'" shape = 'line'/>
 
 
@@ -23,8 +24,10 @@
 
 
         <svg:g *ngSwitchCase = "'userDefined'" shape = 'userDefined'/>
+        
+        <svg:g *ngIf="shape.value.isSelected"  shape = 'selection' [center] = 'shape.value.center' [dimensions]= 'shape.value.dimensions' [type] = 'shape.value.getType()'/>        
 
-        <svg:g *ngIf="shape.value.isSelected"  shape = 'selection' [selected] = 'shape.value'/>        
+
     </svg:g>
     <use *ngFor="let shape of this.manager.selectedShapes | keyvalue"
             [attr.href] = "'#' + shape.key">

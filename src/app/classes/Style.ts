@@ -8,7 +8,7 @@ export class Style {
         Object.values(this).forEach((value) => {
             str += `${value.toString()};`
         })
-        console.log(str);
+        // console.log(str);
         return str;
     }
 }
