@@ -3,7 +3,7 @@
             [ngSwitch]="shape.value.getType()">
 
 
-        <svg:g *ngSwitchCase= "'line'" shape = 'line' [id]= "shape.key"/>
+        <svg:g *ngSwitchCase= "'line'" shape = 'line' [id]= "shape.key" [line] = 'shape.value'/>
 
 
         <svg:g *ngSwitchCase = "'triangle'" shape = 'triangle' [id]= "shape.key"/>
