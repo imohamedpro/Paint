@@ -38,10 +38,18 @@ export class ShapeManagerService {
   }
 
   select(shape: Shape){
-   this.selectedShapes.set(shape.id, shape); 
+    shape.isSelected = true;
+    this.selectedShapes.set(shape.id, shape); 
   }
-  deselect(id: number){
-    this.selectedShapes.delete(id);
+  deselect(shape: Shape){
+    shape.isSelected = false;
+    this.selectedShapes.delete(shape.id);
+  }
+  clearSelected(){
+    this.selectedShapes.forEach((shape) => {
+      this.deselect(shape);
+    });
+    // this.selectedShapes = new Map<number, Shape>();
   }
 
   move(offset: Point){
