@@ -46,15 +46,18 @@ export class CircleComponent implements OnInit{
 
   clicked(): void {
     if(!this.dragging){
-      if(!(this.manager.selectedShapes.size == 0 || this.ctrl)){
+      // this.circle.isSelected = !this.circle.isSelected;
+
+      if(this.manager.selectedShapes.size == 0 || this.ctrl){
         this.manager.clearSelected();
       }
-      this.circle.isSelected = !this.circle.isSelected;
-      if(this.circle.isSelected){
-        this.manager.select(this.circle);
-      }else{
-        this.manager.deselect(this.circle.id);
-      }
+      // this.circle.isSelected = true;
+      this.manager.select(this.circle);
+      // if(this.circle.isSelected){
+      //   this.manager.select(this.circle);
+      // }else{
+      //   this.manager.deselect(this.circle.id);
+      // }
       this.circle.setFill(new FillColor(Math.floor(Math.random()*255),Math.floor(Math.random()*255),Math.floor(Math.random()*255), 1));
       this.circle.setStroke(new StrokeColor(Math.floor(Math.random()*255),Math.floor(Math.random()*255),Math.floor(Math.random()*255), 1));
       console.log(this.manager);
