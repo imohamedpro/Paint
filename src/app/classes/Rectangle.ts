@@ -20,5 +20,5 @@ export class Rectangle extends Shape {
     delete(): void {
         throw new Error('Method not implemented.');
     }
-
+    
 }

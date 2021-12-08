@@ -31,7 +31,7 @@ export class ShapeManagerService {
     shape.setFill(fill);
     shape.setStroke(stroke);
     shape.setStrokeWidth(strokeWidth);
-    shape.resize(center, [100,100]);
+    shape.resize(center, [100,200]);
     this.shapes.set(id, shape);
     // console.log(shape.fill.toString());
 

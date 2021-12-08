@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { Point } from 'src/app/classes/Point';
 import { Shape } from '../../classes/Shape';
 
 @Component({
@@ -19,6 +20,16 @@ export class RectangleComponent implements OnInit {
   ngOnInit(): void {
     console.log(this.rectangle.style.toString());
   }
+
+  // fire(e: MouseEvent): void{
+  //    if(this.rectangle.isSelected && e.which == 1){
+  //     e.stopPropagation();
+  //     console.log(e);
+  //     let offsetX = this.rectangle.center.x + e.movementX;
+  //     let offsetY = this.rectangle.center.y + e.movementY;
+  //     this.rectangle.move(new Point(offsetX, offsetY));
+  //    }
+  // }
   // fillColor(){
   //   return `fill: ${this.rectangle.fill.toString()}`;
   // }
