@@ -13,9 +13,10 @@ export abstract class Shape implements IShape {
     // stroke!: Color;
     // strokeWidth!: number;
     isSelected: boolean;
-    constructor(type: string, id: number){
+    constructor(type: string, id: number, center: Point){
         this.id = id;
         this.type = type;
+        this.center = center;
         this.isSelected = false;
     }
     getId(): number {
@@ -25,8 +26,11 @@ export abstract class Shape implements IShape {
         return this.type;
     }
 
-    move(newCenter: Point): void {
-        this.center = newCenter;
+    move(offset: Point): void {
+        this.center.shift(offset);
+        // this.center = offset;
+        // console.log(this.center);
+
     }
 
     setFill(color: Color): void {
