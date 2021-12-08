@@ -17,8 +17,9 @@ export class SketchComponent implements OnInit {
 
   ngOnInit(): void {
     this.manager.createShape('circle', new Point(100, 100), new FillColor(110, 100, 30, 0.5), new StrokeColor(0, 100, 30, 1), 5);
+    this.manager.createShape('rectangle', new Point(300, 300), new FillColor(110, 100, 30, 0.5), new StrokeColor(0, 100, 30, 1), 5);
     this.manager.createShape('circle', new Point(450, 450), new FillColor(110, 100, 30, 0.5), new StrokeColor(0, 100, 30, 1), 5);
-
+    this.manager.createShape('ellipse', new Point(100, 500), new FillColor(110, 100, 30, 0.5), new StrokeColor(0, 100, 30, 1), 5);
   }
   random():number{
     return Math.random()*800;

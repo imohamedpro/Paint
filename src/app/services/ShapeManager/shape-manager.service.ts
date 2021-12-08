@@ -31,7 +31,8 @@ export class ShapeManagerService {
     shape.setFill(fill);
     shape.setStroke(stroke);
     shape.setStrokeWidth(strokeWidth);
-    shape.resize(center, [60]);
+    shape.setCursor("default");
+    shape.resize(center, [100,50]);
     this.shapes.set(id, shape);
     // console.log(shape.fill.toString());
 
@@ -39,12 +40,15 @@ export class ShapeManagerService {
 
   select(shape: Shape){
     shape.isSelected = true;
-    this.selectedShapes.set(shape.id, shape); 
+    this.selectedShapes.set(shape.id, shape);
+    shape.setCursor("move"); 
   }
   deselect(shape: Shape){
     shape.isSelected = false;
     this.selectedShapes.delete(shape.id);
+    shape.setCursor("default"); 
   }
+
   clearSelected(){
     this.selectedShapes.forEach((shape) => {
       this.deselect(shape);

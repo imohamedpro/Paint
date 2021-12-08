@@ -10,13 +10,13 @@
         <svg:g *ngSwitchCase = "'triangle'" shape = 'triangle'/>
 
 
-        <svg:g *ngSwitchCase = "'ellipse'" shape = 'ellipse'/>
+        <svg:g *ngSwitchCase = "'ellipse'" shape = 'ellipse' [ellipse] = 'shape.value'/>
 
 
         <svg:g *ngSwitchCase = "'circle'" shape = 'circle' [circle] = 'shape.value'/>
 
 
-        <svg:g *ngSwitchCase = "'rectangle'" shape = 'rectangle'/>
+        <svg:g *ngSwitchCase = "'rectangle'" shape = 'rectangle' [rectangle] = 'shape.value'/>
 
 
         <svg:g *ngSwitchCase = "'square'" shape = 'square'/>

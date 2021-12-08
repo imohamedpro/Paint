@@ -1,4 +1,4 @@
-import { Shape } from '../../classes/Shape';
+import { Shape } from 'src/app/classes/Shape';
 import { Component, HostListener, Input, OnInit } from '@angular/core';
 import { Point } from '../../classes/Point';
 import { FillColor, StrokeColor } from '../../classes/Style';
@@ -6,12 +6,12 @@ import { IShape } from '../../interfaces/IShape'
 import { ShapeManagerService } from '../../services/ShapeManager/shape-manager.service';
 
 @Component({
-  selector: '[shape=circle]',
-  templateUrl: './circle.component.html',
-  styleUrls: ['./circle.component.css']
+  selector: '[shape=ellipse]',
+  templateUrl: './ellipse.component.html',
+  styleUrls: ['./ellipse.component.css']
 })
-export class CircleComponent implements OnInit{
-  @Input() circle!: Shape; 
+export class EllipseComponent implements OnInit{
+  @Input() ellipse!: Shape; 
   manager: ShapeManagerService;
   initialClick!: Point;
   dragging: boolean; 
@@ -24,7 +24,7 @@ export class CircleComponent implements OnInit{
   }
 
   ngOnInit(): void {
-    console.log(this.circle.style.toString());
+    console.log(this.ellipse.style.toString());
   }
 
   @HostListener('window:keydown', ['$event'])
@@ -46,29 +46,29 @@ export class CircleComponent implements OnInit{
 
   clicked(): void {
     if(!this.dragging){
-      // this.circle.isSelected = !this.circle.isSelected;
+      // this.ellipse.isSelected = !this.ellipse.isSelected;
 
       if(this.manager.selectedShapes.size == 0){  //first one to be clicked
-        this.manager.select(this.circle);
+        this.manager.select(this.ellipse);
 
-      }else if (this.circle.isSelected){
-        this.manager.deselect(this.circle);
+      }else if (this.ellipse.isSelected){
+        this.manager.deselect(this.ellipse);
 
-      }else if(!this.circle.isSelected && this.ctrl) {
-        this.manager.select(this.circle);
+      }else if(!this.ellipse.isSelected && this.ctrl) {
+        this.manager.select(this.ellipse);
       }else{
         this.manager.clearSelected();
-        this.manager.select(this.circle);
+        this.manager.select(this.ellipse);
       }
-      // this.circle.isSelected = true;
-      // if(this.circle.isSelected){
-      //   this.manager.select(this.circle);
+      // this.ellipse.isSelected = true;
+      // if(this.ellipse.isSelected){
+      //   this.manager.select(this.ellipse);
       // }else{
-      //   this.manager.deselect(this.circle.id);
+      //   this.manager.deselect(this.ellipse.id);
       // }
-      if(this.circle.isSelected){
-        this.circle.setFill(new FillColor(Math.floor(Math.random()*255),Math.floor(Math.random()*255),Math.floor(Math.random()*255), 1));
-        this.circle.setStroke(new StrokeColor(Math.floor(Math.random()*255),Math.floor(Math.random()*255),Math.floor(Math.random()*255), 1));
+      if(this.ellipse.isSelected){
+        this.ellipse.setFill(new FillColor(Math.floor(Math.random()*255),Math.floor(Math.random()*255),Math.floor(Math.random()*255), 1));
+        this.ellipse.setStroke(new StrokeColor(Math.floor(Math.random()*255),Math.floor(Math.random()*255),Math.floor(Math.random()*255), 1));
         console.log(this.manager);
       }
     }
@@ -84,7 +84,7 @@ export class CircleComponent implements OnInit{
     }
   }
   move(e: MouseEvent): void {
-    if(e.button == 0 && this.dragging && this.circle.isSelected){
+    if(e.button == 0 && this.dragging && this.ellipse.isSelected){
       let offset: Point = new Point(e.clientX - this.initialClick.x, e.clientY - this.initialClick.y);
       console.log(offset);
       this.initialClick = new Point(e.clientX, e.clientY);
