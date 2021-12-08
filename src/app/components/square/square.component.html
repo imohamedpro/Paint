@@ -1,11 +1,14 @@
 <!-- <p>square works!</p> -->
 
-<svg:rect   [attr.x]= "square.center.x"
-            [attr.y]= "square.center.y"
-            [attr.height] = "square.dimensions[0]"
-            [attr.width] = "square.dimensions[0]"
-            
-            [attr.style] = "fillColor() + '; ' + strokeColor()"/>
+<svg:rect   [attr.x]= "square.center.x",
+            [attr.y]= "square.center.y",
+            [attr.height] = "square.dimensions[0]",
+            [attr.width] = "square.dimensions[0]",
+            [attr.style] = "square.style.toString()",
+            (click)="clicked()",
+            (mousedown)="mouseDown($event)",
+            (mousemove)="move($event)",
+            (mouseup)="mouseUp($event)"/>
 
 
 

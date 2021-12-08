@@ -3,8 +3,8 @@ import { Point } from "./Point";
 import { Shape } from "./Shape";
 
 export class Square extends Shape {
-    constructor(id: number){
-        super("square", id);
+    constructor(id: number, center: Point){
+        super("square", id, center);
     }
 
     draw(p: Point): void {

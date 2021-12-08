@@ -13,7 +13,7 @@ export class ShapeFactoryService {
 
   constructor() { }
   createShape(type: string, id: number, center: Point): Shape{
-    let shape: Shape = new Circle(id, center);
+    let shape: Shape = new Square(id, center);
     switch (type){
 
 
@@ -22,10 +22,8 @@ export class ShapeFactoryService {
         break;
 
       case 'square':
-        shape = new Square(id);
+        shape = new Square(id, center);
         break;  
-      
-      
       }
       
 
