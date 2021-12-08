@@ -3,7 +3,7 @@
             [ngSwitch]="shape.value.getType()"
             [id]= "shape.key">
 
-        <svg:g *ngIf="shape.value.isSelected"/> 
+        <svg:circle *ngIf="shape.value.isSelected" [attr.r] = "10"/> 
         <svg:g *ngSwitchCase= "'line'" shape = 'line'/>
 
 

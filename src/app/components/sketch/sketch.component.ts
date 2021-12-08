@@ -20,6 +20,8 @@ export class SketchComponent implements OnInit {
     this.manager.createShape('circle', new Point(450, 450), new FillColor(110, 100, 30, 0.5), new StrokeColor(0, 100, 30, 1), 5);
 
   }
-  
+  random():number{
+    return Math.random()*800;
+  }
 
 }
