@@ -24,10 +24,9 @@
 
         <svg:g *ngSwitchCase = "'userDefined'" shape = 'userDefined'/>
 
-        
+        <svg:g *ngIf="shape.value.isSelected"  shape = 'selection' [selected] = 'shape.value'/>        
     </svg:g>
     <use *ngFor="let shape of this.manager.selectedShapes | keyvalue"
             [attr.href] = "'#' + shape.key">
-
     </use>
 </svg>

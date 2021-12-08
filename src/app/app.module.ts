@@ -5,6 +5,7 @@ import { SketchComponent } from './components/sketch/sketch.component';
 import { CircleComponent } from './components/circle/circle.component';
 import { RectangleComponent } from './components/rectangle/rectangle.component';
 import { EllipseComponent } from './components/ellipse/ellipse.component';
+import { SelectionComponent } from './components/selection/selection.component';
 
 @NgModule({
   declarations: [
@@ -13,6 +14,7 @@ import { EllipseComponent } from './components/ellipse/ellipse.component';
     CircleComponent,
     RectangleComponent,
     EllipseComponent,
+    SelectionComponent,
   ],
   imports: [
     BrowserModule
