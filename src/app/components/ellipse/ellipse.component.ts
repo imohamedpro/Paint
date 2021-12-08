@@ -6,38 +6,38 @@ import { IShape } from '../../interfaces/IShape'
 import { ShapeManagerService } from '../../services/ShapeManager/shape-manager.service';
 
 @Component({
-  selector: '[shape=rectangle]',
-  templateUrl: './rectangle.component.html',
-  styleUrls: ['./rectangle.component.css']
+  selector: '[shape=ellipse]',
+  templateUrl: './ellipse.component.html',
+  styleUrls: ['./ellipse.component.css']
 })
-export class RectangleComponent implements OnInit{
-  @Input() rectangle!: Shape; 
+export class EllipseComponent implements OnInit{
+  @Input() ellipse!: Shape; 
   manager: ShapeManagerService;
   initialClick!: Point;
   dragging: boolean = false; 
   // styles = {
-  //   'fill': this.rectangle.fill.toString(),
-  //   'stroke' : this.rectangle.stroke.toString()
+  //   'fill': this.ellipse.fill.toString(),
+  //   'stroke' : this.ellipse.stroke.toString()
   // }
   constructor(manager: ShapeManagerService) { 
     this.manager = manager;
   }
 
   ngOnInit(): void {
-    console.log(this.rectangle.style.toString());
+    console.log(this.ellipse.style.toString());
   }
 
   clicked(): void {
     if(!this.dragging){
-      this.rectangle.isSelected = !this.rectangle.isSelected;
-      if(this.rectangle.isSelected){
-        this.manager.select(this.rectangle);
+      this.ellipse.isSelected = !this.ellipse.isSelected;
+      if(this.ellipse.isSelected){
+        this.manager.select(this.ellipse);
       }else{
-        this.manager.deselect(this.rectangle.id);
+        this.manager.deselect(this.ellipse.id);
       }
     }
-    this.rectangle.setFill(new FillColor(Math.floor(Math.random()*255),Math.floor(Math.random()*255),Math.floor(Math.random()*255), 0.25));
-    this.rectangle.setStroke(new StrokeColor(Math.floor(Math.random()*255),Math.floor(Math.random()*255),Math.floor(Math.random()*255), 0.25));
+    this.ellipse.setFill(new FillColor(Math.floor(Math.random()*255),Math.floor(Math.random()*255),Math.floor(Math.random()*255), 0.25));
+    this.ellipse.setStroke(new StrokeColor(Math.floor(Math.random()*255),Math.floor(Math.random()*255),Math.floor(Math.random()*255), 0.25));
     console.log(this.manager);
 
   }
@@ -50,7 +50,7 @@ export class RectangleComponent implements OnInit{
     }
   }
   move(e: MouseEvent): void {
-    if(e.button == 0 && this.rectangle.isSelected && this.dragging){
+    if(e.button == 0 && this.ellipse.isSelected && this.dragging){
       let offset: Point = new Point(e.clientX - this.initialClick.x, e.clientY - this.initialClick.y);
       console.log(offset);
       this.initialClick = new Point(e.clientX, e.clientY);
@@ -63,10 +63,10 @@ export class RectangleComponent implements OnInit{
     }
   }
   // fillColor(){
-  //   return `fill: ${this.rectangle.fill.toString()}`;
+  //   return `fill: ${this.ellipse.fill.toString()}`;
   // }
 
   // strokeColor(){
-  //   return `stroke: ${this.rectangle.fill.toString()}`;
+  //   return `stroke: ${this.ellipse.fill.toString()}`;
   // }
 }

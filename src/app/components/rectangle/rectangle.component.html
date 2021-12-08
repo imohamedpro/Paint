@@ -18,8 +18,10 @@
 
 <svg:rect   [attr.x]= "rectangle.center.x"
             [attr.y]= "rectangle.center.y"
-            [attr.height] = "rectangle.dimensions[0]"
-            [attr.width] = "rectangle.dimensions[1]"
+            [attr.height] = "rectangle.dimensions[1]"
+            [attr.width] = "rectangle.dimensions[0]"
             [attr.style] = "rectangle.style.toString()"
-            (click) = "rectangle.click()"
-            (mousemove) = "rectangle.clickMove($event)"/>
+            (click)="clicked()"
+            (mousedown)="mouseDown($event)"
+            (mousemove)="move($event)"
+            (mouseup)="mouseUp($event)"/>

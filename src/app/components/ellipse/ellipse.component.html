@@ -1,0 +1,10 @@
+<svg:ellipse
+            [attr.cx]= "ellipse.center.x"
+            [attr.cy]= "ellipse.center.y"
+            [attr.rx] = "ellipse.dimensions[0]"
+            [attr.ry] = "ellipse.dimensions[1]"
+            [attr.style] = "ellipse.style.toString()"
+            (click)="clicked()"
+            (mousedown)="mouseDown($event)"
+            (mousemove)="move($event)"
+            (mouseup)="mouseUp($event)"/>

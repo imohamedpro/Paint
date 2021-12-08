@@ -1,3 +1,4 @@
+import { Ellipse } from './../../classes/Ellipse';
 import { Rectangle } from './../../classes/Rectangle';
 import { Injectable } from '@angular/core';
 import { Circle } from '../../classes/Circle';
@@ -19,6 +20,9 @@ export class ShapeFactoryService {
         break;
       case 'rectangle':
         shape = new Rectangle(id, center);
+        break;
+      case 'ellipse':
+        shape = new Ellipse(id, center);
         break;
     }
 

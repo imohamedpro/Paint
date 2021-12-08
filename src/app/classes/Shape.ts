@@ -54,29 +54,29 @@ export abstract class Shape implements IShape {
     abstract copy(): IShape;
     abstract delete(): void;
 
-    click(): void{
-        this.isSelected = !this.isSelected;
-        console.log(this.id + " selected: " + this.isSelected);
-    }
+    // click(): void{
+    //     this.isSelected = !this.isSelected;
+    //     console.log(this.id + " selected: " + this.isSelected);
+    // }
 
-    clickMove(e: MouseEvent): void{
-        if(this.isSelected && e.which == 1){
-         e.stopPropagation();
-         //console.log(e);
-         let offsetX = this.center.x + e.movementX;
-         let offsetY = this.center.y + e.movementY;
-         this.move(new Point(offsetX, offsetY));
-        }
-     }
+    // clickMove(e: MouseEvent): void{
+    //     if(this.isSelected && e.which == 1){
+    //      e.stopPropagation();
+    //      //console.log(e);
+    //      let offsetX = this.center.x + e.movementX;
+    //      let offsetY = this.center.y + e.movementY;
+    //      this.move(new Point(offsetX, offsetY));
+    //     }
+    //  }
 
-     getBorderVisibility(){
-        if(this.isSelected){
-            return "visible";
-        }
-        else{
-            return "hidden";
-        }
-    }
+    //  getBorderVisibility(){
+    //     if(this.isSelected){
+    //         return "visible";
+    //     }
+    //     else{
+    //         return "hidden";
+    //     }
+    // }
 
     // clickUpperLeftCorner(){
     //     this.isUpperLeftCornerClicked = true;
