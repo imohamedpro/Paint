@@ -48,11 +48,16 @@ export class CircleComponent implements OnInit{
     if(!this.dragging){
       // this.circle.isSelected = !this.circle.isSelected;
 
-      if(this.manager.selectedShapes.size == 0 || this.ctrl){
-        this.manager.clearSelected();
+      if(this.manager.selectedShapes.size == 0){
+        this.manager.select(this.circle);
+
+      }else if (this.circle.isSelected && this.ctrl){
+        this.manager.deselect(this.circle);
+
+      }else if(!this.circle.isSelected && this.ctrl) {
+        this.manager.select(this.circle);
       }
       // this.circle.isSelected = true;
-      this.manager.select(this.circle);
       // if(this.circle.isSelected){
       //   this.manager.select(this.circle);
       // }else{
