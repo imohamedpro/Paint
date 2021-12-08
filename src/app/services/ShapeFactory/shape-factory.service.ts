@@ -1,4 +1,6 @@
 import { Injectable } from '@angular/core';
+import { Square } from 'src/app/classes/Square';
+import { SquareComponent } from 'src/app/components/square/square.component';
 import { Circle } from '../../classes/Circle';
 import { Shape } from '../../classes/Shape';
 import { IShape } from '../../interfaces/IShape';
@@ -18,7 +20,13 @@ export class ShapeFactoryService {
         shape =  new Circle(id);
         break;
 
-    }
+      case 'square':
+        shape = new Square(id);
+        break;  
+      
+      
+      }
+      
 
     return shape;
   }
