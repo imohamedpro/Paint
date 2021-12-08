@@ -6,7 +6,7 @@ import { IShape } from '../../interfaces/IShape'
 import { ShapeManagerService } from '../../services/ShapeManager/shape-manager.service';
 
 @Component({
-  selector: 'app-square',
+  selector: '[shape=square]',
   templateUrl: './square.component.html',
   styleUrls: ['./square.component.css']
 })
