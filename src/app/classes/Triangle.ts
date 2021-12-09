@@ -24,8 +24,5 @@ export class Triangle extends Shape{
         this.dimensions[2] += offset.x;
         this.dimensions[3] += offset.y;
     }
-
-    pointsGetter(): string {
-        return `${this.center.x},${this.center.y} ${this.dimensions[0]},${this.dimensions[1]} ${this.dimensions[2]},${this.dimensions[3]}`;
-    }
+        
 }

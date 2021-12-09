@@ -57,4 +57,11 @@ export class ShapeManagerService {
       shape.move(offset);
     });
   }
+  delete(): void{
+    this.selectedShapes.forEach((shape) =>{
+      this.availableIds.push(shape.id);
+      this.deselect(shape);
+      this.shapes.delete(shape.id);
+    });
+  }
 }

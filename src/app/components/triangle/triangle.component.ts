@@ -1,4 +1,5 @@
-import { Component, HostListener, Input, OnInit } from '@angular/core';
+import { Component, ElementRef, Host, HostListener, Input, OnInit, ViewChild } from '@angular/core';
+import { Triangle } from 'src/app/classes/Triangle';
 import { Point } from '../../classes/Point';
 import { Shape } from '../../classes/Shape';
 import { FillColor, StrokeColor } from '../../classes/Style';
@@ -25,21 +26,42 @@ export class TriangleComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  @HostListener('window:keyDown',['$event'])
-  ctrlDown(event: KeyboardEvent){
+  @HostListener('window:keydown',['$event'])
+  ctrlOrDeleteDown(event: KeyboardEvent){
     if(event.ctrlKey){
       this.ctrl = true;
       console.log(this.ctrl);
     }
+    else if(event.key === 'Delete'){
+      this.manager.delete();
+      console.log('delete is down');
+    }
   }
 
-  @HostListener('window:keyUp',['$event'])
+  @HostListener('window:keyup',['$event'])
   ctrlUp(event: KeyboardEvent){
     if(event.ctrlKey){
       this.ctrl = false;
       console.log(this.ctrl);
     }
   }
+
+  /*@HostListener('window:keydown',['$event'])
+    deleteDown(event: KeyboardEvent){
+      if(event.key === 'Delete'){
+        this.delete = true;
+        this.deleteShape();
+        console.log('delete is down');
+      }
+    }
+  @HostListener('window:keyup',['$event'])
+    deleteUp(event: KeyboardEvent){
+      if(event.key === 'Delete'){
+        this.delete = false;
+        console.log('delete is up');
+      }
+    }*/
+  
 
   clicked(): void {
     if(!this.dragging){
@@ -92,6 +114,8 @@ export class TriangleComponent implements OnInit {
 
   pointsGetter(): string {
     return `${this.triangle.center.x},${this.triangle.center.y} ${this.triangle.dimensions[0]},${this.triangle.dimensions[1]} ${this.triangle.dimensions[2]},${this.triangle.dimensions[3]}`;
-}
+  }
+
+
 }
 
