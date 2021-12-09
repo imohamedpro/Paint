@@ -5,8 +5,10 @@ export class SelectionFactory{
 
     static getSelection(type: string): Selection{
         let selection: Selection = new SelectionA();
-        if(type == 'circle' || type == 'ellipse'){
+        if(type == 'ellipse'){
             selection = new SelectionB();
+        }else if(type == 'circle'){
+            selection = new SelectionC();
         }
         console.log(type);
 
@@ -82,3 +84,17 @@ export class SelectionB extends Selection{
 
 }
 
+export class SelectionC extends Selection{
+    rectCenterX(center: Point, dimensions: Array<number>): number {
+        return center.x - dimensions[0];
+    }
+    rectCenterY(center: Point, dimensions: Array<number>): number {
+        return center.y - dimensions[0];
+    }
+    rectDim1(dimensions: Array<number>): number {
+        return dimensions[0] * 2;
+    }
+    rectDim2(dimensions: Array<number>): number {
+        return dimensions[0] * 2;
+    }
+}
