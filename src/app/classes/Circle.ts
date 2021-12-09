@@ -26,12 +26,16 @@ export class Circle extends Shape {
     }
     resize(location: string, offset: Point, mouse: Point): void {
         let direction = (location == 'N' || location == 'W')? -1: 1;
+        let off = offset.y;
         if(Math.abs(offset.x) > Math.abs(offset.y)){
-            this.dimensions[0] += direction * offset.x;
-        }else{
-            this.dimensions[0] += direction * offset.y;
+            off =  offset.x;
         }
-        this.dimensions[0] = Math.abs(this.dimensions[0]);
-        this.dimensions[1] = this.dimensions[0];
+        if(this.dimensions[0] + direction * off > 10){
+            this.dimensions[0] += direction * off;
+            this.dimensions[1] = this.dimensions[0];
+        }
+
+
+        // this.normalizeDims();
     }
 }

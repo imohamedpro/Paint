@@ -23,12 +23,13 @@ export class Ellipse extends Shape {
         throw new Error('Method not implemented.');
     }
     resize(location: string, offset: Point, mouse: Point): void {
+        // this.normalizeDims();
 
         let directed = Geometry.getDirections(location, offset);
-        this.dimensions[0] += directed.x;
-        this.dimensions[1] += directed.y
-        this.dimensions[0] = Math.abs(this.dimensions[0]);
-        this.dimensions[1] = Math.abs(this.dimensions[1]);
+        
+        if(this.dimensions[0] + directed.x > 10)  this.dimensions[0] += directed.x;
+        if(this.dimensions[1] + directed.y > 10)  this.dimensions[1] += directed.y;
+        // this.dimensions[1] += directed.y
     }
     
 }

@@ -52,6 +52,13 @@ export abstract class Shape implements IShape {
         this.center = center;
         this.dimensions = dimensions;
      }
+     normalizeDims(){
+         this.dimensions.forEach((x) =>{
+             if(x < 4){
+                 x = 4;
+             }
+         });
+     }
 
     //  resize(location: string, offset: Point, mouse: Point): void{
     //     // this.center = newCenter;
