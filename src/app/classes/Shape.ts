@@ -53,11 +53,11 @@ export abstract class Shape implements IShape {
         this.dimensions = dimensions;
      }
 
-     resize(location: string, offset: Point, mouse: Point): void{
-        // this.center = newCenter;
-        // this.dimensions = newDimensions;
-     }
-
+    //  resize(location: string, offset: Point, mouse: Point): void{
+    //     // this.center = newCenter;
+    //     // this.dimensions = newDimensions;
+    //  }
+    abstract resize(location: string, offset: Point, mouse: Point): void
     // abstract draw(p: Point): void;
     abstract copy(): IShape;
     abstract delete(): void;

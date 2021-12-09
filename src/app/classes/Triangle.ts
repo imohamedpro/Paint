@@ -24,7 +24,7 @@ export class Triangle extends Shape{
         this.dimensions[2] += offset.x;
         this.dimensions[3] += offset.y;
     }
-    override resize(location: string, offset: Point, mouse: Point){
+    resize(location: string, offset: Point, mouse: Point){
         switch(location){
             case 'v1':
                 this.center.shift(offset);

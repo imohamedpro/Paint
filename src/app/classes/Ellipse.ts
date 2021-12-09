@@ -4,6 +4,9 @@ import {Shape} from './Shape'
 
 
 export class Ellipse extends Shape {
+    resize(location: string, offset: Point, mouse: Point): void {
+        throw new Error('Method not implemented.');
+    }
     constructor(id: number, center: Point){
         super("ellipse", id, center);
     }

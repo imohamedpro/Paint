@@ -23,7 +23,7 @@ export class Line extends Shape{
         this.dimensions[1] += offset.y;
     }
 
-    override resize(location: string, offset: Point, mouse: Point){
+    resize(location: string, offset: Point, mouse: Point){
         switch(location){
             case 'v1':
                 this.center.shift(offset);
