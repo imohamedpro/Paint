@@ -11,6 +11,9 @@ export class ShapebarComponent implements OnInit {
   constructor() { }
   ellipse: string = "⬭";
   triangle: string = "△";
+  circle: string = "○"
+  square:string = "□"
+  rectangle:string = "▭"
   ngOnInit(): void {
   }
 
@@ -25,5 +28,23 @@ export class ShapebarComponent implements OnInit {
   }
   mouseoutTriangle(){
     this.triangle ="△"
+  }
+  mouseoverCircle(){
+    this.circle = "●"
+  }
+  mouseoutCircle(){
+    this.circle ="○"
+  }
+  mouseoverSquare(){
+    this.square = "■"
+  }
+  mouseoutSquare(){
+    this.square ="□"
+  }
+  mouseoverRectangle(){
+    this.rectangle = "▬"
+  }
+  mouseoutRectangle(){
+    this.rectangle ="▭"
   }
 }

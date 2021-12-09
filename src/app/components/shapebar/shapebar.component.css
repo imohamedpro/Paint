@@ -24,6 +24,14 @@ body {
     box-shadow: 0 0 1px 0 rgb(52 46 173 / 25%), 0 15px 30px 0 rgb(52 46 173 / 10%);
     flex-direction: column;
 }
+.menu-row{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    flex-grow: 1;
+    text-decoration: none;
+}
 .menu-item {
     display: flex;
     flex-direction: column;
@@ -39,8 +47,20 @@ body {
     font-family: "Material Icons";
     color: #342ead;
 }
-.menu-item:focus .menu-item-label, .menu-item:hover .menu-item-label {
+.menu-item:focus .icons, .menu-item:hover .icons {
     color: #342ead;
+}
+.menu-item:focus .menu-item-label, .menu-item:hover .menu-item-label{
+    color: #342ead;
+}
+.icons{
+    font-family: "Segoe UI Symbol";
+    display: block;
+    margin-bottom: 4px;
+    font-size: 30px;
+    color: #aeabde;
+    transition: 0.25s ease;
+    cursor: pointer;
 }
 .material-icons {
     font-family: "Material Icons Outlined";
@@ -49,6 +69,7 @@ body {
     font-size: 26px;
     color: #aeabde;
     transition: 0.25s ease;
+    cursor: pointer;
 }
 .menu-item-label {
     display: block;
@@ -56,4 +77,11 @@ body {
     font-size: 13px;
     color: #c2c0e6;
     transition: 0.25s ease;
+    cursor: pointer;
+}
+.color-input{
+    border: none;
+    background: none;
+    height: 4vh;
+    width: 4vh;
 }
