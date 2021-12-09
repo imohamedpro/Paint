@@ -1,4 +1,15 @@
-body{
-    width: 100% !important;
-    height: 100% !important;
+.container{
+    display: inline-block; 
+    width: 100%;
+}
+
+.shapebar{
+    width: 10%; 
+    float: left;
+}
+
+.sketch{
+    width: 90%; 
+    height: 91.5vh; 
+    float: left;
 }

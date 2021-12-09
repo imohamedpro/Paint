@@ -6,7 +6,7 @@
 			<span class="menu-item-label">Move</span>
 		</a>
 		<a href="#" class="menu-item">
-			<span class="material-icons">minimize</span>
+			<span class="material-icons" style="font-size: 17px;">╱</span>
 			<span class="menu-item-label">Line</span>
 		</a>
 		<a href="#" class="menu-item">
@@ -21,12 +21,12 @@
 			<span class="material-icons">circle</span>
 			<span class="menu-item-label">Circle</span>
 		</a>
-        <a href="#" class="menu-item">
-			<span class="material-icons" style="font-size: 30px;">⬬</span>
+        <a href="#" class="menu-item" (mouseover) = "mouseoverEllipse()" (mouseout) = "mouseoutEllipse()">
+			<span class="material-icons" style="font-size: 35px;">{{ ellipse }}</span>
 			<span class="menu-item-label">Ellipse</span>
 		</a>
-        <a href="#" class="menu-item">
-			<span class="material-icons">change_history</span>
+        <a href="#" class="menu-item" (mouseover) = "mouseoverTriangle()" (mouseout) = "mouseoutTriangle()">
+			<span class="material-icons" style="font-size: 30px;">{{ triangle }}</span>
 			<span class="menu-item-label">Triangle</span>
 		</a>
 	</nav>

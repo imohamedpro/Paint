@@ -1,3 +1,4 @@
+import { Rectangle } from './../../classes/Rectangle';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -8,8 +9,21 @@ import { Component, OnInit } from '@angular/core';
 export class ShapebarComponent implements OnInit {
 
   constructor() { }
-
+  ellipse: string = "⬭";
+  triangle: string = "△";
   ngOnInit(): void {
   }
 
+  mouseoverEllipse(){
+    this.ellipse = "⬬";
+  }
+  mouseoutEllipse(){
+    this.ellipse = "⬭"
+  }
+  mouseoverTriangle(){
+    this.triangle = "▲"
+  }
+  mouseoutTriangle(){
+    this.triangle ="△"
+  }
 }
