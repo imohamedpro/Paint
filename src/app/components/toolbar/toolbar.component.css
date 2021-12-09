@@ -1,0 +1,63 @@
+*, *:after, *:before {
+    box-sizing: border-box;
+}
+.container {
+    position: relative;
+    /* top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0; */
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+body {
+    font-family: "Inter", sans-serif;
+    color: #303030;
+    background-color: #f5f5fb;
+}
+.menu {
+    display: flex;
+    flex-grow: 1;
+    height: 8vh;
+    min-height: 50px;
+    max-width: 100%;
+    border-radius: 12px;
+    overflow: hidden;
+    background-color: #fff;
+    box-shadow: 0 0 1px 0 rgba(52, 46, 173, 0.25), 0 15px 30px 0 rgba(52, 46, 173, 0.1);
+}
+.menu-item {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    flex-grow: 1;
+    text-decoration: none;
+}
+.menu-item:focus, .menu-item:hover {
+    outline: none;
+}
+.menu-item:hover .material-icons {
+    font-family: "Material Icons";
+    color: #2e8fad;
+}
+.menu-item:hover .menu-item-label {
+    color: #2e8fad;
+}
+.material-icons {
+    font-family: "Material Icons Outlined";
+    display: block;
+    margin-bottom: 4px;
+    font-size: 26px;
+    color: #aeabde;
+    transition: 0.25s ease;
+}
+.menu-item-label {
+    display: block;
+    font-family: cursive;
+    font-size: 13px;
+    color: #c2c0e6;
+    transition: 0.25s ease;
+}
