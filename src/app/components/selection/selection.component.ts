@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Point } from '../../classes/Point';
+import { Resizer, ResizerFactory } from '../../classes/Resizers';
 import { Selection, SelectionFactory } from '../../classes/Selection';
 import { Shape } from '../../classes/Shape';
 
@@ -13,14 +14,13 @@ export class SelectionComponent implements OnInit {
   @Input() dimensions!: Array<number>;
   @Input() type!: string;
   selected!: Selection;
-  resizers: string[] = ['NW', 'N', 'NE',
-                        'W',       'E',
-                        'SW', 'S', 'SE'];
+  resizers!: Resizer;
   
   constructor() {}
 
   ngOnInit(): void {
     this.selected = SelectionFactory.getSelection(this.type);
+    this.resizers = new ResizerFactory().getResizer(this.type);
   }
   getResizer(location: string){
     let result: number = 0;
@@ -81,6 +81,25 @@ export class SelectionComponent implements OnInit {
       case 'SEy':
         result = this.selected.resizeSWy(this.center, this.dimensions);
         break;
+      case 'ax':
+        result = this.dimensions[0];
+        break;
+      case 'ay':
+        result = this.dimensions[1];
+        break;
+      case 'bx':
+        result = this.dimensions[2];
+        break;
+      case 'by':
+        result = this.dimensions[3];
+        break;
+      case 'cx':
+        result = this.dimensions[4];
+        break;
+      case 'cy':
+        result = this.dimensions[5];
+        break;
+
     }
     return result;
   }
