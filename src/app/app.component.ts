@@ -1,3 +1,4 @@
+import { Style } from './classes/Style';
 import { Component } from '@angular/core';
 
 @Component({
@@ -8,7 +9,12 @@ import { Component } from '@angular/core';
 export class AppComponent {
   title = 'paint-app';
   action = 'Move';
-  send(action:string){
+  style = new Style();
+  sendAction(action:string){
     this.action = action;
+  }
+  sendStyle(style:Style){
+    this.style = style;
+    console.log("Style sent");
   }
 }

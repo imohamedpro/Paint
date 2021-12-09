@@ -1,5 +1,5 @@
 <app-toolbar></app-toolbar>
 <div class="container">
-    <app-shapebar class="shapebar" (emitter)="send($event)"></app-shapebar>
-    <app-sketch class="sketch" [action]="action"></app-sketch>
+    <app-shapebar class="shapebar" (actionEmitter)="sendAction($event)" (styleEmitter)="sendStyle($event)"></app-shapebar>
+    <app-sketch class="sketch" [action]="action" [style]="style"></app-sketch>
 </div>

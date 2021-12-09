@@ -1,5 +1,8 @@
+import { Style, FillColor, StrokeColor, Dimensions} from './../../classes/Style';
 import { MenuItem } from './../../classes/MenuItem';
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import hexRgb from 'hex-rgb';
+
 @Component({
   selector: 'app-shapebar',
   templateUrl: './shapebar.component.html',
@@ -8,26 +11,63 @@ import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 export class ShapebarComponent implements OnInit {
 
   constructor() { }
-  @Output() emitter:EventEmitter<string>
+  @Output() actionEmitter:EventEmitter<string>
        = new EventEmitter<string>();
+  @Output() styleEmitter:EventEmitter<Style>
+        = new EventEmitter<Style>();
   rows: MenuItem[][] = [[new MenuItem("open_with", "Move"),new MenuItem("╱","Line")],
                         [new MenuItem("□","Square"), new MenuItem("▭","Rectangle")],
                         [new MenuItem("○","Circle"), new MenuItem("⬭","Ellipse")],
                         [new MenuItem("△","Triangle"), new MenuItem("","")]]
+  fillColor: string = '#ff0000';
+  strokeColor: string = '#570000'
+  strokeWidth: number = 5;
+  style: Style = new Style();                      
   ngOnInit(): void {
+    let rgb = hexRgb(this.fillColor)
+    this.style.fillColor = new FillColor(rgb.red, rgb.green, rgb.blue, rgb.alpha);
+    rgb = hexRgb(this.strokeColor)
+    this.style.strokeColor = new StrokeColor(rgb.red, rgb.green, rgb.blue, rgb.alpha);
+    this.style.strokeWidth = new Dimensions(this.strokeWidth);
+    this.emitStyle(this.style);
+    //console.log(this.style);
   }
-  emit(action: string){
-    this.emitter.emit(action);
-}
+  emitAction(action: string){
+    this.actionEmitter.emit(action);
+  }
+  emitStyle(style: Style){
+    this.styleEmitter.emit(style);
+  }
+  click(menuItem: MenuItem):void{
+    for(let item of this.rows){
+      item[0].declick();
+      item[1].declick();
+    }
+    menuItem.click();
+    this.emitAction(menuItem.text);
+  }
+  updateFillColor(e: any){
+    this.fillColor = e.target.value;
+    let rgb = hexRgb(this.fillColor)
+    this.style.fillColor = new FillColor(rgb.red, rgb.green, rgb.blue, rgb.alpha);
+    console.log(this.style.fillColor);
+    this.emitStyle(this.style);
+  }
 
-click(menuItem: MenuItem):void{
-  for(let item of this.rows){
-    item[0].declick();
-    item[1].declick();
+  updateStrokeColor(e: any){
+    this.strokeColor = e.target.value;
+    let rgb = hexRgb(this.strokeColor)
+    this.style.strokeColor = new StrokeColor(rgb.red, rgb.green, rgb.blue, rgb.alpha);
+    console.log(this.style.strokeColor);
+    this.emitStyle(this.style);
   }
-  menuItem.click();
-  this.emit(menuItem.text);
-}
+
+  updateStrokeWidth(e: any){
+    this.strokeWidth = parseInt(e.target.value);
+    this.style.strokeWidth = new Dimensions(this.strokeWidth);
+    console.log(this.style.strokeWidth);
+    this.emitStyle(this.style);
+  }
 
   // mouseoverEllipse(){
   //   this.ellipse = "⬬";

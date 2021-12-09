@@ -63,4 +63,7 @@ export class Dimensions {
     toString(){
         return `stroke-width: ${this.value}px`;
     }
+    toNumber(){
+        return this.value;
+    }
 }

@@ -1,21 +1,33 @@
 <div class="menu">
 	<div class="menu-row" *ngFor="let row of rows">
 		<div class="menu-item" (click)="click(row[0])" (mouseover) = "row[0].invertIcon()" (mouseout) = "row[0].invertIcon()" *ngIf="row[0].icon != ''">
-			<span class="material-icons" style={{row[0].style}} *ngIf="row[0].text == 'Move'">{{row[0].icon}}</span>
-			<span class="icons"  style={{row[0].style}} *ngIf="row[0].text != 'Move'">{{row[0].icon}}</span>
-			<span class="menu-item-label" style={{row[0].style}}>{{row[0].text}}</span>
+			<span class="material-icons" [attr.style] = "row[0].style" *ngIf="row[0].text == 'Move'">{{row[0].icon}}</span>
+			<span class="icons"  [attr.style] = "row[0].style" *ngIf="row[0].text != 'Move'">{{row[0].icon}}</span>
+			<span class="menu-item-label" [attr.style] = "row[0].style">{{row[0].text}}</span>
 
 		</div>
 		<div class="menu-item" (click)="click(row[1])" (mouseover) = "row[1].invertIcon()" (mouseout) = "row[1].invertIcon()" *ngIf="row[1].icon != ''">
-			<span class="material-icons" style={{row[1].style}} *ngIf="row[1].text == 'Line'">{{row[1].icon}}</span>
-			<span class="icons" style={{row[1].style}} *ngIf="row[1].text != 'Line'">{{row[1].icon}}</span>
-			<span class="menu-item-label" style={{row[1].style}}>{{row[1].text}}</span>
+			<span class="material-icons" [attr.style] = "row[1].style" *ngIf="row[1].text == 'Line'">{{row[1].icon}}</span>
+			<span class="icons" [attr.style] = "row[1].style" *ngIf="row[1].text != 'Line'">{{row[1].icon}}</span>
+			<span class="menu-item-label" [attr.style] = "row[1].style">{{row[1].text}}</span>
 		</div>
 	</div>
 	<div class="menu-row">
 		<div class="menu-item">
-			<input type="color" class="color-input" value="#ff0000">
-			<span class="menu-item-label">Color</span>
+			<input type="color" class="color-input" value="#ff0000" (change)="updateFillColor($event)">
+			<span class="menu-item-label">Fill</span>
+		</div>
+	</div>
+	<div class="menu-row">
+		<div class="menu-item">
+			<input type="color" class="color-input" value="#570000" (change)="updateStrokeColor($event)">
+			<span class="menu-item-label">Stroke</span>
+		</div>
+	</div>
+	<div class="menu-row">
+		<div class="menu-item">
+			<input type="number" class="number-input" value="5" (change)="updateStrokeWidth($event)">
+			<span class="menu-item-label">Stroke Width</span>
 		</div>
 	</div>
 </div>
