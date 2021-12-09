@@ -8,15 +8,15 @@ export class Ellipse extends Shape {
         super("ellipse", id, center);
     }
 
-    draw(p: Point): void {
-        throw new Error('Method not implemented.');
-    }
+    // draw(p: Point): void {
+    //     throw new Error('Method not implemented.');
+    // }
     // resize(newCenter: Point, newDimensions: Array<number>): void {
     //     throw new Error('Method not implemented.');
     // }
-    copy(): IShape {
-        throw new Error('Method not implemented.');
-    }
+    // copy(): IShape {
+    //     throw new Error('Method not implemented.');
+    // }
     delete(): void {
         throw new Error('Method not implemented.');
     }

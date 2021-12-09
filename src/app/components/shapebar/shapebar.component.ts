@@ -1,4 +1,4 @@
-import { Style, FillColor, StrokeColor, Dimensions} from './../../classes/Style';
+import { Style, FillColor, StrokeColor, Dimensions, Color} from './../../classes/Style';
 import { MenuItem } from './../../classes/MenuItem';
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import hexRgb from 'hex-rgb';
@@ -25,9 +25,11 @@ export class ShapebarComponent implements OnInit {
   style: Style = new Style();                      
   ngOnInit(): void {
     let rgb = hexRgb(this.fillColor)
-    this.style.fillColor = new FillColor(rgb.red, rgb.green, rgb.blue, rgb.alpha);
+    let color = new Color(rgb.red, rgb.green, rgb.blue, rgb.alpha);
+    this.style.fillColor = new FillColor(color);
     rgb = hexRgb(this.strokeColor)
-    this.style.strokeColor = new StrokeColor(rgb.red, rgb.green, rgb.blue, rgb.alpha);
+    color = new Color(rgb.red, rgb.green, rgb.blue, rgb.alpha);
+    this.style.strokeColor = new StrokeColor(color);
     this.style.strokeWidth = new Dimensions(this.strokeWidth);
     this.emitStyle(this.style);
     //console.log(this.style);
@@ -49,7 +51,8 @@ export class ShapebarComponent implements OnInit {
   updateFillColor(e: any){
     this.fillColor = e.target.value;
     let rgb = hexRgb(this.fillColor)
-    this.style.fillColor = new FillColor(rgb.red, rgb.green, rgb.blue, rgb.alpha);
+    let color = new Color(rgb.red, rgb.green, rgb.blue, rgb.alpha);
+    this.style.fillColor = new FillColor(color);
     console.log(this.style.fillColor);
     this.emitStyle(this.style);
   }
@@ -57,7 +60,8 @@ export class ShapebarComponent implements OnInit {
   updateStrokeColor(e: any){
     this.strokeColor = e.target.value;
     let rgb = hexRgb(this.strokeColor)
-    this.style.strokeColor = new StrokeColor(rgb.red, rgb.green, rgb.blue, rgb.alpha);
+    let color = new Color(rgb.red, rgb.green, rgb.blue, rgb.alpha);
+    this.style.strokeColor = new StrokeColor(color);
     console.log(this.style.strokeColor);
     this.emitStyle(this.style);
   }

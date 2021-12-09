@@ -1,8 +1,8 @@
 import { Component, HostListener, Input, OnInit } from '@angular/core';
-import { Line } from 'src/app/classes/Line';
+import { Line } from '../../classes/Line';
 import { Point } from '../../classes/Point';
 import { Shape } from '../../classes/Shape';
-import { FillColor, StrokeColor } from '../../classes/Style';
+import { Color, FillColor, StrokeColor } from '../../classes/Style';
 import { IShape } from '../../interfaces/IShape'
 import { ShapeManagerService } from '../../services/ShapeManager/shape-manager.service';
 
@@ -70,7 +70,7 @@ export class LineComponent implements OnInit {
       // }else{
       //   this.manager.deselect(this.circle.id);
       // }
-      this.line.setStroke(new StrokeColor(Math.floor(Math.random()*255),Math.floor(Math.random()*255),Math.floor(Math.random()*255), 1));
+      this.line.setStroke(new Color(Math.floor(Math.random()*255),Math.floor(Math.random()*255),Math.floor(Math.random()*255), 1));
       console.log(this.manager);
     }
 

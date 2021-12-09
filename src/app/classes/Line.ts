@@ -7,15 +7,15 @@ export class Line extends Shape{
         super('line', id, center);
     }
 
-    draw(p: Point): void {
-        throw new Error("Method not implemented.");
-    }
-    copy(): IShape {
-        throw new Error("Method not implemented.");
-    }
-    delete(): void {
-        throw new Error("Method not implemented.");
-    }
+    //draw(p: Point): void {
+     //   throw new Error("Method not implemented.");
+    //}
+    //copy(): IShape {
+      //  throw new Error("Method not implemented.");
+    //}
+    //delete(): void {
+    //    throw new Error("Method not implemented.");
+    //}
 
     override move(offset: Point): void{
         this.center.shift(offset);

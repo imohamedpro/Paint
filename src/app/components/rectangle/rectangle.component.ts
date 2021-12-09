@@ -1,7 +1,7 @@
 import { Shape } from '../../classes/Shape';
 import { Component, HostListener, Input, OnInit } from '@angular/core';
 import { Point } from '../../classes/Point';
-import { FillColor, StrokeColor } from '../../classes/Style';
+import { Color, FillColor, StrokeColor } from '../../classes/Style';
 import { IShape } from '../../interfaces/IShape'
 import { ShapeManagerService } from '../../services/ShapeManager/shape-manager.service';
 
@@ -63,8 +63,8 @@ export class RectangleComponent implements OnInit{
       }
 
       if(this.rectangle.isSelected){
-        this.rectangle.setFill(new FillColor(Math.floor(Math.random()*255),Math.floor(Math.random()*255),Math.floor(Math.random()*255), 1));
-        this.rectangle.setStroke(new StrokeColor(Math.floor(Math.random()*255),Math.floor(Math.random()*255),Math.floor(Math.random()*255), 1));
+        this.rectangle.setFill(new Color(Math.floor(Math.random()*255),Math.floor(Math.random()*255),Math.floor(Math.random()*255), 1));
+        this.rectangle.setStroke(new Color(Math.floor(Math.random()*255),Math.floor(Math.random()*255),Math.floor(Math.random()*255), 1));
         console.log(this.manager);
       }
     }

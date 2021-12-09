@@ -8,15 +8,15 @@ export class Rectangle extends Shape {
         super("rectangle", id, center);
     }
 
-    draw(p: Point): void {
-        throw new Error('Method not implemented.');
-    }
-    // resize(newCenter: Point, newDimensions: Array<number>): void {
+    // draw(p: Point): void {
     //     throw new Error('Method not implemented.');
     // }
-    copy(): IShape {
-        throw new Error('Method not implemented.');
-    }
+    // // resize(newCenter: Point, newDimensions: Array<number>): void {
+    // //     throw new Error('Method not implemented.');
+    // // }
+    // copy(): IShape {
+    //     throw new Error('Method not implemented.');
+    // }
     delete(): void {
         throw new Error('Method not implemented.');
     }

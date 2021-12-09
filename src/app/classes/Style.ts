@@ -11,6 +11,13 @@ export class Style {
         // console.log(str);
         return str;
     }
+    copy(): Style{
+        let clone = new Style();
+        clone.fillColor = this.fillColor.copy();
+        clone.strokeColor = this.strokeColor.copy();
+        clone.strokeWidth = this.strokeWidth.copy();
+        return clone;
+    }
 }
 
 export class Color {
@@ -31,6 +38,9 @@ export class Color {
     toString(): string{
         return `rgba(${this.red}, ${this.green}, ${this.blue}, ${this.alpha})`;
     }
+    copy(): Color{
+        return new Color(this.red, this. green, this.blue, this.alpha);
+    }
 }
 
 export class Cursor {
@@ -43,15 +53,36 @@ export class Cursor {
     }
 }
 
-export class FillColor extends Color {
-    override toString(): string {
-        return `fill: ${super.toString()}`;
+// export class FillColor extends Color {
+//     override toString(): string {
+//         return `fill: ${super.toString()}`;
+//     }
+// }
+
+
+export class FillColor{
+    color: Color;
+    constructor(color: Color){
+        this.color = color;
+    }
+    toString(): string {
+        return `fill: ${this.color.toString()}`;
+    }
+    copy(): FillColor {
+        return new FillColor(this.color.copy());
     }
 }
 
-export class StrokeColor extends Color {
-    override toString(): string {
-        return `stroke: ${super.toString()}`;
+export class StrokeColor{
+    color: Color;
+    constructor(color: Color){
+        this.color = color;
+    }
+    toString(): string {
+        return `stroke: ${this.color.toString()}`;
+    }
+    copy(): StrokeColor{
+        return new StrokeColor(this.color.copy());
     }
 }
 
@@ -65,5 +96,8 @@ export class Dimensions {
     }
     toNumber(){
         return this.value;
+    }
+    copy(): Dimensions{
+        return new Dimensions(this.value);
     }
 }
