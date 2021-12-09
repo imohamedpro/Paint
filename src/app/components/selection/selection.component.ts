@@ -13,16 +13,75 @@ export class SelectionComponent implements OnInit {
   @Input() dimensions!: Array<number>;
   @Input() type!: string;
   selected!: Selection;
-  constructor() {
-    // console.log(this.type);
-
-
-  }
+  resizers: string[] = ['NW', 'N', 'NE',
+                        'W',       'E',
+                        'SW', 'S', 'SE'];
+  
+  constructor() {}
 
   ngOnInit(): void {
-    // console.log(this);
     this.selected = SelectionFactory.getSelection(this.type);
-
   }
-
+  getResizer(location: string){
+    let result: number = 0;
+    switch(location){
+      case 'NWx':
+        result = this.selected.resizeNWx(this.center, this.dimensions);
+        break;
+      case 'NWy':
+        result = this.selected.resizeNWy(this.center, this.dimensions);
+        break;
+      case 'Nx':
+        result = (this.selected.resizeNWx(this.center, this.dimensions)
+                  + this.selected.resizeNEx(this.center, this.dimensions)) / 2;
+        break;
+      case 'Ny':
+        result = (this.selected.resizeNWy(this.center, this.dimensions)
+                    + this.selected.resizeNEy(this.center, this.dimensions)) / 2;
+        break;
+      case 'NEx':
+        result = this.selected.resizeNEx(this.center, this.dimensions);
+        break;
+      case 'NEy':
+        result = this.selected.resizeNEy(this.center, this.dimensions);
+        break;
+      case 'Wx':
+        result = (this.selected.resizeNWx(this.center, this.dimensions)
+                  + this.selected.resizeSWx(this.center, this.dimensions)) / 2;
+        break;
+      case 'Wy':
+        result = (this.selected.resizeNWy(this.center, this.dimensions)
+                  + this.selected.resizeSWy(this.center, this.dimensions)) / 2;
+        break;
+      case 'Ex':
+        result = (this.selected.resizeNEx(this.center, this.dimensions)
+                  + this.selected.resizeSEx(this.center, this.dimensions)) / 2;
+        break;
+      case 'Ey':
+        result = (this.selected.resizeNEy(this.center, this.dimensions)
+                  + this.selected.resizeSEy(this.center, this.dimensions)) / 2;
+        break;
+      case 'SWx':
+        result = this.selected.resizeSWx(this.center, this.dimensions);
+        break;
+      case 'SWy':
+        result = this.selected.resizeSWy(this.center, this.dimensions);
+        break;
+      case 'Sx':
+        result = (this.selected.resizeSEx(this.center, this.dimensions)
+                  + this.selected.resizeSWx(this.center, this.dimensions)) / 2;
+        break;
+      case 'Sy':
+        result = (this.selected.resizeSEy(this.center, this.dimensions)
+                  + this.selected.resizeSWy(this.center, this.dimensions)) / 2;
+        break;
+      case 'SEx':
+        result = this.selected.resizeSEx(this.center, this.dimensions);
+        break;
+      case 'SEy':
+        result = this.selected.resizeSWy(this.center, this.dimensions);
+        break;
+    }
+    return result;
+  }
 }

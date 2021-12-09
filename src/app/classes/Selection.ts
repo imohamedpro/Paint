@@ -15,6 +15,7 @@ export class SelectionFactory{
 }
 export abstract class Selection {
     resizeNWx(center: Point, dimensions: Array<number>): number {
+        // console.log(this.rectCenterX);
         return this.rectCenterX(center, dimensions);
     }
     resizeNWy(center: Point, dimensions: Array<number>): number {
@@ -62,6 +63,7 @@ export class SelectionA extends Selection {
     rectDim2(dimensions: Array<number>): number {
         return dimensions[1];
     }
+    
 }
 
 export class SelectionB extends Selection{
