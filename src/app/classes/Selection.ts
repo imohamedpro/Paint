@@ -144,28 +144,28 @@ export class SelectionB extends Selection{
 
 
     override resizeNWx(center: Point, dimensions: Array<number>): number{
-        return center.x - Geometry.getXComponent(dimensions);
+        return center.x - dimensions[0];
     }
     override resizeNWy(center: Point, dimensions: Array<number>): number{
-        return center.y - Geometry.getYComponent(dimensions);
+        return center.y - dimensions[1];
     }
     override resizeNEx(center: Point, dimensions: Array<number>): number{
-        return center.x + Geometry.getXComponent(dimensions);
+        return center.x + dimensions[0];
     }
     override resizeNEy(center: Point, dimensions: Array<number>): number{
-        return center.y - Geometry.getYComponent(dimensions);
+        return center.y - dimensions[1];
     }
     override resizeSEx(center: Point, dimensions: Array<number>): number{
-        return center.x + Geometry.getXComponent(dimensions);
+        return center.x + dimensions[0];
     }
     override resizeSEy(center: Point, dimensions: Array<number>): number{
-        return center.y + Geometry.getYComponent(dimensions);
+        return center.y + dimensions[1];
     }
     override resizeSWx(center: Point, dimensions: Array<number>): number{
-        return center.x - Geometry.getXComponent(dimensions);
+        return center.x - dimensions[0];
     }
     override resizeSWy(center: Point, dimensions: Array<number>): number{
-        return center.y + Geometry.getYComponent(dimensions);
+        return center.y + dimensions[1];
     }
 
 }
