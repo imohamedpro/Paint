@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { Point } from '../../classes/Point';
 import { Shape } from '../../classes/Shape';
 import { Dimensions, FillColor, StrokeColor } from '../../classes/Style';
@@ -11,8 +11,10 @@ import { ShapeManagerService } from '../../services/ShapeManager/shape-manager.s
 })
 export class SketchComponent implements OnInit {
   manager: ShapeManagerService;
+  @Input() action:string;
   constructor(manager: ShapeManagerService) {
     this.manager = manager;
+    this.action = "move";
    }
 
   ngOnInit(): void {
@@ -25,6 +27,10 @@ export class SketchComponent implements OnInit {
   }
   random():number{
     return Math.random()*800;
+  }
+
+  click():void{
+    console.log(this.action);
   }
 
 }

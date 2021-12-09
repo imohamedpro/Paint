@@ -83,5 +83,9 @@ body {
     border: none;
     background: none;
     height: 4vh;
-    width: 4vh;
+    width: 4vw;
+    max-width: 40px;
+    min-width: 30px;
+    max-height: 40px;
+    min-height: 30px;
 }

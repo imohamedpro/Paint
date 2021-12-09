@@ -7,4 +7,8 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'paint-app';
+  action = 'Move';
+  send(action:string){
+    this.action = action;
+  }
 }
