@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, HostListener, OnInit } from '@angular/core';
 import { Point } from '../../classes/Point';
 import { Shape } from '../../classes/Shape';
 import { Dimensions, FillColor, StrokeColor } from '../../classes/Style';
@@ -11,8 +11,44 @@ import { ShapeManagerService } from '../../services/ShapeManager/shape-manager.s
 })
 export class SketchComponent implements OnInit {
   manager: ShapeManagerService;
+  ctrlC: boolean;
+  ctrl: boolean;
+
   constructor(manager: ShapeManagerService) {
     this.manager = manager;
+    this.ctrlC = false;
+    this.ctrl = false;
+   }
+
+   @HostListener('window:keydown',['$event'])
+   ctrlOrDeleteDown(event: KeyboardEvent){
+     if(event.ctrlKey && event.key === 'c'){
+       console.log("ctrl + c is done");
+       this.manager.ctrlC();
+       this.ctrlC = true;
+     }
+     else if(event.ctrlKey && event.key === 'v' && this.ctrlC){
+       this.manager.paste();
+     }
+     else if(event.ctrlKey){
+       this.ctrl = true;
+       console.log(this.ctrl);
+     }
+     else if(event.key === 'Delete'){
+       this.manager.delete();
+       console.log('delete is down');
+     }
+   }
+ 
+   @HostListener('window:keyup',['$event'])
+   ctrlUp(event: KeyboardEvent){
+     if(event.ctrlKey){
+       this.ctrl = false;
+       console.log(this.ctrl);
+     }
+     else if(event.key === 'c'){
+       this.ctrlC = false;
+     }
    }
 
   ngOnInit(): void {

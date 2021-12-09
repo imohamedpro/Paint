@@ -16,11 +16,13 @@ export class TriangleComponent implements OnInit {
   initialClick! : Point;
   dragging: boolean;
   ctrl: boolean;
+  ctrlC: boolean;
 
   constructor(manager: ShapeManagerService) { 
     this.manager = manager;
     this.dragging = false;
     this.ctrl =false;
+    this.ctrlC = false;
   }
 
   ngOnInit(): void {
@@ -28,7 +30,15 @@ export class TriangleComponent implements OnInit {
 
   @HostListener('window:keydown',['$event'])
   ctrlOrDeleteDown(event: KeyboardEvent){
-    if(event.ctrlKey){
+    if(event.ctrlKey && event.key === 'c'){
+      console.log("ctrl + c is done");
+      this.manager.ctrlC();
+      this.ctrlC = true;
+    }
+    else if(event.ctrlKey && event.key === 'v' && this.ctrlC){
+      this.manager.paste();
+    }
+    else if(event.ctrlKey){
       this.ctrl = true;
       console.log(this.ctrl);
     }
@@ -43,6 +53,9 @@ export class TriangleComponent implements OnInit {
     if(event.ctrlKey){
       this.ctrl = false;
       console.log(this.ctrl);
+    }
+    else if(event.key === 'c'){
+      this.ctrlC = false;
     }
   }
 

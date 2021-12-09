@@ -3,21 +3,23 @@ import { IShape } from "../interfaces/IShape";
 import { Point } from "./Point";
 import { Color, Dimensions, Style } from "./Style";
 
-export abstract class Shape implements IShape {
-    readonly type: string;
-    readonly id: number;
+export class Shape implements IShape {
+    type: string;
+    id: number;
     dimensions!: Array<number>;
     center!: Point;
     style!: Style;
-    // fill!: Color;
-    // stroke!: Color;
-    // strokeWidth!: number;
+    clone!: Shape;
+    fill!: Color;
+    stroke!: Color;
+    strokeWidth!: number;
     isSelected: boolean;
     constructor(type: string, id: number, center: Point){
         this.id = id;
         this.type = type;
         this.center = center;
         this.isSelected = false;
+        //this.clone = new Shape(type, id, center);
     }
     getId(): number {
         return this.id;
@@ -25,7 +27,6 @@ export abstract class Shape implements IShape {
     getType(): string {
         return this.type;
     }
-
     move(offset: Point): void {
         this.center.shift(offset);
         // this.center = offset;
@@ -37,7 +38,7 @@ export abstract class Shape implements IShape {
         this.style.fillColor = color;
      }
 
-     setStroke(color: Color): void {
+    setStroke(color: Color): void {
          this.style.strokeColor = color;
      }
 
@@ -50,9 +51,17 @@ export abstract class Shape implements IShape {
         this.dimensions = newDimensions;
      }
 
-    abstract draw(p: Point): void;
-    abstract copy(): IShape;
-    abstract delete(): void;
+    //abstract draw(p: Point): void;
+    copy(): Shape{
+        this.clone.style = this.style;
+        this.clone.dimensions = this.dimensions;
+        this.clone.setFill(this.fill);
+        this.clone.setStroke(this.stroke);
+        this.clone.setStrokeWidth(this.strokeWidth);
+        this.isSelected = false;
+        return this.clone;
+    };
+    //abstract delete(): void;
 
 
 }

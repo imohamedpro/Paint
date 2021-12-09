@@ -13,11 +13,13 @@ export class ShapeManagerService {
   selectedShapes: Map<number, Shape>;
   availableIds: Array<number>;
   factory: ShapeFactoryService;
+  clipBoard!: Map<number, Shape>;
 
   constructor(factory: ShapeFactoryService) { 
     this.shapes = new Map<number, Shape>();
     this.selectedShapes = new Map<number, Shape>();
     this.availableIds = new Array<number>();
+    this.clipBoard = new Map<number, Shape>();
     this.factory = factory;
   }
   getAvailableId(): number{
@@ -62,6 +64,20 @@ export class ShapeManagerService {
       this.availableIds.push(shape.id);
       this.deselect(shape);
       this.shapes.delete(shape.id);
+    });
+  }
+  ctrlC(): void{
+    let clone!: Shape;
+    this.selectedShapes.forEach((shape)=>{
+      clone = shape.copy();
+      this.clipBoard.set(clone.getId(),clone);
+    });
+  }
+  paste(): void{
+    let shifting:Point = new Point(5,5);
+    this.clipBoard.forEach((shape)=> {
+      shape.move(shifting);
+      this.shapes.set(this.getAvailableId(),shape);
     });
   }
 }
