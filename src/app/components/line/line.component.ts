@@ -1,17 +1,19 @@
-import { Shape } from '../../classes/Shape';
 import { Component, HostListener, Input, OnInit } from '@angular/core';
+import { Line } from 'src/app/classes/Line';
 import { Point } from '../../classes/Point';
+import { Shape } from '../../classes/Shape';
 import { FillColor, StrokeColor } from '../../classes/Style';
 import { IShape } from '../../interfaces/IShape'
 import { ShapeManagerService } from '../../services/ShapeManager/shape-manager.service';
 
+
 @Component({
-  selector: '[shape=circle]',
-  templateUrl: './circle.component.html',
-  styleUrls: ['./circle.component.css']
+  selector: '[shape=line]',
+  templateUrl: './line.component.html',
+  styleUrls: ['./line.component.css']
 })
-export class CircleComponent implements OnInit{
-  @Input() circle!: Shape; 
+export class LineComponent implements OnInit {
+  @Input() line!: Shape; 
   manager: ShapeManagerService;
   initialClick!: Point;
   dragging: boolean; 
@@ -24,7 +26,7 @@ export class CircleComponent implements OnInit{
   }
 
   ngOnInit(): void {
-    console.log(this.circle.style.toString());
+    console.log(this.line.style.toString());
   }
 
   @HostListener('window:keydown', ['$event'])
@@ -50,19 +52,17 @@ export class CircleComponent implements OnInit{
 
   clicked(): void {
     if(!this.dragging){
-      // this.circle.isSelected = !this.circle.isSelected;
+      if(this.manager.selectedShapes.size == 0){
+        this.manager.select(this.line);
 
-      if(this.manager.selectedShapes.size == 0){  //first one to be clicked
-        this.manager.select(this.circle);
+      }else if (this.line.isSelected){
+        this.manager.deselect(this.line);
 
-      }else if (this.circle.isSelected){
-        this.manager.deselect(this.circle);
-
-      }else if(!this.circle.isSelected && this.ctrl) {
-        this.manager.select(this.circle);
+      }else if(!this.line.isSelected && this.ctrl) {
+        this.manager.select(this.line);
       }else{
         this.manager.clearSelected();
-        this.manager.select(this.circle);
+        this.manager.select(this.line);
       }
       // this.circle.isSelected = true;
       // if(this.circle.isSelected){
@@ -70,11 +70,8 @@ export class CircleComponent implements OnInit{
       // }else{
       //   this.manager.deselect(this.circle.id);
       // }
-      if(this.circle.isSelected){
-        this.circle.setFill(new FillColor(Math.floor(Math.random()*255),Math.floor(Math.random()*255),Math.floor(Math.random()*255), 1));
-        this.circle.setStroke(new StrokeColor(Math.floor(Math.random()*255),Math.floor(Math.random()*255),Math.floor(Math.random()*255), 1));
-        console.log(this.manager);
-      }
+      this.line.setStroke(new StrokeColor(Math.floor(Math.random()*255),Math.floor(Math.random()*255),Math.floor(Math.random()*255), 1));
+      console.log(this.manager);
     }
 
 
@@ -88,7 +85,7 @@ export class CircleComponent implements OnInit{
     }
   }
   move(e: MouseEvent): void {
-    if(e.button == 0 && this.dragging && this.circle.isSelected){
+    if(e.button == 0 && this.dragging && this.line.isSelected){
       let offset: Point = new Point(e.clientX - this.initialClick.x, e.clientY - this.initialClick.y);
       console.log(offset);
       this.initialClick = new Point(e.clientX, e.clientY);

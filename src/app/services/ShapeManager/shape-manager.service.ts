@@ -32,7 +32,7 @@ export class ShapeManagerService {
     shape.setStroke(stroke);
     shape.setStrokeWidth(strokeWidth);
     shape.setCursor("default");
-    shape.resize(center, [100,50]);
+    shape.resize(center, [100,50,150,190]);
     this.shapes.set(id, shape);
     // console.log(shape.fill.toString());
 
@@ -59,6 +59,13 @@ export class ShapeManagerService {
   move(offset: Point){
     this.selectedShapes.forEach((shape) => {
       shape.move(offset);
+    });
+  }
+  delete(): void{
+    this.selectedShapes.forEach((shape) =>{
+      this.availableIds.push(shape.id);
+      this.deselect(shape);
+      this.shapes.delete(shape.id);
     });
   }
 }
