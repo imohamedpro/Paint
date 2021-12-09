@@ -1,29 +1,33 @@
 <svg width = "100%" height = "100%">
     <svg:g *ngFor="let shape of this.manager.shapes | keyvalue; index as i"
-            [ngSwitch]="shape.value.getType()">
+            [ngSwitch]="shape.value.getType()"
+            [id]= "shape.key">
+
+        <svg:g *ngIf="shape.value.isSelected"/> 
+        <svg:g *ngSwitchCase= "'line'" shape = 'line' [line] = 'shape.value'/>
 
 
-        <svg:g *ngSwitchCase= "'line'" shape = 'line' [id]= "shape.key" [line] = 'shape.value'/>
+        <svg:g *ngSwitchCase = "'triangle'" shape = 'triangle' [triangle] = 'shape.value'/>
 
 
-        <svg:g *ngSwitchCase = "'triangle'" shape = 'triangle' [id]= "shape.key"/>
+        <svg:g *ngSwitchCase = "'ellipse'" shape = 'ellipse'/>
 
 
-        <svg:g *ngSwitchCase = "'ellipse'" shape = 'ellipse' [id]= "shape.key"/>
+        <svg:g *ngSwitchCase = "'circle'" shape = 'circle' [circle] = 'shape.value'/>
 
 
-        <svg:g *ngSwitchCase = "'circle'" shape = 'circle' [id]= "shape.key" [circle] = 'shape.value'/>
+        <svg:g *ngSwitchCase = "'rectangle'" shape = 'rectangle'/>
 
 
-        <svg:g *ngSwitchCase = "'rectangle'" shape = 'rectangle' [id]= "shape.key"/>
+        <svg:g *ngSwitchCase = "'square'" shape = 'square'/>
 
 
-        <svg:g *ngSwitchCase = "'square'" shape = 'square' [id]= "shape.key"/>
-
-
-        <svg:g *ngSwitchCase = "'userDefined'" shape = 'userDefined' [id]= "shape.key"/>
+        <svg:g *ngSwitchCase = "'userDefined'" shape = 'userDefined'/>
 
         
     </svg:g>
-    <use></use>
+    <use *ngFor="let shape of this.manager.selectedShapes | keyvalue"
+            [attr.href] = "'#' + shape.key">
+
+    </use>
 </svg>

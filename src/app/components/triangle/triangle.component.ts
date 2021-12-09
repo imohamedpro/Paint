@@ -2,61 +2,58 @@ import { Component, HostListener, Input, OnInit } from '@angular/core';
 import { Point } from '../../classes/Point';
 import { Shape } from '../../classes/Shape';
 import { FillColor, StrokeColor } from '../../classes/Style';
-import { IShape } from '../../interfaces/IShape'
 import { ShapeManagerService } from '../../services/ShapeManager/shape-manager.service';
 
 @Component({
-  selector: '[shape=circle]',
-  templateUrl: './circle.component.html',
-  styleUrls: ['./circle.component.css']
+  selector: '[shape=triangle]',
+  templateUrl: './triangle.component.html',
+  styleUrls: ['./triangle.component.css']
 })
-export class CircleComponent implements OnInit{
-  @Input() circle!: Shape; 
-  manager: ShapeManagerService;
-  initialClick!: Point;
-  dragging: boolean; 
+export class TriangleComponent implements OnInit {
+  @Input() triangle! : Shape;
+  manager : ShapeManagerService;
+  initialClick! : Point;
+  dragging: boolean;
   ctrl: boolean;
 
   constructor(manager: ShapeManagerService) { 
     this.manager = manager;
     this.dragging = false;
-    this.ctrl = false;
+    this.ctrl =false;
   }
 
   ngOnInit(): void {
-    console.log(this.circle.style.toString());
   }
 
-  @HostListener('window:keydown', ['$event'])
+  @HostListener('window:keyDown',['$event'])
   ctrlDown(event: KeyboardEvent){
-    console.log(event);
-    if(event.key == 'Control'){
-      console.log('ctrl down');
+    if(event.ctrlKey){
       this.ctrl = true;
-    }
-  }
-  @HostListener('window:keyup', ['$event'])
-  ctrlUp(event: KeyboardEvent){
-    if(event.key == 'Control'){
-      console.log("ctrl up");
-      this.ctrl = false;
+      console.log(this.ctrl);
     }
   }
 
+  @HostListener('window:keyUp',['$event'])
+  ctrlUp(event: KeyboardEvent){
+    if(event.ctrlKey){
+      this.ctrl = false;
+      console.log(this.ctrl);
+    }
+  }
 
   clicked(): void {
     if(!this.dragging){
       if(this.manager.selectedShapes.size == 0){
-        this.manager.select(this.circle);
+        this.manager.select(this.triangle);
 
-      }else if (this.circle.isSelected){
-        this.manager.deselect(this.circle);
+      }else if (this.triangle.isSelected){
+        this.manager.deselect(this.triangle);
 
-      }else if(!this.circle.isSelected && this.ctrl) {
-        this.manager.select(this.circle);
+      }else if(!this.triangle.isSelected && this.ctrl) {
+        this.manager.select(this.triangle);
       }else{
         this.manager.clearSelected();
-        this.manager.select(this.circle);
+        this.manager.select(this.triangle);
       }
       // this.circle.isSelected = true;
       // if(this.circle.isSelected){
@@ -64,8 +61,8 @@ export class CircleComponent implements OnInit{
       // }else{
       //   this.manager.deselect(this.circle.id);
       // }
-      this.circle.setFill(new FillColor(Math.floor(Math.random()*255),Math.floor(Math.random()*255),Math.floor(Math.random()*255), 1));
-      this.circle.setStroke(new StrokeColor(Math.floor(Math.random()*255),Math.floor(Math.random()*255),Math.floor(Math.random()*255), 1));
+      this.triangle.setStroke(new StrokeColor(Math.floor(Math.random()*255),Math.floor(Math.random()*255),Math.floor(Math.random()*255), 1));
+      this.triangle.setFill(new FillColor(Math.floor(Math.random()*255),Math.floor(Math.random()*255),Math.floor(Math.random()*255), 1));
       console.log(this.manager);
     }
 
@@ -80,7 +77,7 @@ export class CircleComponent implements OnInit{
     }
   }
   move(e: MouseEvent): void {
-    if(e.button == 0 && this.dragging && this.circle.isSelected){
+    if(e.button == 0 && this.dragging && this.triangle.isSelected){
       let offset: Point = new Point(e.clientX - this.initialClick.x, e.clientY - this.initialClick.y);
       console.log(offset);
       this.initialClick = new Point(e.clientX, e.clientY);
@@ -92,4 +89,9 @@ export class CircleComponent implements OnInit{
       this.dragging = false;
     }
   }
+
+  pointsGetter(): string {
+    return `${this.triangle.center.x},${this.triangle.center.y} ${this.triangle.dimensions[0]},${this.triangle.dimensions[1]} ${this.triangle.dimensions[2]},${this.triangle.dimensions[3]}`;
 }
+}
+

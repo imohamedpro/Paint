@@ -25,15 +25,36 @@ export class ShapeManagerService {
   }
   createShape(type: string, center:Point, fill: Color, stroke: Color, strokeWidth: number){
     let id = this.getAvailableId();
-    let shape = this.factory.createShape(type, id);
+    let shape = this.factory.createShape(type, id, center);
     shape.style = new Style();
-    shape.move(center);
+    // shape.move(center);
     shape.setFill(fill);
     shape.setStroke(stroke);
     shape.setStrokeWidth(strokeWidth);
-    shape.resize(center, [60]);
+    shape.resize(center, [50,100,150,190]);
     this.shapes.set(id, shape);
     // console.log(shape.fill.toString());
 
+  }
+
+  select(shape: Shape){
+    shape.isSelected = true;
+    this.selectedShapes.set(shape.id, shape); 
+  }
+  deselect(shape: Shape){
+    shape.isSelected = false;
+    this.selectedShapes.delete(shape.id);
+  }
+  clearSelected(){
+    this.selectedShapes.forEach((shape) => {
+      this.deselect(shape);
+    });
+    // this.selectedShapes = new Map<number, Shape>();
+  }
+
+  move(offset: Point){
+    this.selectedShapes.forEach((shape) => {
+      shape.move(offset);
+    });
   }
 }

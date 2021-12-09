@@ -5,6 +5,7 @@ import { AppComponent } from './app.component';
 import { SketchComponent } from './components/sketch/sketch.component';
 import { CircleComponent } from './components/circle/circle.component';
 import { LineComponent } from './components/line/line.component';
+import { TriangleComponent } from './components/triangle/triangle.component';
 
 @NgModule({
   declarations: [
@@ -12,6 +13,7 @@ import { LineComponent } from './components/line/line.component';
     SketchComponent,
     CircleComponent,
     LineComponent,
+    TriangleComponent,
   ],
   imports: [
     BrowserModule
