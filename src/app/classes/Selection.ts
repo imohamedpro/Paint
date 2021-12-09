@@ -89,7 +89,6 @@ export class SelectionB extends Selection{
 }
 
 export class SelectionC extends Selection{
-<<<<<<< HEAD
     rectCenterX(center: Point, dimensions: number[]): number {
         return Math.min(center.x, this.getMin(dimensions, true));
     }
@@ -117,18 +116,3 @@ export class SelectionC extends Selection{
     
 }
 
-=======
-    rectCenterX(center: Point, dimensions: Array<number>): number {
-        return center.x - dimensions[0];
-    }
-    rectCenterY(center: Point, dimensions: Array<number>): number {
-        return center.y - dimensions[0];
-    }
-    rectDim1(dimensions: Array<number>): number {
-        return dimensions[0] * 2;
-    }
-    rectDim2(dimensions: Array<number>): number {
-        return dimensions[0] * 2;
-    }
-}
->>>>>>> origin/Magdi

@@ -1,9 +1,37 @@
 
-<svg:rect   [attr.x] = "selected.rectCenterX(center, dimensions)"
+<!-- <svg:rect   [attr.x] = "selected.rectCenterX(center, dimensions)"
             [attr.y] = "selected.rectCenterY(center, dimensions)"
             [attr.height] = "selected.rectDim2(center, dimensions)"
             [attr.width] = "selected.rectDim1(center, dimensions)"
-            id = "selected"/>
+            id = "selected"/> -->
+<svg:rect class="selected"
+                *ngIf=" type == 'rectangle'"
+                [attr.x] = 'center.x' [attr.y] = 'center.y' [attr.width] = 'dimensions[0]'  [attr.height] = 'dimensions[1]'/>
+
+<svg:rect class="selected" 
+                *ngIf=" type == 'square'" 
+                [attr.x] = 'center.x' [attr.y] = 'center.y' [attr.width] = 'dimensions[0]'  [attr.height] = 'dimensions[0]'/>
+
+<svg:polygon class="selected"
+                *ngIf=" type == 'triangle'" 
+                [attr.points] = '[center.x, center.y, dimensions[0], dimensions[1], dimensions[2], dimensions[3]]'/>
+
+<svg:circle class="selected"
+                *ngIf=" type == 'circle'" 
+                [attr.cx] = 'center.x' [attr.cy] ='center.y' [attr.r] = 'dimensions[0]'/>
+
+<svg:ellipse class="selected"
+                *ngIf=" type == 'ellipse'" 
+                [attr.cx] = 'center.x' [attr.cy] ='center.y' [attr.rx] = 'dimensions[0]' [attr.ry] = 'dimensions[1]'/>
+
+<svg:line class="selected"
+                *ngIf=" type == 'line'" 
+                [attr.x1] = 'center.x' [attr.y1] = 'center.y' [attr.x2] = 'dimensions[0]' [attr.y2] = 'dimensions[1]'/>
+
+<svg:rect class="selected"
+                *ngIf="type == 'userDefined'"
+                /> <!-- attributes -->
+
 <svg:g *ngFor = "let resizer of resizers.array; index as i"  
         resizer
         [ngClass] = 'resizer'

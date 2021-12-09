@@ -1,4 +1,4 @@
-#selected{
+.selected{
     fill: transparent;
     pointer-events: none;
     stroke-width: 1px;

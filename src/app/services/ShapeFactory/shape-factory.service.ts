@@ -1,8 +1,8 @@
 import { Ellipse } from './../../classes/Ellipse';
 import { Rectangle } from './../../classes/Rectangle';
 import { Injectable } from '@angular/core';
-import { Line } from 'src/app/classes/Line';
-import { Triangle } from 'src/app/classes/Triangle';
+import { Line } from '../..//classes/Line';
+import { Triangle } from '../../classes/Triangle';
 import { Circle } from '../../classes/Circle';
 import { Point } from '../../classes/Point';
 import { Shape } from '../../classes/Shape';

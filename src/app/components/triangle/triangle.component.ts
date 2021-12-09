@@ -1,5 +1,5 @@
 import { Component, ElementRef, Host, HostListener, Input, OnInit, ViewChild } from '@angular/core';
-import { Triangle } from 'src/app/classes/Triangle';
+import { Triangle } from '../../classes/Triangle';
 import { Point } from '../../classes/Point';
 import { Shape } from '../../classes/Shape';
 import { FillColor, StrokeColor } from '../../classes/Style';

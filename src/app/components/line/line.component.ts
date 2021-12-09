@@ -1,5 +1,5 @@
 import { Component, HostListener, Input, OnInit } from '@angular/core';
-import { Line } from 'src/app/classes/Line';
+import { Line } from '../../classes/Line';
 import { Point } from '../../classes/Point';
 import { Shape } from '../../classes/Shape';
 import { FillColor, StrokeColor } from '../../classes/Style';
