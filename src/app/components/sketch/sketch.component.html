@@ -1,14 +1,13 @@
-<svg width = "100%" height = "100%">
+<svg width = "100%" height = "100%" >
     <svg:g *ngFor="let shape of this.manager.shapes | keyvalue; index as i"
             [ngSwitch]="shape.value.getType()"
             [id]= "shape.key">
 
-        <!-- <svg:circle *ngIf="shape.value.isSelected" [attr.r] = "10"/>  -->
+        <svg:g *ngIf="shape.value.isSelected"/> 
+        <svg:g *ngSwitchCase= "'line'" shape = 'line' [line] = 'shape.value'/>
 
-        <svg:g *ngSwitchCase= "'line'" shape = 'line'/>
 
-
-        <svg:g *ngSwitchCase = "'triangle'" shape = 'triangle'/>
+        <svg:g *ngSwitchCase = "'triangle'" shape = 'triangle' [triangle] = 'shape.value'/>
 
 
         <svg:g *ngSwitchCase = "'ellipse'" shape = 'ellipse' [ellipse] = 'shape.value'/>

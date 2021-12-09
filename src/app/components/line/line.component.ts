@@ -1,17 +1,19 @@
-import { Shape } from '../../classes/Shape';
 import { Component, HostListener, Input, OnInit } from '@angular/core';
+import { Line } from 'src/app/classes/Line';
 import { Point } from '../../classes/Point';
+import { Shape } from '../../classes/Shape';
 import { FillColor, StrokeColor } from '../../classes/Style';
 import { IShape } from '../../interfaces/IShape'
 import { ShapeManagerService } from '../../services/ShapeManager/shape-manager.service';
 
+
 @Component({
-  selector: '[shape=rectangle]',
-  templateUrl: './rectangle.component.html',
-  styleUrls: ['./rectangle.component.css']
+  selector: '[shape=line]',
+  templateUrl: './line.component.html',
+  styleUrls: ['./line.component.css']
 })
-export class RectangleComponent implements OnInit{
-  @Input() rectangle!: Shape; 
+export class LineComponent implements OnInit {
+  @Input() line!: Shape; 
   manager: ShapeManagerService;
   initialClick!: Point;
   dragging: boolean; 
@@ -24,7 +26,7 @@ export class RectangleComponent implements OnInit{
   }
 
   ngOnInit(): void {
-    console.log(this.rectangle.style.toString());
+    console.log(this.line.style.toString());
   }
 
   @HostListener('window:keydown', ['$event'])
@@ -33,7 +35,8 @@ export class RectangleComponent implements OnInit{
     if(event.key == 'Control'){
       console.log('ctrl down');
       this.ctrl = true;
-    }else if(event.key === 'Delete'){
+    }
+    else if(event.key === 'Delete'){
       this.manager.delete();
       console.log('delete is down');
     }
@@ -49,25 +52,28 @@ export class RectangleComponent implements OnInit{
 
   clicked(): void {
     if(!this.dragging){
-      if(this.manager.selectedShapes.size == 0){  //first one to be clicked
-        this.manager.select(this.rectangle);
+      if(this.manager.selectedShapes.size == 0){
+        this.manager.select(this.line);
 
-      }else if (this.rectangle.isSelected){
-        this.manager.deselect(this.rectangle);
+      }else if (this.line.isSelected){
+        this.manager.deselect(this.line);
 
-      }else if(!this.rectangle.isSelected && this.ctrl) {
-        this.manager.select(this.rectangle);
+      }else if(!this.line.isSelected && this.ctrl) {
+        this.manager.select(this.line);
       }else{
         this.manager.clearSelected();
-        this.manager.select(this.rectangle);
+        this.manager.select(this.line);
       }
-
-      if(this.rectangle.isSelected){
-        this.rectangle.setFill(new FillColor(Math.floor(Math.random()*255),Math.floor(Math.random()*255),Math.floor(Math.random()*255), 1));
-        this.rectangle.setStroke(new StrokeColor(Math.floor(Math.random()*255),Math.floor(Math.random()*255),Math.floor(Math.random()*255), 1));
-        console.log(this.manager);
-      }
+      // this.circle.isSelected = true;
+      // if(this.circle.isSelected){
+      //   this.manager.select(this.circle);
+      // }else{
+      //   this.manager.deselect(this.circle.id);
+      // }
+      this.line.setStroke(new StrokeColor(Math.floor(Math.random()*255),Math.floor(Math.random()*255),Math.floor(Math.random()*255), 1));
+      console.log(this.manager);
     }
+
 
   }
   mouseDown(e: MouseEvent):void {
@@ -79,7 +85,7 @@ export class RectangleComponent implements OnInit{
     }
   }
   move(e: MouseEvent): void {
-    if(e.button == 0 && this.dragging && this.rectangle.isSelected){
+    if(e.button == 0 && this.dragging && this.line.isSelected){
       let offset: Point = new Point(e.clientX - this.initialClick.x, e.clientY - this.initialClick.y);
       console.log(offset);
       this.initialClick = new Point(e.clientX, e.clientY);

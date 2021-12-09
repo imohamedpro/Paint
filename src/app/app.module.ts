@@ -5,8 +5,12 @@ import { SketchComponent } from './components/sketch/sketch.component';
 import { CircleComponent } from './components/circle/circle.component';
 import { RectangleComponent } from './components/rectangle/rectangle.component';
 import { EllipseComponent } from './components/ellipse/ellipse.component';
+import { ToolbarComponent } from './components/toolbar/toolbar.component';
+import { ShapebarComponent } from './components/shapebar/shapebar.component';
 import { SelectionComponent } from './components/selection/selection.component';
 import { ResizerComponent } from './components/resizer/resizer.component';
+import { LineComponent } from './components/line/line.component';
+import { TriangleComponent } from './components/triangle/triangle.component';
 
 @NgModule({
   declarations: [
@@ -15,8 +19,12 @@ import { ResizerComponent } from './components/resizer/resizer.component';
     CircleComponent,
     RectangleComponent,
     EllipseComponent,
+    ToolbarComponent,
+    ShapebarComponent,
     SelectionComponent,
     ResizerComponent,
+    LineComponent,
+    TriangleComponent,
   ],
   imports: [
     BrowserModule

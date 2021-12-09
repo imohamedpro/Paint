@@ -1,0 +1,47 @@
+
+<div class="container">
+	<div class="menu">
+		<div class="menu-row">
+			<div class="menu-item">
+				<span class="material-icons">open_with</span>
+				<span class="menu-item-label">Move</span>
+			</div>
+			<div class="menu-item">
+				<span class="material-icons" style="font-size: 26px;">╱</span>
+				<span class="menu-item-label">Line</span>
+			</div>
+		</div>
+		<div class="menu-row">
+			<div class="menu-item" (mouseover) = "mouseoverSquare()" (mouseout) = "mouseoutSquare()">
+				<span class="icons">{{ square }}</span>
+				<span class="menu-item-label">Square</span>
+			</div>
+			<div class="menu-item" (mouseover) = "mouseoverRectangle()" (mouseout) = "mouseoutRectangle()">
+				<span class="icons">{{ rectangle }}</span>
+				<span class="menu-item-label">Rectangle</span>
+			</div>
+		</div>
+		<div class="menu-row">
+			<div class="menu-item" (mouseover) = "mouseoverCircle()" (mouseout) = "mouseoutCircle()">
+				<span class="icons">{{ circle }}</span>
+				<span class="menu-item-label">Circle</span>
+			</div>
+			<div class="menu-item" (mouseover) = "mouseoverEllipse()" (mouseout) = "mouseoutEllipse()">
+				<span class="icons">{{ ellipse }}</span>
+				<span class="menu-item-label">Ellipse</span>
+			</div>
+		</div>
+		<div class="menu-row">
+        	<div class="menu-item" (mouseover) = "mouseoverTriangle()" (mouseout) = "mouseoutTriangle()">
+				<span class="icons">{{ triangle }}</span>
+				<span class="menu-item-label">Triangle</span>
+			</div>
+		</div>
+		<div class="menu-row">
+			<div class="menu-item">
+				<input type="color" class="color-input" value="#ff0000">
+				<span class="menu-item-label">Color</span>
+			</div>
+		</div>
+	</div>
+</div>
