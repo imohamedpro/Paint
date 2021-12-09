@@ -9,15 +9,16 @@ export class Resizer {
 export class Resizer1D extends Resizer{
     constructor(){
         super();
-        this.array = ['NW',     'NE',
-                      'SW',     'SE'];
+        this.array = ['N',     'E',
+                      'W',     'S'];
     }
 }
 export class Resizer0D extends Resizer{
     constructor(x: number){
         super();
-        for(let i = 0; i < x; i++){
-            this.array[i] = 'a' + i;
+        this.array = [];
+        for(let i = 1; i <= x; i++){
+            this.array[i-1] = 'v' + i;
         }
     }
 }
