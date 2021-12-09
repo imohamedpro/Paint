@@ -1,8 +1,8 @@
 import { Component, ElementRef, Host, HostListener, Input, OnInit, ViewChild } from '@angular/core';
-import { Triangle } from 'src/app/classes/Triangle';
+import { Triangle } from '../../classes/Triangle';
 import { Point } from '../../classes/Point';
 import { Shape } from '../../classes/Shape';
-import { FillColor, StrokeColor } from '../../classes/Style';
+import { Color, FillColor, StrokeColor } from '../../classes/Style';
 import { ShapeManagerService } from '../../services/ShapeManager/shape-manager.service';
 
 @Component({
@@ -96,8 +96,8 @@ export class TriangleComponent implements OnInit {
       // }else{
       //   this.manager.deselect(this.circle.id);
       // }
-      this.triangle.setStroke(new StrokeColor(Math.floor(Math.random()*255),Math.floor(Math.random()*255),Math.floor(Math.random()*255), 1));
-      this.triangle.setFill(new FillColor(Math.floor(Math.random()*255),Math.floor(Math.random()*255),Math.floor(Math.random()*255), 1));
+      this.triangle.setStroke(new Color(Math.floor(Math.random()*255),Math.floor(Math.random()*255),Math.floor(Math.random()*255), 1));
+      this.triangle.setFill(new Color(Math.floor(Math.random()*255),Math.floor(Math.random()*255),Math.floor(Math.random()*255), 1));
       console.log(this.manager);
     }
 

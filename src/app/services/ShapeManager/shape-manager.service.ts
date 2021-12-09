@@ -68,16 +68,22 @@ export class ShapeManagerService {
   }
   ctrlC(): void{
     let clone!: Shape;
+    this.clipBoard = new Map<number, Shape>();
     this.selectedShapes.forEach((shape)=>{
       clone = shape.copy();
+      console.log("original" + shape);
+      console.log("clone" + clone);
       this.clipBoard.set(clone.getId(),clone);
     });
   }
   paste(): void{
     let shifting:Point = new Point(5,5);
     this.clipBoard.forEach((shape)=> {
-      shape.move(shifting);
-      this.shapes.set(this.getAvailableId(),shape);
+      let clone = shape.copy();
+      clone.move(shifting);
+      clone.id = this.getAvailableId();
+      this.select(clone);
+      this.shapes.set(clone.id,clone);
     });
   }
 }

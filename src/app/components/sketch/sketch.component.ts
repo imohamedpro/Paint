@@ -1,7 +1,7 @@
 import { Component, HostListener, OnInit } from '@angular/core';
 import { Point } from '../../classes/Point';
 import { Shape } from '../../classes/Shape';
-import { Dimensions, FillColor, StrokeColor } from '../../classes/Style';
+import { Color, Dimensions, FillColor, StrokeColor } from '../../classes/Style';
 import { ShapeManagerService } from '../../services/ShapeManager/shape-manager.service';
 
 @Component({
@@ -23,7 +23,7 @@ export class SketchComponent implements OnInit {
    @HostListener('window:keydown',['$event'])
    ctrlOrDeleteDown(event: KeyboardEvent){
      if(event.ctrlKey && event.key === 'c'){
-       console.log("ctrl + c is done");
+      //  console.log("ctrl + c is done");
        this.manager.ctrlC();
        this.ctrlC = true;
      }
@@ -32,11 +32,11 @@ export class SketchComponent implements OnInit {
      }
      else if(event.ctrlKey){
        this.ctrl = true;
-       console.log(this.ctrl);
+      //  console.log(this.ctrl);
      }
      else if(event.key === 'Delete'){
        this.manager.delete();
-       console.log('delete is down');
+      //  console.log('delete is down');
      }
    }
  
@@ -44,7 +44,7 @@ export class SketchComponent implements OnInit {
    ctrlUp(event: KeyboardEvent){
      if(event.ctrlKey){
        this.ctrl = false;
-       console.log(this.ctrl);
+      //  console.log(this.ctrl);
      }
      else if(event.key === 'c'){
        this.ctrlC = false;
@@ -52,10 +52,10 @@ export class SketchComponent implements OnInit {
    }
 
   ngOnInit(): void {
-    this.manager.createShape('circle', new Point(100, 100), new FillColor(110, 100, 30, 0.5), new StrokeColor(0, 100, 30, 1), 5);
-    this.manager.createShape('circle', new Point(450, 450), new FillColor(110, 100, 30, 0.5), new StrokeColor(0, 100, 30, 1), 5);
-    this.manager.createShape('line', new Point(300, 300), new FillColor(110, 100, 30, 0.5), new StrokeColor(0, 100, 30, 1), 5);
-    this.manager.createShape('triangle', new Point(50, 50), new FillColor(110, 100, 30, 0.5), new StrokeColor(0, 100, 30, 1), 5);
+    this.manager.createShape('circle', new Point(100, 100), new Color(110, 100, 30, 0.5), new Color(0, 100, 30, 1), 5);
+    this.manager.createShape('circle', new Point(450, 450), new Color(110, 100, 30, 0.5), new Color(0, 100, 30, 1), 5);
+    this.manager.createShape('line', new Point(300, 300), new Color(110, 100, 30, 0.5), new Color(0, 100, 30, 1), 5);
+    this.manager.createShape('triangle', new Point(50, 50), new Color(110, 100, 30, 0.5), new Color(0, 100, 30, 1), 5);
   }
   
 

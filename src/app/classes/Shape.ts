@@ -1,7 +1,8 @@
 import { IDimension } from "../interfaces/IDimension";
 import { IShape } from "../interfaces/IShape";
+import { ShapeFactoryService } from "../services/ShapeFactory/shape-factory.service";
 import { Point } from "./Point";
-import { Color, Dimensions, Style } from "./Style";
+import { Color, Dimensions, FillColor, StrokeColor, Style } from "./Style";
 
 export class Shape implements IShape {
     type: string;
@@ -9,10 +10,10 @@ export class Shape implements IShape {
     dimensions!: Array<number>;
     center!: Point;
     style!: Style;
-    clone!: Shape;
-    fill!: Color;
-    stroke!: Color;
-    strokeWidth!: number;
+    // clone!: Shape;
+    // fill!: Color;
+    // stroke!: Color;
+    // strokeWidth!: number;
     isSelected: boolean;
     constructor(type: string, id: number, center: Point){
         this.id = id;
@@ -35,11 +36,11 @@ export class Shape implements IShape {
     }
 
     setFill(color: Color): void {
-        this.style.fillColor = color;
+        this.style.fillColor = new FillColor(color);
      }
 
     setStroke(color: Color): void {
-         this.style.strokeColor = color;
+         this.style.strokeColor = new StrokeColor(color);
      }
 
      setStrokeWidth(width: number): void {
@@ -53,13 +54,15 @@ export class Shape implements IShape {
 
     //abstract draw(p: Point): void;
     copy(): Shape{
-        this.clone.style = this.style;
-        this.clone.dimensions = this.dimensions;
-        this.clone.setFill(this.fill);
-        this.clone.setStroke(this.stroke);
-        this.clone.setStrokeWidth(this.strokeWidth);
-        this.isSelected = false;
-        return this.clone;
+        let clone = new ShapeFactoryService().createShape(this.type, this.id, this.center.copy());
+        clone.style = this.style.copy();
+        // console.log(clone.style);
+        // clone.dimensions = Object.assign([], this.dimensions);
+        clone.dimensions = new Array<number>();
+        this.dimensions.forEach((x)=>{
+            clone.dimensions.push(x);
+        });
+        return clone;
     };
     //abstract delete(): void;
 
