@@ -33,6 +33,9 @@ export class EllipseComponent implements OnInit{
     if(event.key == 'Control'){
       console.log('ctrl down');
       this.ctrl = true;
+    }else if(event.key === 'Delete'){
+      this.manager.delete();
+      console.log('delete is down');
     }
   }
   @HostListener('window:keyup', ['$event'])
