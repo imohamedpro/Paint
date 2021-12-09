@@ -5,6 +5,8 @@ import { Color, Style } from '../../classes/Style';
 import { IShape } from '../../interfaces/IShape';
 import { ShapeFactoryService } from '../ShapeFactory/shape-factory.service';
 
+// Shape manager user the shape factory
+
 @Injectable({
   providedIn: 'root'
 })
@@ -12,6 +14,7 @@ export class ShapeManagerService {
   shapes: Map<number, Shape>;
   selectedShapes: Map<number, Shape>;
   availableIds: Array<number>;
+  // if a shape is deleted, later ones are shifted.
   factory: ShapeFactoryService;
   clipBoard!: Map<number, Shape>;
 

@@ -46,6 +46,7 @@ export class SketchComponent implements OnInit {
     this.manager.createShape('ellipse', new Point(100, 500), new Color(110, 100, 30, 0.5), new Color(0, 100, 30, 1), 5);
     this.manager.createShape('line', new Point(300, 300), new Color(110, 100, 30, 0.5), new Color(0, 100, 30, 1), 5);
     this.manager.createShape('triangle', new Point(50, 50), new Color(110, 100, 30, 0.5), new Color(0, 100, 30, 1), 5);
+    this.manager.createShape('square', new Point(600,600), new Color(2, 200, 2, 0.5), new Color(0, 100, 30, 1), 8);
   }
   action: string;
   ctrlC: boolean;
