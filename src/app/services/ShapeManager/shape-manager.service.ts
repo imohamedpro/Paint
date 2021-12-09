@@ -68,4 +68,9 @@ export class ShapeManagerService {
       this.shapes.delete(shape.id);
     });
   }
+
+  resize(id: number, location: string, offset: Point){
+    let shape: any = this.shapes.get(id);
+    shape.resize(location, offset);
+  }
 }

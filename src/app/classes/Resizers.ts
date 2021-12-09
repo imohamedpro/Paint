@@ -1,5 +1,5 @@
 export class Resizer {
-    array: Array<String>;
+    array: Array<string>;
     constructor(){
         this.array = ['NW', 'N', 'NE',
                          'W',       'E',

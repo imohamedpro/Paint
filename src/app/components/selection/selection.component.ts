@@ -13,6 +13,7 @@ export class SelectionComponent implements OnInit {
   @Input() center!: Point;
   @Input() dimensions!: Array<number>;
   @Input() type!: string;
+  @Input('shapeId') id!: number; 
   selected!: Selection;
   resizers!: Resizer;
   
