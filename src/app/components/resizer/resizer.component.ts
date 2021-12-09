@@ -28,21 +28,29 @@ export class ResizerComponent implements OnInit {
     console.log(this.x + " " + this.y);
   }
 
-  @HostListener('window: mousedown', ['$event'])
   mouseDown(e: MouseEvent){
     if(e.button == 0){
       this.dragging = true;
       this.initialClick = new Point(e.clientX, e.clientY);
-      console.log()
+      // console.log()
+      // console.log(this.id + " " + this.initialClick + ' ' + this.location);
     }
   }
 
-  @HostListener('window: mousemove', ['$event'])
   mouseMove(e: MouseEvent){
     if(e.button == 0 && this.dragging){
       let offset: Point = new Point(e.clientX - this.initialClick.x, e.clientY - this.initialClick.y);
       this.initialClick = new Point(e.clientX, e.clientY);
-      this.manager.resize(this.id, this.location, offset);
+      this.manager.resize(this.id, this.location, offset, this.initialClick);
+    }
+  }
+
+  mouseUp(e: MouseEvent){
+    // console.log("up");
+    // this.dragging = false;
+
+    if(e.button == 0){
+      this.dragging = false;
     }
   }
 }

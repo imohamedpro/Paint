@@ -32,7 +32,7 @@ export class ShapeManagerService {
     shape.setStroke(stroke);
     shape.setStrokeWidth(strokeWidth);
     shape.setCursor("default");
-    shape.resize(center, [100,50,150,190]);
+    shape.draw(center, [100,50,150,190]);
     this.shapes.set(id, shape);
     // console.log(shape.fill.toString());
 
@@ -69,8 +69,9 @@ export class ShapeManagerService {
     });
   }
 
-  resize(id: number, location: string, offset: Point){
+  resize(id: number, location: string, offset: Point, mouse: Point){
     let shape: any = this.shapes.get(id);
-    shape.resize(location, offset);
+    console.log(id + " " + location + " " + offset + " " + mouse);
+    shape.resize(location, offset, mouse);
   }
 }

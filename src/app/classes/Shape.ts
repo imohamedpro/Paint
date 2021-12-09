@@ -48,13 +48,17 @@ export abstract class Shape implements IShape {
      setCursor(type: string){
          this.style.cursor = new Cursor(type);
      }
+     draw(center: Point, dimensions: Array<number>){
+        this.center = center;
+        this.dimensions = dimensions;
+     }
 
-     resize(location: string, offset: Point): void{
+     resize(location: string, offset: Point, mouse: Point): void{
         // this.center = newCenter;
         // this.dimensions = newDimensions;
      }
 
-    abstract draw(p: Point): void;
+    // abstract draw(p: Point): void;
     abstract copy(): IShape;
     abstract delete(): void;
 

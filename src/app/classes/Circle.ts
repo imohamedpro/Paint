@@ -10,9 +10,9 @@ export class Circle extends Shape {
         super("circle", id, center);
     }
 
-    draw(p: Point): void {
-        throw new Error('Method not implemented.');
-    }
+    // draw(p: Point): void {
+    //     throw new Error('Method not implemented.');
+    // }
     // resize(newCenter: Point, newDimensions: Array<number>): void {
     //     throw new Error('Method not implemented.');
     // }

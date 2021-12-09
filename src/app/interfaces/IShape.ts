@@ -6,9 +6,9 @@ export interface IShape {
 
     getId(): number;
     getType(): string;
-    draw(p: Point): void;
+    draw(p: Point, dimensions: Array<number>): void;
     move(newCenter: Point): void;
-    resize(location: string, offset: Point): void;
+    resize(location: string, offset: Point, mouse: Point): void;
     copy(): IShape;
     delete(): void;
     setFill(color: Color): void;

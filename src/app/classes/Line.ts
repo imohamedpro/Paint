@@ -7,9 +7,9 @@ export class Line extends Shape{
         super('line', id, center);
     }
 
-    draw(p: Point): void {
-        throw new Error("Method not implemented.");
-    }
+    // draw(p: Point): void {
+    //     throw new Error("Method not implemented.");
+    // }
     copy(): IShape {
         throw new Error("Method not implemented.");
     }
@@ -21,6 +21,18 @@ export class Line extends Shape{
         this.center.shift(offset);
         this.dimensions[0] += offset.x;
         this.dimensions[1] += offset.y;
+    }
+
+    override resize(location: string, offset: Point, mouse: Point){
+        switch(location){
+            case 'v1':
+                this.center.shift(offset);
+                break;
+            case 'v2':
+                this.dimensions[0] += offset.x;
+                this.dimensions[1] += offset.y;
+                break;
+        }
     }
     
 }
