@@ -28,7 +28,7 @@ export class ShapeManagerService {
   getAvailableId(): number{
     return this.availableIds.length > 0? Number(this.availableIds.shift()): this.shapes.size;
   }
-  createShape(type: string, center:Point, fill: Color, stroke: Color, strokeWidth: number){
+  createShape(type: string, center:Point, fill: Color, stroke: Color, strokeWidth: number): number{
     let id = this.getAvailableId();
     let shape = this.factory.createShape(type, id, center);
     shape.style = new Style();
@@ -37,10 +37,10 @@ export class ShapeManagerService {
     shape.setStroke(stroke);
     shape.setStrokeWidth(strokeWidth);
     shape.setCursor("default");
-    shape.resize(center, [100,50,150,190]);
+    shape.resize(center, [5,5,5,5]);
     this.shapes.set(id, shape);
     // console.log(shape.fill.toString());
-
+    return id;
   }
 
   select(shape: Shape){
@@ -92,5 +92,9 @@ export class ShapeManagerService {
       this.select(clone);
       this.shapes.set(clone.id,clone);
     });
+  }
+
+  draw(id: number, dim: number[]): void{
+    this.shapes.get(id)?.draw(dim);
   }
 }

@@ -56,7 +56,9 @@ export class Shape implements IShape {
         this.dimensions = newDimensions;
      }
 
-    //abstract draw(p: Point): void;
+    draw(newDimensions: Array<number>): void{
+        this.dimensions = newDimensions;
+    }
     copy(): Shape{
         let clone = new ShapeFactoryService().createShape(this.type, this.id, this.center.copy());
         clone.style = this.style.copy();

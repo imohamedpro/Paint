@@ -8,6 +8,12 @@ export class Rectangle extends Shape {
         super("rectangle", id, center);
     }
 
+    // override draw(newDimensions: Array<number>): void{
+    //     console.log(newDimensions);
+    //     if(newDimensions[0] > 5 && newDimensions[1] > 5){
+    //         this.dimensions = newDimensions;
+    //     }
+    // }
     // draw(p: Point): void {
     //     throw new Error('Method not implemented.');
     // }

@@ -2,8 +2,8 @@
 
 <svg:rect   [attr.x]= "square.center.x"
             [attr.y]= "square.center.y"
-            [attr.height] = "square.dimensions[0]"
-            [attr.width] = "square.dimensions[0]"
+            [attr.height] = "getSideLength()"
+            [attr.width] = "getSideLength()"
             [attr.style] = "square.style.toString()"
             (click)="clicked()"
             (mousedown)="mouseDown($event)"
