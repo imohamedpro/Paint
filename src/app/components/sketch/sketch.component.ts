@@ -11,11 +11,29 @@ import { ShapeManagerService } from '../../services/ShapeManager/shape-manager.s
 })
 export class SketchComponent implements OnInit {
   manager: ShapeManagerService;
-  @Input() action:string;
+  @Input() mode:string;
   @Input() style: Style;
+  @Input() set _action(value:string){
+    this.action = value;
+    switch(this.action){
+      case 'Copy':
+        this.manager.ctrlC();
+        this.ctrlC = true;
+        break;
+      case 'Paste':
+        if(this.ctrlC){
+          this.manager.paste();
+        }
+        break;
+      case 'Delete':
+        this.manager.delete();
+        break;
+    }
+  };
   constructor(manager: ShapeManagerService) {
     this.manager = manager;
-    this.action = "move";
+    this.mode = "Move";
+    this.action = "";
     this.style = new Style();
     this.ctrlC = false;
     this.ctrl = false;
@@ -29,6 +47,7 @@ export class SketchComponent implements OnInit {
     this.manager.createShape('line', new Point(300, 300), new Color(110, 100, 30, 0.5), new Color(0, 100, 30, 1), 5);
     this.manager.createShape('triangle', new Point(50, 50), new Color(110, 100, 30, 0.5), new Color(0, 100, 30, 1), 5);
   }
+  action: string;
   ctrlC: boolean;
   ctrl: boolean;
 
@@ -67,7 +86,7 @@ export class SketchComponent implements OnInit {
   }
 
   click():void{
-    console.log(this.action);
+    console.log(this.mode);
     console.log(this.style);
   }
 

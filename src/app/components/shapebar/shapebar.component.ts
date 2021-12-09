@@ -11,7 +11,7 @@ import hexRgb from 'hex-rgb';
 export class ShapebarComponent implements OnInit {
 
   constructor() { }
-  @Output() actionEmitter:EventEmitter<string>
+  @Output() modeEmitter:EventEmitter<string>
        = new EventEmitter<string>();
   @Output() styleEmitter:EventEmitter<Style>
         = new EventEmitter<Style>();
@@ -34,8 +34,8 @@ export class ShapebarComponent implements OnInit {
     this.emitStyle(this.style);
     //console.log(this.style);
   }
-  emitAction(action: string){
-    this.actionEmitter.emit(action);
+  emitMode(mode: string){
+    this.modeEmitter.emit(mode);
   }
   emitStyle(style: Style){
     this.styleEmitter.emit(style);
@@ -46,7 +46,7 @@ export class ShapebarComponent implements OnInit {
       item[1].declick();
     }
     menuItem.click();
-    this.emitAction(menuItem.text);
+    this.emitMode(menuItem.text);
   }
   updateFillColor(e: any){
     this.fillColor = e.target.value;

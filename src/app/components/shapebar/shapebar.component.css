@@ -102,4 +102,5 @@ body {
     min-width: 40px;
     max-height: 40px;
     min-height: 30px;
+    border-radius: 10px;
 }
