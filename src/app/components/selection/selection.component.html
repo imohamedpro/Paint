@@ -1,0 +1,11 @@
+
+<svg:rect   [attr.x] = "selected.rectCenterX(center, dimensions)"
+            [attr.y] = "selected.rectCenterY(center, dimensions)"
+            [attr.height] = "selected.rectDim2(dimensions)"
+            [attr.width] = "selected.rectDim1(dimensions)"
+            id = "selected"/>
+<svg:g *ngFor = "let resizer of resizers; index as i"  
+        resizer
+        [ngClass] = 'resizer'
+        [x] = 'getResizer(resizer + "x")'
+        [y] = 'getResizer(resizer + "y")'/>

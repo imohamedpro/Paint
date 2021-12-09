@@ -1,4 +1,4 @@
-import { Shape } from 'src/app/classes/Shape';
+import { Shape } from '../../classes/Shape';
 import { Component, HostListener, Input, OnInit } from '@angular/core';
 import { Point } from '../../classes/Point';
 import { FillColor, StrokeColor } from '../../classes/Style';

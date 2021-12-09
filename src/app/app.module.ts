@@ -7,6 +7,8 @@ import { RectangleComponent } from './components/rectangle/rectangle.component';
 import { EllipseComponent } from './components/ellipse/ellipse.component';
 import { ToolbarComponent } from './components/toolbar/toolbar.component';
 import { ShapebarComponent } from './components/shapebar/shapebar.component';
+import { SelectionComponent } from './components/selection/selection.component';
+import { ResizerComponent } from './components/resizer/resizer.component';
 
 @NgModule({
   declarations: [
@@ -17,6 +19,8 @@ import { ShapebarComponent } from './components/shapebar/shapebar.component';
     EllipseComponent,
     ToolbarComponent,
     ShapebarComponent,
+    SelectionComponent,
+    ResizerComponent,
   ],
   imports: [
     BrowserModule

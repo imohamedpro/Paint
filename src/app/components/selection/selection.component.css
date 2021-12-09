@@ -1,0 +1,20 @@
+#selected{
+    fill: transparent;
+    pointer-events: none;
+    stroke-width: 1px;
+    stroke: aqua;
+    stroke-dasharray: 4px;
+    /* stroke-width: 5px; */
+}
+.NE, .SW{
+    cursor:nesw-resize;
+}
+.NW, .SE {
+    cursor:nwse-resize;
+}
+.N, .S{
+    cursor:n-resize;
+}
+.E, .W{
+    cursor: e-resize;
+}
