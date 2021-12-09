@@ -12,5 +12,5 @@ export class Cloneable{
     copy(): Shape{
         this.shape.move(this.shift);
         return this.shape;
-    };
+    }
 }
