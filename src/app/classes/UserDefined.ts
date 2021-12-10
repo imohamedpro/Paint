@@ -3,6 +3,7 @@ import { Point } from "./Point";
 import { Shape } from "./Shape";
 
 export class UserDefined extends Shape {
+    initilaDims: Array<number>;
     getMinX(): number {
         return this.center.x;
     }
@@ -28,10 +29,11 @@ export class UserDefined extends Shape {
             maxX = Math.max(minX, shapes[i].getMaxX());
             maxY = Math.max(minX, shapes[i].getMaxX());
         }
-        this.center.x = minX;
-        this.center.y = minY;
         this.dimensions[0] = maxX - minX;
         this.dimensions[1] = maxY - minY;
+        this.initilaDims = new Array<number>();
+        this.initilaDims[0] = this.dimensions[0];
+        this.initilaDims[1] = this.dimensions[1];
     }
     resize(location: string, offset: Point, mouse: Point): void {
         let directed = Geometry.getDirections(location, offset);

@@ -13,8 +13,11 @@ export class UserDefinedComponent implements OnInit {
 
   ngOnInit(): void {
   }
-  getScale(): number{
-    return 1;
+  getScaleX(): number{
+    return this.shape.dimensions[0] / this.shape.initilaDims[0];
+  }
+  getScaleY(): number{
+    return this.shape.dimensions[1] / this.shape.initilaDims[1];
   }
   pointsGetter(shape: Shape): string {
     return `${shape.center.x},${shape.center.y} ${shape.dimensions[0]},${shape.dimensions[1]} ${shape.dimensions[2]},${shape.dimensions[3]}`;

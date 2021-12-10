@@ -30,7 +30,7 @@
 
 <svg:rect class="selected"
                 *ngIf="type == 'userDefined'"
-                /> <!-- attributes -->
+                [attr.x] = 'center.x' [attr.y] = 'center.y' [attr.width] = 'dimensions[0]'  [attr.height] = 'dimensions[1]'/> <!-- attributes -->
 
 <svg:g *ngFor = "let resizer of resizers.array; index as i"  
         resizer
