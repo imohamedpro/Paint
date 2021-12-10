@@ -49,7 +49,8 @@ export class ShapeManagerService {
     // }else{
       let shape = this.factory.createShape(type, id, center);
       if(type == 'userDefined'){
-        this.createUserDefined(this.customId, shape);
+        console
+        this.createUserDefined(0, shape);
       }else{
         shape.style = new Style();
         // shape.move(center);
@@ -185,6 +186,16 @@ export class ShapeManagerService {
     shape.initialDims = new Array<number>();
     shape.initialDims[0] = shape.dimensions[0];
     shape.initialDims[1] = shape.dimensions[1];
+    }
+  }
+
+  addCustomShape(){
+    if(this.selectedShapes.size > 0){
+      let prototype = new Array<Shape>();
+      this.selectedShapes.forEach((shape) =>{
+        prototype.push(shape.copy());
+      });
+      this.customShapes.set(this.customShapes.size + 1, prototype);
     }
   }
 }
