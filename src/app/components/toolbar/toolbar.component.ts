@@ -11,11 +11,18 @@ export class ToolbarComponent implements OnInit {
   @Output() actionEmitter:EventEmitter<string>
        = new EventEmitter<string>();
   mode: string = '';
+  nShapes: number = 0;
   ngOnInit(): void {
   }
 
   emitAction(action: string){
     this.actionEmitter.emit(action);
+  }
+
+  createShape(){
+    this.nShapes++;
+    this.emitAction("Custom Shape " + this.nShapes);
+    //Put Code Here
   }
 
 }

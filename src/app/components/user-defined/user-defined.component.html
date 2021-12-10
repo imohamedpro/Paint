@@ -1,0 +1,45 @@
+<svg [attr.x] = 'shape.center.x' [attr.y] = 'shape.center.y'>
+    <svg:g [attr.transform] = "'scale(' + getScale() + ')'">
+        <svg:g *ngFor="let shape of shape.shapes"
+                [ngSwitch]="shape.getType()">
+
+                <svg:circle *ngSwitchCase="'circle'"
+                    [attr.cx]= "shape.center.x"
+                    [attr.cy]= "shape.center.y"
+                    [attr.r] = "shape.dimensions[0]"
+                    [attr.style] = "shape.style.toString()"/>
+
+                <svg:ellipse *ngSwitchCase = "'ellipse'"
+                    [attr.cx]= "shape.center.x"
+                    [attr.cy]= "shape.center.y"
+                    [attr.rx] = "shape.dimensions[0]"
+                    [attr.ry] = "shape.dimensions[1]"
+                    [attr.style] = "shape.style.toString()"/>
+
+                <svg:line *ngSwitchCase = "'line'"
+                    [attr.x1]= "shape.center.x"
+                    [attr.y1]= "shape.center.y"
+                    [attr.x2]= "shape.dimensions[0]"
+                    [attr.y2]= "shape.dimensions[1]"
+                    [attr.style]= "shape.style.toString()"/>
+
+                <svg:rect *ngSwitchCase = "'line'"
+                    [attr.x]= "shape.center.x"  
+                    [attr.y]= "shape.center.y"
+                    [attr.height] = "shape.dimensions[1]"
+                    [attr.width] = "shape.dimensions[0]"
+                    [attr.style] = "shape.style.toString()"/>
+
+                <svg:rect *ngSwitchCase = "'square'"
+                    [attr.x]= "shape.center.x"
+                    [attr.y]= "shape.center.y"
+                    [attr.height] = "shape.dimensions[1]"
+                    [attr.width] = "shape.dimensions[0]"
+                    [attr.style] = "shape.style.toString()"/>
+
+                <svg:polygon  
+                    [attr.points] = "pointsGetter(shape)"
+                    [attr.style] = "shape.style.toString()"/>
+        </svg:g>
+    </svg:g>
+</svg>

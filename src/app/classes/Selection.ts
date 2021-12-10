@@ -1,3 +1,4 @@
+import { Geometry } from './Geometry';
 import { Point } from './Point';
 import {Shape} from './Shape';
 
@@ -22,68 +23,149 @@ export class SelectionFactory{
 export abstract class Selection {
     resizeNWx(center: Point, dimensions: Array<number>): number {
         // console.log(this.rectCenterX);
-        return this.rectCenterX(center, dimensions);
+        return center.x;
     }
     resizeNWy(center: Point, dimensions: Array<number>): number {
-        return this.rectCenterY(center, dimensions);
+        return center.y;
     }
 
     resizeNEx(center: Point, dimensions: Array<number>): number {
-        return this.rectCenterX(center, dimensions) + this.rectDim1(center, dimensions);
+        return center.x + dimensions[0];
     }
     resizeNEy(center: Point, dimensions: Array<number>): number {
-        return this.rectCenterY(center, dimensions);
+        return center.y;
     }
     resizeSEx(center: Point, dimensions: Array<number>): number {
-        return this.rectCenterX(center, dimensions) + this.rectDim1(center, dimensions);
+        return center.x + dimensions[0];
     }
     resizeSEy(center: Point, dimensions: Array<number>): number {
-        return this.rectCenterY(center, dimensions) + this.rectDim2(center, dimensions);
+        return center.y + dimensions[1];
     }
     resizeSWx(center: Point, dimensions: Array<number>): number {
-        return this.rectCenterX(center, dimensions);
+        return center.x;
     }
     resizeSWy(center: Point, dimensions: Array<number>): number {
-        return this.rectCenterY(center, dimensions) + this.rectDim2(center, dimensions);
+        return center.y + dimensions[1];
     }
 
-    abstract rectCenterX(center: Point, dimensions: Array<number>): number;
-    abstract rectCenterY(center: Point, dimensions: Array<number>): number;
-    abstract rectDim1(center: Point, dimensions: Array<number>): number;
-    abstract rectDim2(center: Point, dimensions: Array<number>): number;
+
+
+
+
+    resizeNx(center: Point, dimensions: Array<number>): number {
+        // console.log(this.rectCenterX);
+        return center.x + dimensions[0] / 2;
+    }
+    resizeNy(center: Point, dimensions: Array<number>): number {
+        return center.y;
+    }
+
+    resizeEx(center: Point, dimensions: Array<number>): number {
+        return center.x + dimensions[0];
+    }
+    resizeEy(center: Point, dimensions: Array<number>): number {
+        return center.y + dimensions[1] / 2;
+    }
+    resizeSx(center: Point, dimensions: Array<number>): number {
+        return center.x + dimensions[0] / 2;
+    }
+    resizeSy(center: Point, dimensions: Array<number>): number {
+        return center.y + dimensions[1];
+    }
+    resizeWx(center: Point, dimensions: Array<number>): number {
+        return center.x;
+    }
+    resizeWy(center: Point, dimensions: Array<number>): number {
+        return center.y + dimensions[1] / 2;
+    }
+
+    // abstract rectCenterX(center: Point, dimensions: Array<number>): number;
+    // abstract rectCenterY(center: Point, dimensions: Array<number>): number;
+    // abstract rectDim1(center: Point, dimensions: Array<number>): number;
+    // abstract rectDim2(center: Point, dimensions: Array<number>): number;
 }
 
 export class SelectionA extends Selection {
-    rectCenterX(center: Point, dimensions: Array<number>): number {
-        // console.log(center.x);
+    // rectCenterX(center: Point, dimensions: Array<number>): number {
+    //     // console.log(center.x);
 
-        return center.x;
-    }
-    rectCenterY(center: Point, dimensions: Array<number>): number {
-        return center.y;
-    }
-    rectDim1(center: Point, dimensions: Array<number>): number {
-        // console.log(dimensions[0]);
-        return dimensions[0];
-    }
-    rectDim2(center: Point, dimensions: Array<number>): number {
-        return dimensions[1];
-    }
+    //     return center.x;
+    // }
+    // rectCenterY(center: Point, dimensions: Array<number>): number {
+    //     return center.y;
+    // }
+    // rectDim1(center: Point, dimensions: Array<number>): number {
+    //     // console.log(dimensions[0]);
+    //     return dimensions[0];
+    // }
+    // rectDim2(center: Point, dimensions: Array<number>): number {
+    //     return dimensions[1];
+    // }
     
 }
 
 export class SelectionB extends Selection{
-    rectCenterX(center: Point, dimensions: Array<number>): number {
-        return center.x - dimensions[0];
+    // rectCenterX(center: Point, dimensions: Array<number>): number {
+    //     return center.x - dimensions[0];
+    // }
+    // rectCenterY(center: Point, dimensions: Array<number>): number {
+    //     return center.y - dimensions[1];
+    // }
+    // rectDim1(center: Point, dimensions: Array<number>): number {
+    //     return dimensions[0] * 2;
+    // }
+    // rectDim2(center: Point, dimensions: Array<number>): number {
+    //     return dimensions[1] * 2;
+    // }
+    override resizeNx(center: Point, dimensions: Array<number>): number{
+        return center.x;
     }
-    rectCenterY(center: Point, dimensions: Array<number>): number {
+    override resizeNy(center: Point, dimensions: Array<number>): number{
         return center.y - dimensions[1];
     }
-    rectDim1(center: Point, dimensions: Array<number>): number {
-        return dimensions[0] * 2;
+    override  resizeEx(center: Point, dimensions: Array<number>): number{
+        return center.x + dimensions[0];
     }
-    rectDim2(center: Point, dimensions: Array<number>): number {
-        return dimensions[1] * 2;
+    override resizeEy(center: Point, dimensions: Array<number>): number{
+        return center.y;
+    }
+    override resizeSx(center: Point, dimensions: Array<number>): number{
+        return center.x;
+    }
+    override resizeSy(center: Point, dimensions: Array<number>): number{
+        return center.y + dimensions[1];
+    }
+    override resizeWx(center: Point, dimensions: Array<number>): number{
+        return center.x - dimensions[0];
+    }
+    override resizeWy(center: Point, dimensions: Array<number>): number{
+        return center.y;
+    }
+
+
+    override resizeNWx(center: Point, dimensions: Array<number>): number{
+        return center.x - dimensions[0];
+    }
+    override resizeNWy(center: Point, dimensions: Array<number>): number{
+        return center.y - dimensions[1];
+    }
+    override resizeNEx(center: Point, dimensions: Array<number>): number{
+        return center.x + dimensions[0];
+    }
+    override resizeNEy(center: Point, dimensions: Array<number>): number{
+        return center.y - dimensions[1];
+    }
+    override resizeSEx(center: Point, dimensions: Array<number>): number{
+        return center.x + dimensions[0];
+    }
+    override resizeSEy(center: Point, dimensions: Array<number>): number{
+        return center.y + dimensions[1];
+    }
+    override resizeSWx(center: Point, dimensions: Array<number>): number{
+        return center.x - dimensions[0];
+    }
+    override resizeSWy(center: Point, dimensions: Array<number>): number{
+        return center.y + dimensions[1];
     }
 
 }

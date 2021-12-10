@@ -24,7 +24,9 @@
 
         <svg:g *ngSwitchCase = "'userDefined'" shape = 'userDefined'/>
         
-        <svg:g *ngIf="shape.value.isSelected"  shape = 'selection' [center] = 'shape.value.center' [dimensions]= 'shape.value.dimensions' [type] = 'shape.value.getType()'/>        
+        <svg:g *ngIf="shape.value.isSelected"  
+                shape = 'selection' [shapeId] = 'shape.key'
+                [center] = 'shape.value.center' [dimensions]= 'shape.value.dimensions' [type] = 'shape.value.getType()'/>        
 
 
     </svg:g>

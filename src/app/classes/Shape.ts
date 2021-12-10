@@ -4,7 +4,7 @@ import { ShapeFactoryService } from "../services/ShapeFactory/shape-factory.serv
 import { Point } from "./Point";
 import { Color, Cursor, Dimensions, Style, FillColor, StrokeColor } from "./Style";
 
-export class Shape implements IShape {
+export abstract class Shape implements IShape {
     type: string;
     id: number;
     dimensions!: Array<number>;
@@ -50,18 +50,26 @@ export class Shape implements IShape {
      setCursor(type: string){
          this.style.cursor = new Cursor(type);
      }
+    //  draw(center: Point, dimensions: Array<number>){
+    //     this.center = center;
+    //     this.dimensions = dimensions;
+    //  }
+    abstract resize(location: string, offset: Point, mouse: Point): void;
 
-    resize(newCenter: Point, newDimensions: Array<number>): void{
-        this.center = newCenter;
-        this.dimensions = newDimensions;
+     normalizeDims(){
+         this.dimensions.forEach((x) =>{
+             if(x < 4){
+                 x = 4;
+             }
+         });
      }
 
     draw(newDimensions: Array<number>): void{
-        if(newDimensions[0] > 5){
+        // if(newDimensions[0] > 5){
             this.dimensions = newDimensions;
-        }else{
+        // }else{
             //console.log("Negative Offset");
-        }
+        // }
     }
     copy(): Shape{
         let clone = new ShapeFactoryService().createShape(this.type, this.id, this.center.copy());
@@ -74,6 +82,11 @@ export class Shape implements IShape {
         });
         return clone;
     };
+
+    abstract getMinX(): number;
+    abstract getMinY(): number;
+    abstract getMaxX(): number;
+    abstract getMaxY(): number;
     //abstract delete(): void;
 
     // click(): void{

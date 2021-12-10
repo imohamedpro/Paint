@@ -7,11 +7,11 @@ export interface IShape {
 
     getId(): number;
     getType(): string;
-    //draw(p: Point): void;
+    draw(newDimensions: Array<number>): void;
     move(newCenter: Point): void;
-    resize(newCenter: Point, newDimensions: Array<number>): void;
+    resize(location: string, offset: Point, mouse: Point): void;
     copy(): Shape;
-    //delete(): void;
+    // delete(): void;
     setFill(color: Color): void;
     setStroke(color: Color): void;
 }

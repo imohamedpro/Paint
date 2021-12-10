@@ -1,4 +1,4 @@
-#selected{
+.selected{
     fill: transparent;
     pointer-events: none;
     stroke-width: 1px;
@@ -18,6 +18,6 @@
 .E, .W{
     cursor: e-resize;
 }
-.a, .b, .c {
+.v1, .v2, .v3 {
     cursor: move;
 }

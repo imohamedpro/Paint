@@ -1,4 +1,4 @@
-import { Shape } from 'src/app/classes/Shape';
+import { Shape } from '../../classes/Shape';
 import { Component, HostListener, Input, OnInit } from '@angular/core';
 import { Point } from '../../classes/Point';
 import { Color, FillColor, StrokeColor } from '../../classes/Style';
@@ -109,7 +109,7 @@ export class SquareComponent implements OnInit {
     }
   }
 
-  getSideLength():number{
-    return Math.max(this.square.dimensions[0],this.square.dimensions[1]);
-  }
+  // getSideLength():number{
+  //   return Math.max(this.square.dimensions[0],this.square.dimensions[1]);
+  // }
 }

@@ -41,7 +41,7 @@ export class ShapeManagerService {
     shape.setStroke(stroke);
     shape.setStrokeWidth(strokeWidth);
     shape.setCursor("crosshair");
-    shape.resize(center, [5,5,5,5]);
+    // shape.resize(center, [5,5,5,5], new Point);
     this.shapes.set(id, shape);
     // console.log(shape.fill.toString());
     return id;
@@ -85,6 +85,12 @@ export class ShapeManagerService {
       this.deselect(shape);
       this.shapes.delete(shape.id);
     });
+  }
+
+  resize(id: number, location: string, offset: Point, mouse: Point){
+    let shape: any = this.shapes.get(id);
+    console.log(id + " " + location + " " + offset + " " + mouse);
+    shape.resize(location, offset, mouse);
   }
   ctrlC(): void{
     let clone!: Shape;

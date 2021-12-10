@@ -1,3 +1,6 @@
 <svg:circle   [attr.cx] = 'x'
             [attr.cy] = 'y'
-            [attr.r] = "5"/>
+            [attr.r] = "5"
+            (mousedown)="mouseDown($event)"
+            (mousemove)="mouseMove($event)"
+            (mouseup)="mouseUp($event)"/>

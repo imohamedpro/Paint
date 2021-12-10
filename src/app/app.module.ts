@@ -12,6 +12,7 @@ import { ResizerComponent } from './components/resizer/resizer.component';
 import { LineComponent } from './components/line/line.component';
 import { TriangleComponent } from './components/triangle/triangle.component';
 import { SquareComponent } from './components/square/square.component';
+import { UserDefinedComponent } from './components/user-defined/user-defined.component';
 
 @NgModule({
   declarations: [
@@ -27,6 +28,7 @@ import { SquareComponent } from './components/square/square.component';
     LineComponent,
     TriangleComponent,
     SquareComponent,
+    UserDefinedComponent,
   ],
   imports: [
     BrowserModule
