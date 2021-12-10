@@ -1,7 +1,7 @@
 import { Geometry } from "./Geometry";
 import { Point } from "./Point";
 import { Shape } from "./Shape";
-import { Style } from "./Style";
+import { Color, Style } from "./Style";
 
 export class UserDefined extends Shape {
     // initilaDims: Array<number>;
@@ -79,5 +79,19 @@ export class UserDefined extends Shape {
         });
         return clone;
     }
-    
+    override setFill(color: Color): void {
+        this.shapes.forEach(shape => {
+            shape.setFill(color);
+        });
+    }
+    override setStroke(color: Color): void {
+        this.shapes.forEach(shape => {
+            shape.setStroke(color);
+        });
+    }
+    override setStrokeWidth(width: number): void {
+        this.shapes.forEach(shape => {
+            shape.setStrokeWidth(width);
+        });
+    }
 }
