@@ -25,4 +25,8 @@ export class ToolbarComponent implements OnInit {
     //Put Code Here
   }
 
+  upload(){
+    console.log("uploaded")
+  }
+
 }
