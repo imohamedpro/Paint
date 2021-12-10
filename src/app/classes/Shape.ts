@@ -57,7 +57,11 @@ export class Shape implements IShape {
      }
 
     draw(newDimensions: Array<number>): void{
-        this.dimensions = newDimensions;
+        if(newDimensions[0] > 5){
+            this.dimensions = newDimensions;
+        }else{
+            console.log("Negative Offset");
+        }
     }
     copy(): Shape{
         let clone = new ShapeFactoryService().createShape(this.type, this.id, this.center.copy());
@@ -115,5 +119,7 @@ export class Shape implements IShape {
     //     this.isUpperLeftCornerClicked = false;
     //     console.log("mouseup");
     // }
-
+    setCenter(newCenter: Point): void{
+        this.center = newCenter;
+    }
 }
