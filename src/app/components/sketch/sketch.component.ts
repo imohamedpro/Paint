@@ -140,13 +140,21 @@ export class SketchComponent implements OnInit {
         //console.log("Center = " + e.offsetX + " , " + e.offsetY);
         //console.log(this.dim);
       this.manager.draw(this.id, this.dim);
+    }else if(this.mode == 'Move' && e.button == 0 && this.manager.isDragging){
+      let offset: Point = new Point(e.clientX - this.manager.initialClick.x, e.clientY - this.manager.initialClick.y);
+      console.log(offset);
+      this.manager.initialClick = new Point(e.clientX, e.clientY);
+      this.manager.move(offset);
     }
   }
 
   mouseUp(e: MouseEvent): void{
     if(this.isMouseDown && this.mode != 'Move'){
+      this.manager.finishCreation(this.id);
       this.isMouseDown = false;
       this.dim = [0,0,0,0]
+    }else if(this.mode == 'Move' && this.manager.isDragging){
+      this.manager.clearDragging();
     }
   }
 

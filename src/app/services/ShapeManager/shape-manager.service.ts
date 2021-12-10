@@ -18,13 +18,16 @@ export class ShapeManagerService {
   // if a shape is deleted, later ones are shifted.
   factory: ShapeFactoryService;
   clipBoard!: Map<number, Shape>;
-
+  isDragging: boolean;
+  initialClick: Point;
   constructor(factory: ShapeFactoryService) { 
     this.shapes = new Map<number, Shape>();
     this.selectedShapes = new Map<number, Shape>();
     this.availableIds = new Array<number>();
     this.clipBoard = new Map<number, Shape>();
     this.factory = factory;
+    this.isDragging = false;
+    this.initialClick = new Point(0,0);
   }
   getAvailableId(): number{
     return this.availableIds.length > 0? Number(this.availableIds.shift()): this.shapes.size;
@@ -37,7 +40,7 @@ export class ShapeManagerService {
     shape.setFill(fill);
     shape.setStroke(stroke);
     shape.setStrokeWidth(strokeWidth);
-    shape.setCursor("default");
+    shape.setCursor("crosshair");
     shape.resize(center, [5,5,5,5]);
     this.shapes.set(id, shape);
     // console.log(shape.fill.toString());
@@ -52,7 +55,7 @@ export class ShapeManagerService {
   deselect(shape: Shape){
     shape.isSelected = false;
     this.selectedShapes.delete(shape.id);
-    shape.setCursor("default"); 
+    shape.setCursor("pointer"); 
   }
 
   clearSelected(){
@@ -110,5 +113,20 @@ export class ShapeManagerService {
 
   drawNegative(id:number, offset:number[]){
     this.shapes.get(id)?.setCenter(new Point(offset[0], offset[1]));
+  }
+
+  setDragging(initialClick: Point){
+    //shape.dragging = true;
+    this.isDragging = true;
+    this.initialClick = initialClick;
+  }
+
+  clearDragging(){
+    //shape.dragging = false;
+    this.isDragging = false
+  }
+
+  finishCreation(id: number){
+    this.shapes.get(id)?.setCursor("pointer")
   }
 }

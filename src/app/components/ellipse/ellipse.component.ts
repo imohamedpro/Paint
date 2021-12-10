@@ -80,23 +80,9 @@ export class EllipseComponent implements OnInit{
   }
   mouseDown(e: MouseEvent):void {
     if(e.button == 0){
-      this.dragging = true;
-
       this.initialClick = new Point(e.clientX, e.clientY);
+      this.manager.setDragging(this.initialClick);
       console.log(this.initialClick);
-    }
-  }
-  move(e: MouseEvent): void {
-    if(e.button == 0 && this.dragging && this.ellipse.isSelected){
-      let offset: Point = new Point(e.clientX - this.initialClick.x, e.clientY - this.initialClick.y);
-      console.log(offset);
-      this.initialClick = new Point(e.clientX, e.clientY);
-      this.manager.move(offset);
-    }
-  }
-  mouseUp(e: MouseEvent): void{
-    if(this.dragging){
-      this.dragging = false;
     }
   }
 }
