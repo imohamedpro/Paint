@@ -1,6 +1,6 @@
 import { Style, FillColor, StrokeColor, Dimensions, Color} from './../../classes/Style';
 import { MenuItem } from './../../classes/MenuItem';
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 // import hexRgb from 'hex-rgb';
 
 @Component({
@@ -15,10 +15,13 @@ export class ShapebarComponent implements OnInit {
        = new EventEmitter<string>();
   @Output() styleEmitter:EventEmitter<Style>
         = new EventEmitter<Style>();
+  // @Input() set definedShape(defined: string){
+
+  // }
   rows: MenuItem[][] = [[new MenuItem("open_with", "Move"),new MenuItem("╱","Line")],
                         [new MenuItem("□","Square"), new MenuItem("▭","Rectangle")],
                         [new MenuItem("○","Circle"), new MenuItem("⬭","Ellipse")],
-                        [new MenuItem("△","Triangle"), new MenuItem("","")]]
+                        [new MenuItem("△","Triangle"), new MenuItem("dashboard","Custom Shape 1")]]
   fillColor: string = '#ff0000';
   strokeColor: string = '#570000'
   strokeWidth: number = 5;

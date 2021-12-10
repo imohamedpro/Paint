@@ -18,4 +18,8 @@ export class ToolbarComponent implements OnInit {
     this.actionEmitter.emit(action);
   }
 
+  createShape(){
+    //Put Code Here
+  }
+
 }
