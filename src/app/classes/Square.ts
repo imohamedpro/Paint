@@ -35,7 +35,7 @@ export class Square extends Shape {
         throw new Error('Method not implemented.');
     }
 
-    resize(location: string, offset: Point, mouse: Point): void {
+    resize(location: string, offset: Point): void {
 
         let directed = Geometry.getDirections(location, offset);
         let off = directed.y;

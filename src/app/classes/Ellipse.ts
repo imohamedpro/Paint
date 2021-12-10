@@ -42,7 +42,7 @@ export class Ellipse extends Shape {
     delete(): void {
         throw new Error('Method not implemented.');
     }
-    resize(location: string, offset: Point, mouse: Point): void {
+    resize(location: string, offset: Point): void {
         // this.normalizeDims();
 
         let directed = Geometry.getDirections(location, offset);

@@ -43,7 +43,7 @@ export class Circle extends Shape {
     delete(): void {
         throw new Error('Method not implemented.');
     }
-    resize(location: string, offset: Point, mouse: Point): void {
+    resize(location: string, offset: Point): void {
         let direction = (location == 'N' || location == 'W')? -1: 1;
         let off = offset.y;
         if(Math.abs(offset.x) > Math.abs(offset.y)){

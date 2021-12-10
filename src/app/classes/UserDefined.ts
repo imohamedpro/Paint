@@ -35,7 +35,7 @@ export class UserDefined extends Shape {
         this.initilaDims[0] = this.dimensions[0];
         this.initilaDims[1] = this.dimensions[1];
     }
-    resize(location: string, offset: Point, mouse: Point): void {
+    resize(location: string, offset: Point): void {
         let directed = Geometry.getDirections(location, offset);
         switch(location){
             case 'N':

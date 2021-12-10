@@ -45,7 +45,7 @@ export class Rectangle extends Shape {
     delete(): void {
         throw new Error('Method not implemented.');
     }
-    resize(location: string, offset: Point, mouse: Point): void {
+    resize(location: string, offset: Point): void {
         let directed = Geometry.getDirections(location, offset);
         // console.log(Math.min(this.center.x, mouse.x));
         // console.log(Math.min(this.center.y, mouse.y));
