@@ -1,5 +1,5 @@
 <app-toolbar (actionEmitter)="sendAction($event)"></app-toolbar>
 <div class="container">
-    <app-shapebar class="shapebar" (modeEmitter)="sendMode($event)" (styleEmitter)="sendStyle($event)"></app-shapebar>
-    <app-sketch class="sketch" [mode]="mode" [style]="style" [_action]="action"></app-sketch>
+    <app-shapebar class="shapebar" (modeEmitter)="sendMode($event)" (styleEmitter)="sendStyle($event)" (styleChangeEmitter)="sendStyleChange($event)" [createShape]="action"></app-shapebar>
+    <app-sketch class="sketch" [mode]="mode" [style]="style" [_action]="action" [styleChange]="styleChange"></app-sketch>
 </div>

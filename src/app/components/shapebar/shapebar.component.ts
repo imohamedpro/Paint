@@ -15,17 +15,34 @@ export class ShapebarComponent implements OnInit {
        = new EventEmitter<string>();
   @Output() styleEmitter:EventEmitter<Style>
         = new EventEmitter<Style>();
+  @Output() styleChangeEmitter:EventEmitter<number>
+        = new EventEmitter<number>();
+  @Input() set createShape(value:string){
+    console.log(value);
+    if(value.slice(0,12) == "Custom Shape"){
+      let lastRowIndex: number = this.rows.length-1; 
+      console.log(lastRowIndex);
+      console.log(this.rows);
+      if(this.rows[lastRowIndex][1].icon === ""){
+        let lastRowItem = this.rows[lastRowIndex][0];
+        this.rows.pop();
+        this.rows.push([lastRowItem,new MenuItem("dashboard",value)]);
+      }else{
+        this.rows.push([new MenuItem("dashboard",value), new MenuItem("","")]);
+      }
+    }
+  }
   // @Input() set definedShape(defined: string){
 
   // }
   rows: MenuItem[][] = [[new MenuItem("open_with", "Move"),new MenuItem("╱","Line")],
                         [new MenuItem("□","Square"), new MenuItem("▭","Rectangle")],
                         [new MenuItem("○","Circle"), new MenuItem("⬭","Ellipse")],
-                        [new MenuItem("△","Triangle"), new MenuItem("dashboard","Custom Shape 1")]]
+                        [new MenuItem("△","Triangle"), new MenuItem("","")]]
   fillColor: string = '#ff0000';
   strokeColor: string = '#570000'
   strokeWidth: number = 5;
-  style: Style = new Style();                      
+  style: Style = new Style();                  
   ngOnInit(): void {
     // let rgb = hexRgb(this.fillColor)
     let color = new Color(this.fillColor);
@@ -43,6 +60,9 @@ export class ShapebarComponent implements OnInit {
   emitStyle(style: Style){
     this.styleEmitter.emit(style);
   }
+  emitStyleChange(){
+    this.styleChangeEmitter.emit(0)
+  }
   click(menuItem: MenuItem):void{
     for(let item of this.rows){
       item[0].declick();
@@ -58,6 +78,7 @@ export class ShapebarComponent implements OnInit {
     this.style.fillColor = new FillColor(color);
     console.log(this.style.fillColor);
     this.emitStyle(this.style);
+    this.emitStyleChange();
   }
 
   updateStrokeColor(e: any){
@@ -67,6 +88,7 @@ export class ShapebarComponent implements OnInit {
     this.style.strokeColor = new StrokeColor(color);
     console.log(this.style.strokeColor);
     this.emitStyle(this.style);
+    this.emitStyleChange();
   }
 
   updateStrokeWidth(e: any){
@@ -74,6 +96,7 @@ export class ShapebarComponent implements OnInit {
     this.style.strokeWidth = new Dimensions(this.strokeWidth);
     console.log(this.style.strokeWidth);
     this.emitStyle(this.style);
+    this.emitStyleChange();
   }
 
   // mouseoverEllipse(){

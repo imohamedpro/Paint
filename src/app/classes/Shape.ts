@@ -68,7 +68,7 @@ export abstract class Shape implements IShape {
         // if(newDimensions[0] > 5){
             this.dimensions = newDimensions;
         // }else{
-            console.log("Negative Offset");
+            //console.log("Negative Offset");
         // }
     }
     copy(): Shape{

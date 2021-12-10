@@ -93,43 +93,21 @@ export class SquareComponent implements OnInit {
         this.manager.select(this.square);
       }
 
-      if(this.square.isSelected){
-        // this.square.setStroke(new Color('#' + Math.floor(Math.random()*(Math.pow(255, 3))).toString(16)));
-        // this.square.setFill(new Color('#' + Math.floor(Math.random()*(Math.pow(255, 3))).toString(16)));
-        console.log(this.manager);
-      }
+      // if(this.square.isSelected){
+      //   this.square.setFill(new Color(Math.floor(Math.random()*255),Math.floor(Math.random()*255),Math.floor(Math.random()*255), 1));
+      //   this.square.setStroke(new Color(Math.floor(Math.random()*255),Math.floor(Math.random()*255),Math.floor(Math.random()*255), 1));
+      //   console.log(this.manager);
+      // }
     }
 
   }
   mouseDown(e: MouseEvent):void {
     if(e.button == 0){
-      this.dragging = true;
-
       this.initialClick = new Point(e.clientX, e.clientY);
+      this.manager.setDragging(this.initialClick);
       console.log(this.initialClick);
     }
   }
-  move(e: MouseEvent): void {
-    if(e.button == 0 && this.dragging && this.square.isSelected){
-      let offset: Point = new Point(e.clientX - this.initialClick.x, e.clientY - this.initialClick.y);
-      console.log(offset);
-      this.initialClick = new Point(e.clientX, e.clientY);
-      this.manager.move(offset);
-    }
-  }
-  mouseUp(e: MouseEvent): void{
-    if(this.dragging){
-      this.dragging = false;
-    }
-  }
-  
-  // fillColor(){
-  //   return `fill: ${this.square.fill.toString()}`;
-  // }
-
-  // strokeColor(){
-  //   return `stroke: ${this.square.fill.toString()}`;
-  // }
 
   // getSideLength():number{
   //   return Math.max(this.square.dimensions[0],this.square.dimensions[1]);

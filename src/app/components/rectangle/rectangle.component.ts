@@ -16,7 +16,7 @@ export class RectangleComponent implements OnInit{
   initialClick!: Point;
   dragging: boolean; 
   ctrl: boolean;
-
+ 
   constructor(manager: ShapeManagerService) { 
     this.manager = manager;
     this.dragging = false;
@@ -62,33 +62,19 @@ export class RectangleComponent implements OnInit{
         this.manager.select(this.rectangle);
       }
 
-      if(this.rectangle.isSelected){
-        // this.rectangle.setStroke(new Color('#' + Math.floor(Math.random()*(Math.pow(255, 3))).toString(16)));
-        // this.rectangle.setFill(new Color('#' + Math.floor(Math.random()*(Math.pow(255, 3))).toString(16)));
-        console.log(this.manager);
-      }
+      // if(this.rectangle.isSelected){
+      //   this.rectangle.setFill(new Color(Math.floor(Math.random()*255),Math.floor(Math.random()*255),Math.floor(Math.random()*255), 1));
+      //   this.rectangle.setStroke(new Color(Math.floor(Math.random()*255),Math.floor(Math.random()*255),Math.floor(Math.random()*255), 1));
+      //   console.log(this.manager);
+      // }
     }
 
   }
   mouseDown(e: MouseEvent):void {
     if(e.button == 0){
-      this.dragging = true;
-
       this.initialClick = new Point(e.clientX, e.clientY);
+      this.manager.setDragging(this.initialClick);
       console.log(this.initialClick);
-    }
-  }
-  move(e: MouseEvent): void {
-    if(e.button == 0 && this.dragging && this.rectangle.isSelected){
-      let offset: Point = new Point(e.clientX - this.initialClick.x, e.clientY - this.initialClick.y);
-      console.log(offset);
-      this.initialClick = new Point(e.clientX, e.clientY);
-      this.manager.move(offset);
-    }
-  }
-  mouseUp(e: MouseEvent): void{
-    if(this.dragging){
-      this.dragging = false;
     }
   }
 }

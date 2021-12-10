@@ -12,8 +12,13 @@ import { ShapeManagerService } from '../../services/ShapeManager/shape-manager.s
 export class SketchComponent implements OnInit {
   manager: ShapeManagerService;
   @Input() mode:string;
-  @Input() style: Style;
+  @Input() style:Style;
+  @Input() set styleChange(value:number){
+    console.log("Style Change Recieved");
+    this.manager.changeStyleSelected(this.style.copy());
+  }
   @Input() set _action(value:string){
+    console.log(value);
     this.action = value;
     switch(this.action){
       case 'Copy':
@@ -51,6 +56,7 @@ export class SketchComponent implements OnInit {
     // this.manager.createShape('triangle', new Point(50, 50), new Color(110, 100, 30, 0.5), new Color(0, 100, 30, 1), 5);
     // this.manager.createShape('square', new Point(600,600), new Color(2, 200, 2, 0.5), new Color(0, 100, 30, 1), 8);
   }
+
   initialClick!: Point;
   tempClick!: Point;
   action: string;
@@ -100,6 +106,7 @@ export class SketchComponent implements OnInit {
   // }
   mouseDown(e: MouseEvent):void {
     if(e.button == 0 && this.mode != 'Move'){
+      this.manager.clearSelected();
       this.isMouseDown = true;
       this.initialClick = new Point(e.offsetX, e.offsetY);
       this.tempClick = new Point(e.offsetX, e.offsetY);
@@ -125,22 +132,34 @@ export class SketchComponent implements OnInit {
           case 'Triangle':
             this.dim = [e.offsetX,e.offsetY,e.offsetX+50,e.offsetY+55]
             break;
+          case 'Square':
+            let max = Math.max(e.offsetX - this.tempClick.x,e.offsetY - this.tempClick.y);
+            this.dim = [max,max];
+            break;
           default:
             this.dim[0] += e.offsetX - this.tempClick.x;
             this.dim[1] += e.offsetY - this.tempClick.y;
             this.tempClick = new Point(e.offsetX, e.offsetY);
         }
       }
-        console.log("Center = " + e.offsetX + " , " + e.offsetY);
-        console.log(this.dim);
+        //console.log("Center = " + e.offsetX + " , " + e.offsetY);
+        //console.log(this.dim);
       this.manager.draw(this.id, this.dim);
+    }else if(this.mode == 'Move' && e.button == 0 && this.manager.isDragging){
+      let offset: Point = new Point(e.clientX - this.manager.initialClick.x, e.clientY - this.manager.initialClick.y);
+      console.log(offset);
+      this.manager.initialClick = new Point(e.clientX, e.clientY);
+      this.manager.move(offset);
     }
   }
 
   mouseUp(e: MouseEvent): void{
     if(this.isMouseDown && this.mode != 'Move'){
+      this.manager.finishCreation(this.id);
       this.isMouseDown = false;
       this.dim = [0,0,0,0]
+    }else if(this.mode == 'Move' && this.manager.isDragging){
+      this.manager.clearDragging();
     }
   }
 
