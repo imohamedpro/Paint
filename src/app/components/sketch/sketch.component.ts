@@ -1,3 +1,4 @@
+import { Cursor } from './../../classes/Style';
 import { Component,  OnInit, Input, HostListener } from '@angular/core';
 import { Point } from '../../classes/Point';
 import { Shape } from '../../classes/Shape';
@@ -45,6 +46,7 @@ export class SketchComponent implements OnInit {
     this.isMouseDown = false;
     this.id = 0;
     this.dim = [0,0,0,0]
+    this.svgCursor = new Cursor("auto")
    }
 
   ngOnInit(): void {
@@ -65,7 +67,8 @@ export class SketchComponent implements OnInit {
   ctrl: boolean;
   id: number;
   dim: Array<number>;
-
+  svgCursor: Cursor;
+  
    @HostListener('window:keydown',['$event'])
    ctrlOrDeleteDown(event: KeyboardEvent){
      if(event.ctrlKey && event.key === 'c'){
@@ -120,32 +123,36 @@ export class SketchComponent implements OnInit {
   move(e: MouseEvent): void {
     if(e.button == 0){
       if(this.isMouseDown && this.mode != 'Move'){
-        if(e.offsetX < this.initialClick.x && e.offsetY < this.initialClick.y && this.mode != 'Line' && this.mode != 'Triangle'){
-          this.manager.drawNegative(this.id,[e.offsetX,e.offsetY])
-          this.dim[0] += this.tempClick.x - e.offsetX;
-          this.dim[1] += this.tempClick.y - e.offsetY;
-          this.tempClick = new Point(e.offsetX, e.offsetY);
+        this.svgCursor = new Cursor("crosshair");
+        if(this.mode == 'Line'){
+          this.dim = [e.offsetX,e.offsetY]
+        }else if(this.mode == 'Triangle'){
+          this.dim = [e.offsetX,e.offsetY,e.offsetX+50,e.offsetY+55]
         }else{
-         switch (this.mode){
-           case 'Line':
-             this.dim = [e.offsetX,e.offsetY]
-             break;
-           case 'Triangle':
-             this.dim = [e.offsetX,e.offsetY,e.offsetX+50,e.offsetY+55]
-             break;
-           case 'Square':
-             let max = Math.max(e.offsetX - this.tempClick.x,e.offsetY - this.tempClick.y);
-             this.dim = [max,max];
-             break;
-           default:
-             this.dim[0] += e.offsetX - this.tempClick.x;
-             this.dim[1] += e.offsetY - this.tempClick.y;
-             this.tempClick = new Point(e.offsetX, e.offsetY);
+          if(e.offsetX < this.initialClick.x){
+            let center: Point = new Point(e.offsetX, this.manager.getCenter(this.id)!.y);
+            this.manager.setCenter(center, this.id);
+            this.dim[0] += this.tempClick.x - e.offsetX;
+          }else{
+            this.dim[0] += e.offsetX - this.tempClick.x;
+          }
+
+          if(e.offsetY < this.initialClick.y){
+            let center: Point = new Point(this.manager.getCenter(this.id)!.x, e.offsetY);
+            this.manager.setCenter(center, this.id);
+            this.dim[1] += this.tempClick.y - e.offsetY;
+          }else{
+            this.dim[1] += e.offsetY - this.tempClick.y;
+          }
+
+          this.tempClick = new Point(e.offsetX, e.offsetY);
+          
+          if(this.mode == 'Square'){
+            this.dim = [this.dim[0],this.dim[0]];
+          }
          }
-       }
-         //console.log("Center = " + e.offsetX + " , " + e.offsetY);
-         //console.log(this.dim);
-       this.manager.draw(this.id, this.dim);
+         this.manager.draw(this.id, this.dim);
+
      }else if(this.mode == 'Move'){
        if(this.manager.isResizing){
           let offset: Point = new Point(e.clientX - this.manager.initialClick.x, e.clientY - this.manager.initialClick.y);
@@ -164,6 +171,7 @@ export class SketchComponent implements OnInit {
 
   mouseUp(e: MouseEvent): void{
     if(this.isMouseDown && this.mode != 'Move'){
+      this.svgCursor = new Cursor("auto");
       this.manager.finishCreation(this.id);
       this.isMouseDown = false;
       this.dim = [0,0,0,0]

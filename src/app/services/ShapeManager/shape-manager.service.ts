@@ -150,4 +150,12 @@ export class ShapeManagerService {
   clearResize(){
     this.isResizing = false;
   }
+
+  getCenter(id: number){
+    return this.shapes.get(id)?.center.copy();
+  }
+
+  setCenter(center: Point, id: number){
+    this.shapes.get(id)!.center = center.copy();
+  }
 }
