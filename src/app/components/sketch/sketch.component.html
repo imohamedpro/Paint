@@ -22,7 +22,7 @@
         <svg:g *ngSwitchCase = "'square'" shape = 'square' [square] = 'shape.value'/>
 
 
-        <svg:g *ngSwitchCase = "'userDefined'" shape = 'userDefined'/>
+        <svg:g *ngSwitchCase = "'userDefined'" shape = 'userDefined' [custom] = 'shape.value'/>
         
         <svg:g *ngIf="shape.value.isSelected"  
                 shape = 'selection' [shapeId] = 'shape.key'

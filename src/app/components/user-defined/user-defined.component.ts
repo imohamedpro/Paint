@@ -3,12 +3,12 @@ import { Shape } from '../../classes/Shape';
 import { UserDefined } from '../../classes/UserDefined';
 
 @Component({
-  selector: '[shape = userDefined]',
+  selector: '[shape=userDefined]',
   templateUrl: './user-defined.component.html',
   styleUrls: ['./user-defined.component.css']
 })
 export class UserDefinedComponent implements OnInit {
-  @Input() shape!: UserDefined;
+  @Input('custom') shape!: any;
   constructor() { }
 
   ngOnInit(): void {
