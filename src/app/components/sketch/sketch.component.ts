@@ -52,6 +52,7 @@ export class SketchComponent implements OnInit {
     // this.manager.createShape('square', new Point(600,600), new Color(2, 200, 2, 0.5), new Color(0, 100, 30, 1), 8);
   }
   initialClick!: Point;
+  tempClick!: Point;
   action: string;
   isMouseDown: boolean;
   ctrlC: boolean;
@@ -101,6 +102,7 @@ export class SketchComponent implements OnInit {
     if(e.button == 0 && this.mode != 'Move'){
       this.isMouseDown = true;
       this.initialClick = new Point(e.offsetX, e.offsetY);
+      this.tempClick = new Point(e.offsetX, e.offsetY);
       this.id = this.manager.createShape(this.mode.toLowerCase(), this.initialClick, this.style.fillColor.color, this.style.strokeColor.color, this.style.strokeWidth.toNumber());
       if(this.mode == 'Line') this.manager.draw(this.id, [e.offsetX,e.offsetY]);
       else if(this.mode == 'triangle') this.manager.draw(this.id, [e.offsetX,e.offsetY,e.offsetX,e.offsetY]);
@@ -110,19 +112,27 @@ export class SketchComponent implements OnInit {
 
   move(e: MouseEvent): void {
     if(e.button == 0 && this.isMouseDown && this.mode != 'Move'){
-      switch (this.mode){
-        case 'Line':
-          this.dim = [e.offsetX,e.offsetY]
-          break;
-        case 'Triangle':
-          this.dim = [e.offsetX,e.offsetY,e.offsetX+50,e.offsetY+55]
-          break;
-        default:
-          this.dim[0] += e.offsetX - this.initialClick.x;
-          this.dim[1] += e.offsetY - this.initialClick.y
-          this.initialClick = new Point(e.offsetX, e.offsetY);
+       if(e.offsetX < this.initialClick.x && e.offsetY < this.initialClick.y && this.mode != 'Line' && this.mode != 'Triangle'){
+         this.manager.drawNegative(this.id,[e.offsetX,e.offsetY])
+         this.dim[0] += this.tempClick.x - e.offsetX;
+         this.dim[1] += this.tempClick.y - e.offsetY;
+         this.tempClick = new Point(e.offsetX, e.offsetY);
+       }else{
+        switch (this.mode){
+          case 'Line':
+            this.dim = [e.offsetX,e.offsetY]
+            break;
+          case 'Triangle':
+            this.dim = [e.offsetX,e.offsetY,e.offsetX+50,e.offsetY+55]
+            break;
+          default:
+            this.dim[0] += e.offsetX - this.tempClick.x;
+            this.dim[1] += e.offsetY - this.tempClick.y;
+            this.tempClick = new Point(e.offsetX, e.offsetY);
+        }
       }
-      //console.log(this.dim);
+        console.log("Center = " + e.offsetX + " , " + e.offsetY);
+        console.log(this.dim);
       this.manager.draw(this.id, this.dim);
     }
   }

@@ -5,6 +5,19 @@ import {Shape} from './Shape'
 
 
 export class Rectangle extends Shape {
+    getMinX(): number {
+        return this.center.x;
+    }
+    getMinY(): number {
+        return this.center.y;
+    }
+    getMaxX(): number {
+        return this.center.x + this.dimensions[0];
+
+    }
+    getMaxY(): number {
+        return this.center.y + this.dimensions[1];
+    }
 
     constructor(id: number, center: Point){
         super("rectangle", id, center);

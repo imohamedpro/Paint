@@ -7,6 +7,19 @@ import {Shape} from './Shape'
 
 
 export class Circle extends Shape {
+    getMinX(): number {
+        return this.center.x - this.dimensions[0];
+    }
+    getMinY(): number {
+        return this.center.y - this.dimensions[0];
+    }
+    getMaxX(): number {
+        return this.center.x + this.dimensions[0];
+        ;
+    }
+    getMaxY(): number {
+        return this.center.y + this.dimensions[0];
+    }
 
     constructor(id: number, center: Point){
         super("circle", id, center);

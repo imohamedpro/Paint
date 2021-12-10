@@ -103,4 +103,8 @@ export class ShapeManagerService {
   draw(id: number, dim: number[]): void{
     this.shapes.get(id)?.draw(dim);
   }
+
+  drawNegative(id:number, offset:number[]){
+    this.shapes.get(id)?.setCenter(new Point(offset[0], offset[1]));
+  }
 }

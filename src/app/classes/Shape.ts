@@ -65,13 +65,11 @@ export abstract class Shape implements IShape {
      }
 
     draw(newDimensions: Array<number>): void{
-        // for(let i = 0; i < this.dimensions.length; i++){
-        //     if(this.dimensions[i] < 0 || newDimensions[i] > 10){
-        //         this.dimensions[i] = newDimensions[i]
-        //     }
+        // if(newDimensions[0] > 5){
+            this.dimensions = newDimensions;
+        // }else{
+            console.log("Negative Offset");
         // }
-        // console.log(newDimensions);
-        this.dimensions = newDimensions;
     }
     copy(): Shape{
         let clone = new ShapeFactoryService().createShape(this.type, this.id, this.center.copy());
@@ -84,6 +82,11 @@ export abstract class Shape implements IShape {
         });
         return clone;
     };
+
+    abstract getMinX(): number;
+    abstract getMinY(): number;
+    abstract getMaxX(): number;
+    abstract getMaxY(): number;
     //abstract delete(): void;
 
     // click(): void{
@@ -129,5 +132,7 @@ export abstract class Shape implements IShape {
     //     this.isUpperLeftCornerClicked = false;
     //     console.log("mouseup");
     // }
-
+    setCenter(newCenter: Point): void{
+        this.center = newCenter;
+    }
 }

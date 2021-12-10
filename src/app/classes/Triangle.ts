@@ -4,6 +4,19 @@ import { Point } from "./Point";
 import { Shape } from "./Shape";
 
 export class Triangle extends Shape{
+    getMinX(): number {
+        return Math.min(this.center.x, Math.min(this.dimensions[0], this.dimensions[2]));
+    }
+    getMinY(): number {
+        return Math.min(this.center.x, Math.min(this.dimensions[1], this.dimensions[3]));
+
+    }
+    getMaxX(): number {
+        return Math.max(this.center.x, Math.max(this.dimensions[0], this.dimensions[2]));
+    }
+    getMaxY(): number {
+        return Math.max(this.center.x, Math.max(this.dimensions[1], this.dimensions[3]));
+    }
     constructor(id: number, center: Point){
         super('triangle', id, center);
     }

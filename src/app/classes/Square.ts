@@ -4,6 +4,19 @@ import { Point } from "./Point";
 import { Shape } from "./Shape";
 
 export class Square extends Shape {
+    getMinX(): number {
+        return this.center.x;
+    }
+    getMinY(): number {
+        return this.center.y;
+    }
+    getMaxX(): number {
+        return this.center.x + this.dimensions[0];
+
+    }
+    getMaxY(): number {
+        return this.center.y + this.dimensions[0];
+    }
 
     constructor(id: number, center: Point){
         super("square", id, center);
