@@ -42,6 +42,8 @@
                 <svg:polygon  *ngSwitchCase = "'triangle'"
                     [attr.points] = "pointsGetter(shape)"
                     [attr.style] = "shape.style.toString()"/>
+                
+                <svg *ngSwitchCase = "'userDefined'" shape = 'userDefined' [custom] = 'shape'/>
         </svg:g>
     </svg:g>
 </svg>

@@ -12,10 +12,10 @@ export class UserDefined extends Shape {
         return this.center.y;
     }
     getMaxX(): number {
-        return this.dimensions[0];
+        return this.center.x + this.dimensions[0];
     }
     getMaxY(): number {
-        return this.dimensions[1];
+        return this.center.y + this.dimensions[1];
     }
     // shapes!: Shape[];
     constructor(id: number, center:Point){
