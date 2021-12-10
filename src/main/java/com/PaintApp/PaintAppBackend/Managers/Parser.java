@@ -4,26 +4,26 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 public class Parser {
-    private Shape shape;
-    private Integer id;
     private ObjectMapper obj;
+    private Integer[] id;
+    private Shape[] shape;
 
-    public Parser(Integer id, Shape shape, ObjectMapper obj){
+    public Parser(Integer[] id, Shape[] shape, ObjectMapper obj){
         this.shape = shape;
         this.id = id;
         this.obj = obj;
     }
 
     public void parsing(String jsonStr) throws JsonProcessingException {
-        this.shape = this.obj.readValue(jsonStr, Shape.class);
-        this.id = this.obj.readValue(jsonStr, Integer.class);
+        this.shape = this.obj.readValue(jsonStr, Shape[].class);
+        this.id = this.obj.readValue(jsonStr, Integer[].class);
     }
 
-    public Shape getShape(){
+    public Shape[] getShapes(){
         return this.shape;
     }
 
-    public Integer getId(){
+    public Integer[] getIds(){
         return this.id;
     }
 }
