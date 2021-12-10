@@ -5,6 +5,8 @@ import { Point } from "./Point";
 import { Color, Cursor, Dimensions, Style, FillColor, StrokeColor } from "./Style";
 
 export abstract class Shape implements IShape {
+    initialDims!: Array<number>;
+    shapes!: Shape[];
     type: string;
     id: number;
     dimensions!: Array<number>;

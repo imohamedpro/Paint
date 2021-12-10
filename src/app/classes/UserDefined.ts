@@ -3,7 +3,7 @@ import { Point } from "./Point";
 import { Shape } from "./Shape";
 
 export class UserDefined extends Shape {
-    initilaDims: Array<number>;
+    // initilaDims: Array<number>;
     getMinX(): number {
         return this.center.x;
     }
@@ -16,24 +16,25 @@ export class UserDefined extends Shape {
     getMaxY(): number {
         return this.dimensions[1];
     }
-    shapes!: Shape[];
-    constructor(type:string, id: number, center:Point, shapes: Shape[]){
-        super(type, id, center);
-        let minX = shapes[0].getMinX(), minY = shapes[0].getMinY(),
-             maxX = shapes[0].getMaxX(), maxY = shapes[0].getMaxY();
-        this.shapes.push(shapes[0].copy());
-        for(let i = 1; i < shapes.length; i++){
-            this.shapes.push(shapes[i].copy());
-            minX = Math.min(minX, shapes[i].getMinX());
-            minY = Math.min(minX, shapes[i].getMinX());
-            maxX = Math.max(minX, shapes[i].getMaxX());
-            maxY = Math.max(minX, shapes[i].getMaxX());
-        }
-        this.dimensions[0] = maxX - minX;
-        this.dimensions[1] = maxY - minY;
-        this.initilaDims = new Array<number>();
-        this.initilaDims[0] = this.dimensions[0];
-        this.initilaDims[1] = this.dimensions[1];
+    // shapes!: Shape[];
+    constructor(id: number, center:Point){
+        console.log("D:");
+        super('userDefined', id, center);
+        // let minX = shapes[0].getMinX(), minY = shapes[0].getMinY(),
+        //      maxX = shapes[0].getMaxX(), maxY = shapes[0].getMaxY();
+        // this.shapes.push(shapes[0].copy());
+        // for(let i = 1; i < shapes.length; i++){
+        //     this.shapes.push(shapes[i].copy());
+        //     minX = Math.min(minX, shapes[i].getMinX());
+        //     minY = Math.min(minX, shapes[i].getMinX());
+        //     maxX = Math.max(minX, shapes[i].getMaxX());
+        //     maxY = Math.max(minX, shapes[i].getMaxX());
+        // }
+        // this.dimensions[0] = maxX - minX;
+        // this.dimensions[1] = maxY - minY;
+        // this.initialDims = new Array<number>();
+        // this.initialDims[0] = this.dimensions[0];
+        // this.initialDims[1] = this.dimensions[1];
     }
     resize(location: string, offset: Point): void {
         let directed = Geometry.getDirections(location, offset);

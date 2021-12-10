@@ -8,6 +8,7 @@ import { Circle } from '../../classes/Circle';
 import { Point } from '../../classes/Point';
 import { Shape } from '../../classes/Shape';
 import { IShape } from '../../interfaces/IShape';
+import { UserDefined } from '../../classes/UserDefined';
 
 @Injectable({
   providedIn: 'root'
@@ -37,6 +38,9 @@ export class ShapeFactoryService {
       case 'square':
         shape = new Square(id, center);
         break;  
+      case 'userDefined':
+        shape = new UserDefined(id, center);
+        break;
       }
       
 

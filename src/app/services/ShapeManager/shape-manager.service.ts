@@ -5,6 +5,7 @@ import { Shape } from '../../classes/Shape';
 import { Color, Style } from '../../classes/Style';
 import { IShape } from '../../interfaces/IShape';
 import { ShapeFactoryService } from '../ShapeFactory/shape-factory.service';
+import { UserDefined } from '../../classes/UserDefined';
 
 // Shape manager user the shape factory
 
@@ -15,6 +16,7 @@ export class ShapeManagerService {
   shapes: Map<number, Shape>;
   selectedShapes: Map<number, Shape>;
   availableIds: Array<number>;
+  customShapes: Map<number, Shape[]>;
   // if a shape is deleted, later ones are shifted.
   factory: ShapeFactoryService;
   clipBoard!: Map<number, Shape>;
@@ -23,11 +25,13 @@ export class ShapeManagerService {
   resizeId!: number;
   resizeLocation!: string;
   initialClick: Point;
+  customId: number = 0;
   constructor(factory: ShapeFactoryService) { 
     this.shapes = new Map<number, Shape>();
     this.selectedShapes = new Map<number, Shape>();
     this.availableIds = new Array<number>();
     this.clipBoard = new Map<number, Shape>();
+    this.customShapes = new Map<number, Shape[]>();
     this.factory = factory;
     this.isDragging = false;
     this.isResizing = false;
@@ -38,17 +42,29 @@ export class ShapeManagerService {
   }
   createShape(type: string, center:Point, fill: Color, stroke: Color, strokeWidth: number): number{
     let id = this.getAvailableId();
-    let shape = this.factory.createShape(type, id, center);
-    shape.style = new Style();
-    // shape.move(center);
-    shape.setFill(fill);
-    shape.setStroke(stroke);
-    shape.setStrokeWidth(strokeWidth);
-    shape.setCursor("crosshair");
+    // let shape: Shape = new UserDefined(id, center, this.customShapes.get(this.customId) || []);
+    // shape = new UserDefined(id, center, this.customShapes.get(this.customId) || []);
+
+    // if(type == 'userDefined'){
+    // }else{
+      let shape = this.factory.createShape(type, id, center);
+      if(type == 'userDefined'){
+        this.createUserDefined(this.customId, shape);
+      }else{
+        shape.style = new Style();
+        // shape.move(center);
+        shape.setFill(fill);
+        shape.setStroke(stroke);
+        shape.setStrokeWidth(strokeWidth);
+      }
+
+      shape.setCursor("crosshair");
+    // // }
+
     // shape.resize(center, [5,5,5,5], new Point);
-    this.shapes.set(id, shape);
+      this.shapes.set(id, shape);
     // console.log(shape.fill.toString());
-    return id;
+      return id;
   }
 
   select(shape: Shape){
@@ -149,5 +165,26 @@ export class ShapeManagerService {
 
   clearResize(){
     this.isResizing = false;
+  }
+
+  createUserDefined(customId: number, shape: Shape){
+    let prototype = this.customShapes.get(customId);
+    if(prototype){
+      let minX = prototype[0].getMinX(), minY = prototype[0].getMinY(),
+        maxX = prototype[0].getMaxX(), maxY = prototype[0].getMaxY();
+    shape.shapes.push(prototype[0].copy());
+    for(let i = 1; i < prototype.length; i++){
+      shape.shapes.push(prototype[i].copy());
+      minX = Math.min(minX, prototype[i].getMinX());
+      minY = Math.min(minX, prototype[i].getMinX());
+      maxX = Math.max(minX, prototype[i].getMaxX());
+      maxY = Math.max(minX, prototype[i].getMaxX());
+    }
+    shape.dimensions[0] = maxX - minX;
+    shape.dimensions[1] = maxY - minY;
+    shape.initialDims = new Array<number>();
+    shape.initialDims[0] = shape.dimensions[0];
+    shape.initialDims[1] = shape.dimensions[1];
+    }
   }
 }
