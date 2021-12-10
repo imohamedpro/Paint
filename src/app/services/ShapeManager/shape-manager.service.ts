@@ -19,6 +19,9 @@ export class ShapeManagerService {
   factory: ShapeFactoryService;
   clipBoard!: Map<number, Shape>;
   isDragging: boolean;
+  isResizing: boolean;
+  resizeId!: number;
+  resizeLocation!: string;
   initialClick: Point;
   constructor(factory: ShapeFactoryService) { 
     this.shapes = new Map<number, Shape>();
@@ -27,6 +30,7 @@ export class ShapeManagerService {
     this.clipBoard = new Map<number, Shape>();
     this.factory = factory;
     this.isDragging = false;
+    this.isResizing = false;
     this.initialClick = new Point(0,0);
   }
   getAvailableId(): number{
@@ -134,5 +138,16 @@ export class ShapeManagerService {
 
   finishCreation(id: number){
     this.shapes.get(id)?.setCursor("pointer")
+  }
+
+  setResize(id: number, initialPoint: Point, location:string): void{
+    this.resizeId = id;
+    this.isResizing = true;
+    this.initialClick = initialPoint;
+    this.resizeLocation = location;
+  }
+
+  clearResize(){
+    this.isResizing = false;
   }
 }
