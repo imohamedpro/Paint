@@ -13,8 +13,11 @@ export class Style {
     }
     copy(): Style{
         let clone = new Style();
+        if(this.fillColor)
         clone.fillColor = this.fillColor.copy();
+        if(this.strokeColor)
         clone.strokeColor = this.strokeColor.copy();
+        if(this.strokeWidth)
         clone.strokeWidth = this.strokeWidth.copy();
         return clone;
     }

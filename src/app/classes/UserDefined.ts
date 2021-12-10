@@ -1,6 +1,7 @@
 import { Geometry } from "./Geometry";
 import { Point } from "./Point";
 import { Shape } from "./Shape";
+import { Style } from "./Style";
 
 export class UserDefined extends Shape {
     // initilaDims: Array<number>;
@@ -23,6 +24,7 @@ export class UserDefined extends Shape {
         this.shapes = new Array<Shape>();
         this.initialDims = [0, 0];
         this.dimensions = [0, 0];
+        this.style = new Style();
 
         // let minX = shapes[0].getMinX(), minY = shapes[0].getMinY(),
         //      maxX = shapes[0].getMaxX(), maxY = shapes[0].getMaxY();
@@ -61,6 +63,21 @@ export class UserDefined extends Shape {
         }
         if(this.dimensions[0] + directed.x > 10)  this.dimensions[0] += directed.x;
         if(this.dimensions[1] + directed.y > 10)  this.dimensions[1] += directed.y;
+    }
+    override copy(): Shape {
+        console.log(this);
+        // let clone = 
+        let clone = super.copy();
+        // clone.type = 'userDefined';
+        clone.shapes = new Array<Shape>();
+        this.shapes.forEach((shape) =>{
+            clone.shapes.push(shape.copy());
+        });
+        clone.initialDims = new Array<number>();
+        this.initialDims.forEach((x) =>{
+            clone.initialDims.push(x);
+        });
+        return clone;
     }
     
 }

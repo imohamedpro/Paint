@@ -76,7 +76,7 @@ export abstract class Shape implements IShape {
         // }
     }
     copy(): Shape{
-        let clone = new ShapeFactoryService().createShape(this.type, this.id, this.center.copy());
+        let clone = new ShapeFactoryService().createShape(this.type.toLowerCase(), this.id, this.center.copy());
         clone.style = this.style.copy();
         // console.log(clone.style);
         // clone.dimensions = Object.assign([], this.dimensions);

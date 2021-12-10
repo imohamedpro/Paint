@@ -190,12 +190,13 @@ export class ShapeManagerService {
         shape.move(offset);
         shape.move(new Point(15, 15));
     });
-    shape.dimensions[0] = maxX - minX + 30;
-    shape.dimensions[1] = maxY - minY + 30;
-
     shape.initialDims = [0, 0];
-    shape.initialDims[0] = shape.dimensions[0];
-    shape.initialDims[1] = shape.dimensions[1];
+    shape.initialDims[0] = maxX - minX + 30;
+    shape.initialDims[1] = maxY - minY + 30;
+    shape.dimensions[0] = 0;
+    shape.dimensions[1] = 0;
+
+
 
     // console.log(shape.initialDims[1]);
     }

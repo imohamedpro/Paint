@@ -73,7 +73,6 @@ export class UserDefinedComponent implements OnInit {
 
   clicked(): void {
     if(!this.dragging){
-
       if(this.manager.selectedShapes.size == 0){  //first one to be clicked
         this.manager.select(this.shape);
 
@@ -87,6 +86,8 @@ export class UserDefinedComponent implements OnInit {
         this.manager.select(this.shape);
       }
     }
+    console.log(this.manager);
+
   }
   mouseDown(e: MouseEvent):void {
     if(e.button == 0){
