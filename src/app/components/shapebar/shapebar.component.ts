@@ -19,7 +19,6 @@ export class ShapebarComponent implements OnInit {
         = new EventEmitter<number>();
   @Input() set createShape(value:string){
     console.log(value);
-    //console.log(value.slice(0,-2));
     if(value.slice(0,12) == "Custom Shape"){
       let lastRowIndex: number = this.rows.length-1; 
       console.log(lastRowIndex);

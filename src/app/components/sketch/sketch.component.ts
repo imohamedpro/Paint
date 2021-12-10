@@ -132,6 +132,10 @@ export class SketchComponent implements OnInit {
           case 'Triangle':
             this.dim = [e.offsetX,e.offsetY,e.offsetX+50,e.offsetY+55]
             break;
+          case 'Square':
+            let max = Math.max(e.offsetX - this.tempClick.x,e.offsetY - this.tempClick.y);
+            this.dim = [max,max];
+            break;
           default:
             this.dim[0] += e.offsetX - this.tempClick.x;
             this.dim[1] += e.offsetY - this.tempClick.y;
