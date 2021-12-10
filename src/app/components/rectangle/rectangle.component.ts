@@ -62,11 +62,11 @@ export class RectangleComponent implements OnInit{
         this.manager.select(this.rectangle);
       }
 
-      if(this.rectangle.isSelected){
-        this.rectangle.setFill(new Color(Math.floor(Math.random()*255),Math.floor(Math.random()*255),Math.floor(Math.random()*255), 1));
-        this.rectangle.setStroke(new Color(Math.floor(Math.random()*255),Math.floor(Math.random()*255),Math.floor(Math.random()*255), 1));
-        console.log(this.manager);
-      }
+      // if(this.rectangle.isSelected){
+      //   this.rectangle.setFill(new Color(Math.floor(Math.random()*255),Math.floor(Math.random()*255),Math.floor(Math.random()*255), 1));
+      //   this.rectangle.setStroke(new Color(Math.floor(Math.random()*255),Math.floor(Math.random()*255),Math.floor(Math.random()*255), 1));
+      //   console.log(this.manager);
+      // }
     }
 
   }

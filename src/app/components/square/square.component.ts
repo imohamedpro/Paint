@@ -93,11 +93,11 @@ export class SquareComponent implements OnInit {
         this.manager.select(this.square);
       }
 
-      if(this.square.isSelected){
-        this.square.setFill(new Color(Math.floor(Math.random()*255),Math.floor(Math.random()*255),Math.floor(Math.random()*255), 1));
-        this.square.setStroke(new Color(Math.floor(Math.random()*255),Math.floor(Math.random()*255),Math.floor(Math.random()*255), 1));
-        console.log(this.manager);
-      }
+      // if(this.square.isSelected){
+      //   this.square.setFill(new Color(Math.floor(Math.random()*255),Math.floor(Math.random()*255),Math.floor(Math.random()*255), 1));
+      //   this.square.setStroke(new Color(Math.floor(Math.random()*255),Math.floor(Math.random()*255),Math.floor(Math.random()*255), 1));
+      //   console.log(this.manager);
+      // }
     }
 
   }

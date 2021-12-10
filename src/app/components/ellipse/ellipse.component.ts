@@ -69,11 +69,11 @@ export class EllipseComponent implements OnInit{
       // }else{
       //   this.manager.deselect(this.ellipse.id);
       // }
-      if(this.ellipse.isSelected){
-        this.ellipse.setFill(new Color(Math.floor(Math.random()*255),Math.floor(Math.random()*255),Math.floor(Math.random()*255), 1));
-        this.ellipse.setStroke(new Color(Math.floor(Math.random()*255),Math.floor(Math.random()*255),Math.floor(Math.random()*255), 1));
-        console.log(this.manager);
-      }
+      // if(this.ellipse.isSelected){
+      //   //this.ellipse.setFill(new Color(Math.floor(Math.random()*255),Math.floor(Math.random()*255),Math.floor(Math.random()*255), 1));
+      //   //this.ellipse.setStroke(new Color(Math.floor(Math.random()*255),Math.floor(Math.random()*255),Math.floor(Math.random()*255), 1));
+      //   console.log(this.manager);
+      // }
     }
 
 

@@ -96,10 +96,10 @@ export class TriangleComponent implements OnInit {
       // }else{
       //   this.manager.deselect(this.circle.id);
       // }
-      this.triangle.setStroke(new Color(Math.floor(Math.random()*255),Math.floor(Math.random()*255),Math.floor(Math.random()*255), 1));
-      this.triangle.setFill(new Color(Math.floor(Math.random()*255),Math.floor(Math.random()*255),Math.floor(Math.random()*255), 1));
-      console.log(this.manager);
-    }
+    //   this.triangle.setStroke(new Color(Math.floor(Math.random()*255),Math.floor(Math.random()*255),Math.floor(Math.random()*255), 1));
+    //   this.triangle.setFill(new Color(Math.floor(Math.random()*255),Math.floor(Math.random()*255),Math.floor(Math.random()*255), 1));
+    //   console.log(this.manager);
+     }
 
 
   }

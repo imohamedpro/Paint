@@ -106,6 +106,7 @@ export class SketchComponent implements OnInit {
   // }
   mouseDown(e: MouseEvent):void {
     if(e.button == 0 && this.mode != 'Move'){
+      this.manager.clearSelected();
       this.isMouseDown = true;
       this.initialClick = new Point(e.offsetX, e.offsetY);
       this.tempClick = new Point(e.offsetX, e.offsetY);

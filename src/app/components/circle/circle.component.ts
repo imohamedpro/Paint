@@ -70,9 +70,9 @@ export class CircleComponent implements OnInit{
       // }else{
       //   this.manager.deselect(this.circle.id);
       // }
-      this.circle.setFill(new Color(Math.floor(Math.random()*255),Math.floor(Math.random()*255),Math.floor(Math.random()*255), 1));
-      this.circle.setStroke(new Color(Math.floor(Math.random()*255),Math.floor(Math.random()*255),Math.floor(Math.random()*255), 1));
-      console.log(this.manager);
+      //this.circle.setFill(new Color(Math.floor(Math.random()*255),Math.floor(Math.random()*255),Math.floor(Math.random()*255), 1));
+      //this.circle.setStroke(new Color(Math.floor(Math.random()*255),Math.floor(Math.random()*255),Math.floor(Math.random()*255), 1));
+      //console.log(this.manager);
     }
 
 

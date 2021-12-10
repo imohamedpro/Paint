@@ -70,8 +70,8 @@ export class LineComponent implements OnInit {
       // }else{
       //   this.manager.deselect(this.circle.id);
       // }
-      this.line.setStroke(new Color(Math.floor(Math.random()*255),Math.floor(Math.random()*255),Math.floor(Math.random()*255), 1));
-      console.log(this.manager);
+      // this.line.setStroke(new Color(Math.floor(Math.random()*255),Math.floor(Math.random()*255),Math.floor(Math.random()*255), 1));
+      // console.log(this.manager);
     }
 
 
