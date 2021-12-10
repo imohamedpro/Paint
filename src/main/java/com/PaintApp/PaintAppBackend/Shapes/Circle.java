@@ -1,7 +1,9 @@
 package com.PaintApp.PaintAppBackend.Shapes;
+import com.PaintApp.PaintAppBackend.Utilities.Point;
 
 public class Circle extends Shape {
-   Circle(int id, Point center) {
+
+   public Circle(int id, Point center) {
        super("circle", id, center);
    }
 }

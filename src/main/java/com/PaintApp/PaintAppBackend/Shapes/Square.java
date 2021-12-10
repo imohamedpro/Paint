@@ -1,8 +1,9 @@
 package com.PaintApp.PaintAppBackend.Shapes;
+import com.PaintApp.PaintAppBackend.Utilities.Point;
 
 public class Square extends Shape {
 
-    Square(String type, int id, Point center) {
+    public Square(int id, Point center) {
         super("square", id, center);
     }
 }

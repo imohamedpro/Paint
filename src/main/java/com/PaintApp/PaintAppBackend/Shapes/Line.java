@@ -1,8 +1,9 @@
 package com.PaintApp.PaintAppBackend.Shapes;
+import com.PaintApp.PaintAppBackend.Utilities.Point;
 
 public class Line extends Shape {
 
-    Line(String type, int id, Point center) {
+    public Line(int id, Point center) {
         super("line", id, center);
     }
 }
