@@ -1,4 +1,6 @@
+import { ThrowStmt } from '@angular/compiler';
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { ShapeManagerService } from '../../services/ShapeManager/shape-manager.service';
 
 @Component({
   selector: 'app-toolbar',
@@ -6,8 +8,10 @@ import { Component, EventEmitter, OnInit, Output } from '@angular/core';
   styleUrls: ['./toolbar.component.css']
 })
 export class ToolbarComponent implements OnInit {
-
-  constructor() { }
+  manager: ShapeManagerService;
+  constructor(manager: ShapeManagerService) {
+    this.manager = manager;
+   }
   @Output() actionEmitter:EventEmitter<string>
        = new EventEmitter<string>();
   mode: string = '';
@@ -20,9 +24,18 @@ export class ToolbarComponent implements OnInit {
   }
 
   createShape(){
-    this.nShapes++;
-    this.emitAction("Custom Shape " + this.nShapes);
-    //Put Code Here
+    if(this.manager.selectedShapes.size > 0){
+      this.nShapes++;
+
+      this.emitAction("Custom Shape " + this.nShapes);
+      //Put Code Here
+  
+      this.manager.addCustomShape();
+      // console.log(this.manager.customShapes);
+    }
+
+
+
   }
 
 }

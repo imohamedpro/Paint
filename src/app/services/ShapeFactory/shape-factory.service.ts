@@ -38,7 +38,7 @@ export class ShapeFactoryService {
       case 'square':
         shape = new Square(id, center);
         break;  
-      case 'userDefined':
+      case 'userdefined':
         shape = new UserDefined(id, center);
         break;
       }

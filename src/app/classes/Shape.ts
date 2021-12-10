@@ -6,7 +6,7 @@ import { Color, Cursor, Dimensions, Style, FillColor, StrokeColor } from "./Styl
 
 export abstract class Shape implements IShape {
     initialDims!: Array<number>;
-    shapes!: Shape[];
+    shapes!: Array<Shape>;
     type: string;
     id: number;
     dimensions!: Array<number>;
@@ -22,6 +22,8 @@ export abstract class Shape implements IShape {
         this.type = type;
         this.center = center;
         this.isSelected = false;
+        this.style = new Style();
+
         //this.clone = new Shape(type, id, center);
     }
     getId(): number {

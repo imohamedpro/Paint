@@ -20,6 +20,10 @@ export class UserDefined extends Shape {
     constructor(id: number, center:Point){
         console.log("D:");
         super('userDefined', id, center);
+        this.shapes = new Array<Shape>();
+        this.initialDims = [0, 0];
+        this.dimensions = [0, 0];
+
         // let minX = shapes[0].getMinX(), minY = shapes[0].getMinY(),
         //      maxX = shapes[0].getMaxX(), maxY = shapes[0].getMaxY();
         // this.shapes.push(shapes[0].copy());

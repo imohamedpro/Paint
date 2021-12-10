@@ -25,7 +25,6 @@ export class ShapeManagerService {
   resizeId!: number;
   resizeLocation!: string;
   initialClick: Point;
-  customId: number = 0;
   constructor(factory: ShapeFactoryService) { 
     this.shapes = new Map<number, Shape>();
     this.selectedShapes = new Map<number, Shape>();
@@ -40,17 +39,14 @@ export class ShapeManagerService {
   getAvailableId(): number{
     return this.availableIds.length > 0? Number(this.availableIds.shift()): this.shapes.size;
   }
-  createShape(type: string, center:Point, fill: Color, stroke: Color, strokeWidth: number): number{
+  createShape(type: string, center:Point, fill: Color, stroke: Color, strokeWidth: number, customId: number): number{
     let id = this.getAvailableId();
-    // let shape: Shape = new UserDefined(id, center, this.customShapes.get(this.customId) || []);
-    // shape = new UserDefined(id, center, this.customShapes.get(this.customId) || []);
-
-    // if(type == 'userDefined'){
-    // }else{
+      console.log(type);
+      if(type.slice(0, 12) == 'custom shape') type = 'userdefined';
       let shape = this.factory.createShape(type, id, center);
-      if(type == 'userDefined'){
-        console
-        this.createUserDefined(0, shape);
+      if(type == 'userdefined'){
+        console.log("hi");
+        this.createUserDefined(customId, shape);
       }else{
         shape.style = new Style();
         // shape.move(center);
@@ -170,22 +166,38 @@ export class ShapeManagerService {
 
   createUserDefined(customId: number, shape: Shape){
     let prototype = this.customShapes.get(customId);
+    console.log('initDims');
+    console.log(shape);
     if(prototype){
       let minX = prototype[0].getMinX(), minY = prototype[0].getMinY(),
-        maxX = prototype[0].getMaxX(), maxY = prototype[0].getMaxY();
+        maxX = prototype[0].getMaxX(), maxY = prototype[0].getMaxY(),
+        minStroke = prototype[0].style.strokeWidth;
     shape.shapes.push(prototype[0].copy());
     for(let i = 1; i < prototype.length; i++){
       shape.shapes.push(prototype[i].copy());
       minX = Math.min(minX, prototype[i].getMinX());
-      minY = Math.min(minX, prototype[i].getMinX());
-      maxX = Math.max(minX, prototype[i].getMaxX());
-      maxY = Math.max(minX, prototype[i].getMaxX());
+      minY = Math.min(minY, prototype[i].getMinY());
+      maxX = Math.max(maxX, prototype[i].getMaxX());
+      maxY = Math.max(maxY, prototype[i].getMaxY());
+
     }
-    shape.dimensions[0] = maxX - minX;
-    shape.dimensions[1] = maxY - minY;
-    shape.initialDims = new Array<number>();
+    shape.shapes.sort((a, b)=>{
+      if(a.id >= b.id) return 1;
+      return -1;
+    });
+    let offset = new Point(-1*minX, -1*minY);
+    shape.shapes.forEach((shape) => {
+        shape.move(offset);
+        shape.move(new Point(15, 15));
+    });
+    shape.dimensions[0] = maxX - minX + 30;
+    shape.dimensions[1] = maxY - minY + 30;
+
+    shape.initialDims = [0, 0];
     shape.initialDims[0] = shape.dimensions[0];
     shape.initialDims[1] = shape.dimensions[1];
+
+    // console.log(shape.initialDims[1]);
     }
   }
 
@@ -197,5 +209,13 @@ export class ShapeManagerService {
       });
       this.customShapes.set(this.customShapes.size + 1, prototype);
     }
+  }
+
+  getCenter(id: number){
+    return this.shapes.get(id)?.center.copy();
+  }
+
+  setCenter(center: Point, id: number){
+    this.shapes.get(id)!.center = center.copy();
   }
 }

@@ -1,4 +1,6 @@
-<svg [attr.x] = 'shape.center.x' [attr.y] = 'shape.center.y'>
+<svg [attr.x] = 'shape.center.x' [attr.y] = 'shape.center.y'
+    (click)="clicked()"
+    (mousedown)="mouseDown($event)">
     <svg:g [attr.transform] = "'scale(' + getScaleX() + ','+ getScaleY() + ')'">
         <svg:g *ngFor="let shape of shape.shapes"
                 [ngSwitch]="shape.getType()">
@@ -23,7 +25,7 @@
                     [attr.y2]= "shape.dimensions[1]"
                     [attr.style]= "shape.style.toString()"/>
 
-                <svg:rect *ngSwitchCase = "'line'"
+                <svg:rect *ngSwitchCase = "'rectangle'"
                     [attr.x]= "shape.center.x"  
                     [attr.y]= "shape.center.y"
                     [attr.height] = "shape.dimensions[1]"
@@ -37,7 +39,7 @@
                     [attr.width] = "shape.dimensions[0]"
                     [attr.style] = "shape.style.toString()"/>
 
-                <svg:polygon  
+                <svg:polygon  *ngSwitchCase = "'triangle'"
                     [attr.points] = "pointsGetter(shape)"
                     [attr.style] = "shape.style.toString()"/>
         </svg:g>

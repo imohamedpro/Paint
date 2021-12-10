@@ -54,7 +54,10 @@ export class Circle extends Shape {
             this.dimensions[1] = this.dimensions[0];
         }
 
-
         // this.normalizeDims();
+    }
+    override draw(dims: Array<number>){
+        super.draw(dims);
+        this.dimensions[1] = this.dimensions[0];
     }
 }
