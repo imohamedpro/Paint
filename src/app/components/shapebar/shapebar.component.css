@@ -74,6 +74,7 @@ body {
 .menu-item-label {
     display: block;
     font-family: cursive;
+    text-align: center;
     font-size: 13px;
     color: #c2c0e6;
     transition: 0.25s ease;
@@ -83,5 +84,23 @@ body {
     border: none;
     background: none;
     height: 4vh;
-    width: 4vh;
+    width: 4vw;
+    max-width: 40px;
+    min-width: 30px;
+    max-height: 40px;
+    min-height: 30px;
+}
+
+.number-input{
+    border: #c2c0e6;
+    border-style: solid;
+    background: none;
+    height: 4vh;
+    width: 50%;
+    text-align: center;
+    max-width: 80px;
+    min-width: 40px;
+    max-height: 40px;
+    min-height: 30px;
+    border-radius: 10px;
 }

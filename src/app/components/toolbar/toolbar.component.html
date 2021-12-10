@@ -4,22 +4,34 @@
       rel="stylesheet" />
 
 <div class="container">
-	<nav class="menu">
-		<a href="#" class="menu-item">
+	<div class="menu">
+		<div class="menu-item">
 			<span class="material-icons">undo</span>
 			<span class="menu-item-label">Undo</span>
-		</a>
-		<a href="#" class="menu-item">
+		</div>
+		<div class="menu-item">
 			<span class="material-icons">redo</span>
 			<span class="menu-item-label">Redo</span>
-		</a>
-		<a href="#" class="menu-item">
+		</div>
+		<div class="menu-item" (click)="emitAction('Copy')">
+			<span class="material-icons">content_copy</span>
+			<span class="menu-item-label">Copy</span>
+		</div>
+		<div class="menu-item" (click)="emitAction('Paste')">
+			<span class="material-icons">content_paste</span>
+			<span class="menu-item-label">Paste</span>
+		</div>
+		<div class="menu-item" (click)="emitAction('Delete')">
+			<span class="material-icons">delete</span>
+			<span class="menu-item-label">Delete</span>
+		</div>
+		<div class="menu-item">
 			<span class="material-icons">save</span>
 			<span class="menu-item-label">Save</span>
-		</a>
-		<a href="#" class="menu-item">
+		</div>
+		<div class="menu-item">
 			<span class="material-icons">upload_file</span>
 			<span class="menu-item-label">Load</span>
-		</a>
-	</nav>
+		</div>
+	</div>
 </div>

@@ -1,14 +1,16 @@
 import { IDimension } from "../interfaces/IDimension";
 import { IShape } from "../interfaces/IShape";
+import { ShapeFactoryService } from "../services/ShapeFactory/shape-factory.service";
 import { Point } from "./Point";
-import { Color, Cursor, Dimensions, Style } from "./Style";
+import { Color, Cursor, Dimensions, Style, FillColor, StrokeColor } from "./Style";
 
 export abstract class Shape implements IShape {
-    readonly type: string;
-    readonly id: number;
+    type: string;
+    id: number;
     dimensions!: Array<number>;
     center!: Point;
     style!: Style;
+    // clone!: Shape;
     // fill!: Color;
     // stroke!: Color;
     // strokeWidth!: number;
@@ -18,6 +20,7 @@ export abstract class Shape implements IShape {
         this.type = type;
         this.center = center;
         this.isSelected = false;
+        //this.clone = new Shape(type, id, center);
     }
     getId(): number {
         return this.id;
@@ -25,7 +28,6 @@ export abstract class Shape implements IShape {
     getType(): string {
         return this.type;
     }
-
     move(offset: Point): void {
         this.center.shift(offset);
         // this.center = offset;
@@ -34,11 +36,11 @@ export abstract class Shape implements IShape {
     }
 
     setFill(color: Color): void {
-        this.style.fillColor = color;
+        this.style.fillColor = new FillColor(color);
      }
 
-     setStroke(color: Color): void {
-         this.style.strokeColor = color;
+    setStroke(color: Color): void {
+         this.style.strokeColor = new StrokeColor(color);
      }
 
      setStrokeWidth(width: number): void {
@@ -48,10 +50,11 @@ export abstract class Shape implements IShape {
      setCursor(type: string){
          this.style.cursor = new Cursor(type);
      }
-     draw(center: Point, dimensions: Array<number>){
-        this.center = center;
-        this.dimensions = dimensions;
-     }
+    //  draw(center: Point, dimensions: Array<number>){
+    //     this.center = center;
+    //     this.dimensions = dimensions;
+    //  }
+    abstract resize(location: string, offset: Point, mouse: Point): void;
      normalizeDims(){
          this.dimensions.forEach((x) =>{
              if(x < 4){
@@ -60,14 +63,21 @@ export abstract class Shape implements IShape {
          });
      }
 
-    //  resize(location: string, offset: Point, mouse: Point): void{
-    //     // this.center = newCenter;
-    //     // this.dimensions = newDimensions;
-    //  }
-    abstract resize(location: string, offset: Point, mouse: Point): void
-    // abstract draw(p: Point): void;
-    abstract copy(): IShape;
-    abstract delete(): void;
+    draw(newDimensions: Array<number>): void{
+        this.dimensions = newDimensions;
+    }
+    copy(): Shape{
+        let clone = new ShapeFactoryService().createShape(this.type, this.id, this.center.copy());
+        clone.style = this.style.copy();
+        // console.log(clone.style);
+        // clone.dimensions = Object.assign([], this.dimensions);
+        clone.dimensions = new Array<number>();
+        this.dimensions.forEach((x)=>{
+            clone.dimensions.push(x);
+        });
+        return clone;
+    };
+    //abstract delete(): void;
 
     // click(): void{
     //     this.isSelected = !this.isSelected;

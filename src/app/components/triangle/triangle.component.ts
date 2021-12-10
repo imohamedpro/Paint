@@ -2,7 +2,7 @@ import { Component, ElementRef, Host, HostListener, Input, OnInit, ViewChild } f
 import { Triangle } from '../../classes/Triangle';
 import { Point } from '../../classes/Point';
 import { Shape } from '../../classes/Shape';
-import { FillColor, StrokeColor } from '../../classes/Style';
+import { Color, FillColor, StrokeColor } from '../../classes/Style';
 import { ShapeManagerService } from '../../services/ShapeManager/shape-manager.service';
 
 @Component({
@@ -16,11 +16,13 @@ export class TriangleComponent implements OnInit {
   initialClick! : Point;
   dragging: boolean;
   ctrl: boolean;
+  ctrlC: boolean;
 
   constructor(manager: ShapeManagerService) { 
     this.manager = manager;
     this.dragging = false;
     this.ctrl =false;
+    this.ctrlC = false;
   }
 
   ngOnInit(): void {
@@ -28,7 +30,15 @@ export class TriangleComponent implements OnInit {
 
   @HostListener('window:keydown',['$event'])
   ctrlOrDeleteDown(event: KeyboardEvent){
-    if(event.ctrlKey){
+    if(event.ctrlKey && event.key === 'c'){
+      console.log("ctrl + c is done");
+      this.manager.ctrlC();
+      this.ctrlC = true;
+    }
+    else if(event.ctrlKey && event.key === 'v' && this.ctrlC){
+      this.manager.paste();
+    }
+    else if(event.ctrlKey){
       this.ctrl = true;
       console.log(this.ctrl);
     }
@@ -43,6 +53,9 @@ export class TriangleComponent implements OnInit {
     if(event.ctrlKey){
       this.ctrl = false;
       console.log(this.ctrl);
+    }
+    else if(event.key === 'c'){
+      this.ctrlC = false;
     }
   }
 
@@ -83,8 +96,8 @@ export class TriangleComponent implements OnInit {
       // }else{
       //   this.manager.deselect(this.circle.id);
       // }
-      this.triangle.setStroke(new StrokeColor(Math.floor(Math.random()*255),Math.floor(Math.random()*255),Math.floor(Math.random()*255), 1));
-      this.triangle.setFill(new FillColor(Math.floor(Math.random()*255),Math.floor(Math.random()*255),Math.floor(Math.random()*255), 1));
+      // this.triangle.setStroke(new Color('#' + Math.floor(Math.random()*(Math.pow(255, 3))).toString(16)));
+      // this.triangle.setFill(new Color('#' + Math.floor(Math.random()*(Math.pow(255, 3))).toString(16)));
       console.log(this.manager);
     }
 

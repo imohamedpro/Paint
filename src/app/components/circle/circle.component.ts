@@ -1,7 +1,7 @@
 import { Shape } from '../../classes/Shape';
 import { Component, HostListener, Input, OnInit } from '@angular/core';
 import { Point } from '../../classes/Point';
-import { FillColor, StrokeColor } from '../../classes/Style';
+import { Color, FillColor, StrokeColor } from '../../classes/Style';
 import { IShape } from '../../interfaces/IShape'
 import { ShapeManagerService } from '../../services/ShapeManager/shape-manager.service';
 
@@ -70,11 +70,9 @@ export class CircleComponent implements OnInit{
       // }else{
       //   this.manager.deselect(this.circle.id);
       // }
-      if(this.circle.isSelected){
-        this.circle.setFill(new FillColor(Math.floor(Math.random()*255),Math.floor(Math.random()*255),Math.floor(Math.random()*255), 1));
-        this.circle.setStroke(new StrokeColor(Math.floor(Math.random()*255),Math.floor(Math.random()*255),Math.floor(Math.random()*255), 1));
-        console.log(this.manager);
-      }
+      // this.circle.setStroke(new Color('#' + Math.floor(Math.random()*(Math.pow(255, 3))).toString(16)));
+      // this.circle.setFill(new Color('#' + Math.floor(Math.random()*(Math.pow(255, 3))).toString(16)));
+      console.log(this.manager);
     }
 
 

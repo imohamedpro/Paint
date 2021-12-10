@@ -12,13 +12,20 @@ export class Ellipse extends Shape {
 
     // draw(p: Point): void {
     //     throw new Error('Method not implemented.');
+    // override draw(newDimensions: Array<number>){
+    //     console.log(newDimensions);
+    //     if(newDimensions[0]>5 && newDimensions[1]>5){
+    //         this.dimensions = newDimensions;
+    //     }else{
+    //         console.log('else');
+    //     }
     // }
     // resize(newCenter: Point, newDimensions: Array<number>): void {
     //     throw new Error('Method not implemented.');
     // }
-    copy(): IShape {
-        throw new Error('Method not implemented.');
-    }
+    // copy(): IShape {
+    //     throw new Error('Method not implemented.');
+    // }
     delete(): void {
         throw new Error('Method not implemented.');
     }
