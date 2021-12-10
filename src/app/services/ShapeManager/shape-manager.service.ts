@@ -1,3 +1,4 @@
+import { FillColor } from './../../classes/Style';
 import { Injectable } from '@angular/core';
 import { Point } from '../../classes/Point';
 import { Shape } from '../../classes/Shape';
@@ -59,6 +60,15 @@ export class ShapeManagerService {
       this.deselect(shape);
     });
     // this.selectedShapes = new Map<number, Shape>();
+  }
+
+  changeStyleSelected(style: Style){
+    console.log("Changing Selected");
+    this.selectedShapes.forEach((shape) =>{
+      shape.setFill(style.fillColor.color);
+      shape.setStroke(style.strokeColor.color);
+      shape.setStrokeWidth(style.strokeWidth.toNumber());
+    })
   }
 
   move(offset: Point){

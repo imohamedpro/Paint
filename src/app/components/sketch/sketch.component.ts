@@ -12,8 +12,13 @@ import { ShapeManagerService } from '../../services/ShapeManager/shape-manager.s
 export class SketchComponent implements OnInit {
   manager: ShapeManagerService;
   @Input() mode:string;
-  @Input() style: Style;
+  @Input() style:Style;
+  @Input() set styleChange(value:number){
+    console.log("Style Change Recieved");
+    this.manager.changeStyleSelected(this.style.copy());
+  }
   @Input() set _action(value:string){
+    console.log(value);
     this.action = value;
     switch(this.action){
       case 'Copy':
@@ -51,6 +56,7 @@ export class SketchComponent implements OnInit {
     // this.manager.createShape('triangle', new Point(50, 50), new Color(110, 100, 30, 0.5), new Color(0, 100, 30, 1), 5);
     // this.manager.createShape('square', new Point(600,600), new Color(2, 200, 2, 0.5), new Color(0, 100, 30, 1), 8);
   }
+
   initialClick!: Point;
   tempClick!: Point;
   action: string;
@@ -131,8 +137,8 @@ export class SketchComponent implements OnInit {
             this.tempClick = new Point(e.offsetX, e.offsetY);
         }
       }
-        console.log("Center = " + e.offsetX + " , " + e.offsetY);
-        console.log(this.dim);
+        //console.log("Center = " + e.offsetX + " , " + e.offsetY);
+        //console.log(this.dim);
       this.manager.draw(this.id, this.dim);
     }
   }
