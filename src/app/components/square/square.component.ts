@@ -131,7 +131,7 @@ export class SquareComponent implements OnInit {
   //   return `stroke: ${this.square.fill.toString()}`;
   // }
 
-  getSideLength():number{
-    return Math.max(this.square.dimensions[0],this.square.dimensions[1]);
-  }
+  // getSideLength():number{
+  //   return Math.max(this.square.dimensions[0],this.square.dimensions[1]);
+  // }
 }

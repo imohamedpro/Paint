@@ -55,6 +55,7 @@ export abstract class Shape implements IShape {
     //     this.dimensions = dimensions;
     //  }
     abstract resize(location: string, offset: Point, mouse: Point): void;
+
      normalizeDims(){
          this.dimensions.forEach((x) =>{
              if(x < 4){
@@ -64,6 +65,12 @@ export abstract class Shape implements IShape {
      }
 
     draw(newDimensions: Array<number>): void{
+        // for(let i = 0; i < this.dimensions.length; i++){
+        //     if(this.dimensions[i] < 0 || newDimensions[i] > 10){
+        //         this.dimensions[i] = newDimensions[i]
+        //     }
+        // }
+        // console.log(newDimensions);
         this.dimensions = newDimensions;
     }
     copy(): Shape{

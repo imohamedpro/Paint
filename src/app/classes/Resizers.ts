@@ -7,10 +7,14 @@ export class Resizer {
     }
 }
 export class Resizer1D extends Resizer{
-    constructor(){
+    constructor(type: string){
         super();
         this.array = ['N',     'E',
-                      'W',     'S'];
+                        'W',     'S'];
+        if(type == 'square'){
+            this.array = ['NW',     'NE',
+                            'SW',     'SE'];
+        }
     }
 }
 export class Resizer0D extends Resizer{
@@ -28,7 +32,7 @@ export class ResizerFactory {
         switch(type){
             case 'square':
             case 'circle':
-                resizer = new Resizer1D();
+                resizer = new Resizer1D(type);
                 break;
             case 'line':
                 resizer = new Resizer0D(2);

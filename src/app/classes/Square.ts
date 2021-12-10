@@ -23,26 +23,35 @@ export class Square extends Shape {
     }
 
     resize(location: string, offset: Point, mouse: Point): void {
+
         let directed = Geometry.getDirections(location, offset);
+        let off = directed.y;
+
+        if(Math.abs(offset.x) > Math.abs(offset.y)){
+            off = directed.x;
+        }
         switch(location){
-            case 'N':
             case 'NW':
-            case 'W':
-                if(this.dimensions[0] + directed.x > 10)
-                this.center.x -= directed.x;
-                if(this.dimensions[1] + directed.y > 10)
-                this.center.y -= directed.y;
+                if(this.dimensions[0] + off > 15){
+                    this.center.x -= off;
+                    // if(this.dimensions[1] + directed.y > 10)
+                    this.center.y -= off;
+                }
+
                 break;
             case 'NE':
-                if(this.dimensions[1] + directed.y > 10)
-                this.center.y -= directed.y;
+                if(this.dimensions[1] + off > 15)
+                this.center.y -= off;
                 break;
             case 'SW':
-                if(this.dimensions[0] + directed.x > 10)
-                this.center.x -= directed.x;
+                if(this.dimensions[0] + off > 15)
+                this.center.x -= off;
         }
-        if(this.dimensions[0] + directed.x > 10)  this.dimensions[0] += directed.x;
-        if(this.dimensions[1] + directed.y > 10)  this.dimensions[1] += directed.y;
+        if(this.dimensions[0] + off > 15){
+            this.dimensions[0] += off;
+            this.dimensions[1] = this.dimensions[0];
+        }  
+        // if(this.dimensions[1] + directed.y > 10)  this.dimensions[1] = off;
     }
 
 
