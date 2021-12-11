@@ -1,6 +1,6 @@
 <svg [attr.x] = 'shape.center.x' [attr.y] = 'shape.center.y'
-    (click)="clicked()"
-    (mousedown)="mouseDown($event)">
+    (click)="eventHandler.clicked(shape)"
+    (mousedown)="eventHandler.mouseDown($event, shape)">
     <svg:g [attr.transform] = "'scale(' + getScaleX() + ','+ getScaleY() + ')'"
             [attr.style] = "shape.style.toString()">
         <svg:g *ngFor="let shape of shape.shapes"
