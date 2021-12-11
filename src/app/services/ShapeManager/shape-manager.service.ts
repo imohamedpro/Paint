@@ -6,6 +6,7 @@ import { Color, Style } from '../../classes/Style';
 import { IShape } from '../../interfaces/IShape';
 import { ShapeFactoryService } from '../ShapeFactory/shape-factory.service';
 import { UserDefined } from '../../classes/UserDefined';
+import { ControllerService } from '../controller/controller.service';
 
 // Shape manager user the shape factory
 
@@ -19,6 +20,7 @@ export class ShapeManagerService {
   customShapes: Map<number, Shape[]>;
   // if a shape is deleted, later ones are shifted.
   factory: ShapeFactoryService;
+  controller: ControllerService;
   clipBoard!: Map<number, Shape>;
   isDragging: boolean;
   isResizing: boolean;
@@ -26,13 +28,14 @@ export class ShapeManagerService {
   resizeLocation!: string;
   initialClick: Point;
   ctrlDown: boolean;
-  constructor(factory: ShapeFactoryService) { 
+      constructor(factory: ShapeFactoryService, controller: ControllerService) { 
     this.shapes = new Map<number, Shape>();
     this.selectedShapes = new Map<number, Shape>();
     this.availableIds = new Array<number>();
     this.clipBoard = new Map<number, Shape>();
     this.customShapes = new Map<number, Shape[]>();
     this.factory = factory;
+    this.controller = controller;
     this.isDragging = false;
     this.isResizing = false;
     this.ctrlDown = false;
@@ -176,7 +179,10 @@ export class ShapeManagerService {
   finishCreation(id: number){
     // console.log(this.shapes.get(id));
     if(this.validShape(id)){
-      this.shapes.get(id)?.setCursor("pointer");
+      let shape = this.shapes.get(id);
+      shape.setCursor("pointer");
+      this.controller.addShape([shape]);
+
     }else{
       this.shapes.delete(id);
     }
