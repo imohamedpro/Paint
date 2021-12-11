@@ -2,5 +2,5 @@
             [attr.cy]= "circle.center.y"
             [attr.r] = "circle.dimensions[0]"
             [attr.style] = "circle.style.toString()"
-            (click)="clicked()"
-            (mousedown)="mouseDown($event)">
+            (click)="eventHandler.clicked(circle)"
+            (mousedown)="eventHandler.mouseDown($event, circle)">
