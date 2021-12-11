@@ -3,7 +3,8 @@ import { HttpClient } from '@angular/common/http';
 import {ShapeManagerService} from '../ShapeManager/shape-manager.service'
 import { Observable } from 'rxjs';
 import { Shape } from '../../classes/Shape';
-import { BooleanShape, FileShape } from '../../classes/Responses/BooleanShape';
+import { BooleanShape } from '../../classes/Responses/BooleanShape';
+import { FileShape } from '../../classes/Responses/FileShape';
 
 
 @Injectable({
@@ -11,7 +12,7 @@ import { BooleanShape, FileShape } from '../../classes/Responses/BooleanShape';
 })
 export class ControllerService {
   private readonly apiUrl = 'http://localhost:4050/api/';
-  constructor(private http: HttpClient, manager: ShapeManagerService) { }
+  constructor(private http: HttpClient) { }
   // evaluateExpression(expression: Expression): Observable<IResponse> {
 
   //   return this.http.post<IResponse>(`${this.apiUrl}/evaluateExpression/${expression.operator.path}`,
@@ -34,7 +35,7 @@ export class ControllerService {
     return this.http.post(`${this.apiUrl}define`, shapes);
   }
   uploadFile(file: File):Observable<FileShape>{
-    return this.http.post(`${this.apiUrl}upload`, file);
+    return this.http.post<FileShape>(`${this.apiUrl}upload`, file);
   }
 
   undo(): Observable<BooleanShape>{

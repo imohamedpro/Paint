@@ -118,6 +118,7 @@ export class ShapeManagerService {
     });
   }
   delete(): void{
+    this.controller.deleteShape(Array.from(this.selectedShapes.keys()));
     this.selectedShapes.forEach((shape) =>{
       this.availableIds.push(shape.id);
       this.deselect(shape);
@@ -180,8 +181,8 @@ export class ShapeManagerService {
     // console.log(this.shapes.get(id));
     if(this.validShape(id)){
       let shape = this.shapes.get(id);
-      shape.setCursor("pointer");
-      this.controller.addShape([shape]);
+      shape?.setCursor("pointer");
+      this.controller.addShape([shape!]);
 
     }else{
       this.shapes.delete(id);
@@ -260,6 +261,7 @@ export class ShapeManagerService {
         prototype.push(shape.copy());
       });
       this.customShapes.set(this.customShapes.size + 1, prototype);
+      this.controller.addCustomShape(Array.from(this.selectedShapes.values()));
     }
   }
 
