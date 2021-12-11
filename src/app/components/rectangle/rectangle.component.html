@@ -3,5 +3,5 @@
             [attr.height] = "rectangle.dimensions[1]"
             [attr.width] = "rectangle.dimensions[0]"
             [attr.style] = "rectangle.style.toString()"
-            (click)="clicked()"
-            (mousedown)="mouseDown($event)"/>
+            (click)="eventHandler.clicked(rectangle)"
+            (mousedown)="eventHandler.mouseDown($event, rectangle)"/>
