@@ -1,9 +1,7 @@
 package com.PaintApp.PaintAppBackend;
 
-import com.PaintApp.PaintAppBackend.Shapes.Shape;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonMappingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

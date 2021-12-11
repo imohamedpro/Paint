@@ -1,4 +1,4 @@
-package com.PaintApp.PaintAppBackend.Styles;
+package com.PaintApp.PaintAppBackend.model.style;
 
 public class Style {
     private FillColor fillColor;

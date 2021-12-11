@@ -1,9 +1,8 @@
-package com.PaintApp.PaintAppBackend.Shapes;
-import com.PaintApp.PaintAppBackend.Interfaces.IShape;
-import com.PaintApp.PaintAppBackend.Styles.*;
-import com.PaintApp.PaintAppBackend.Utilities.Point;
+package com.PaintApp.PaintAppBackend.model.shape;
+import com.PaintApp.PaintAppBackend.model.utility.Point;
+import com.PaintApp.PaintAppBackend.model.style.Style;
 
-public class Shape implements IShape {
+public class Shape {
     private int id;
     private String type;
     private Point center;

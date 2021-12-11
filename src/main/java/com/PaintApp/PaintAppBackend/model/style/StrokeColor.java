@@ -1,4 +1,4 @@
-package com.PaintApp.PaintAppBackend.Styles;
+package com.PaintApp.PaintAppBackend.model.style;
 
 public class StrokeColor{
     private Color color;
