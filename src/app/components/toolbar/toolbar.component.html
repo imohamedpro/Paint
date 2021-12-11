@@ -33,9 +33,10 @@
 			<span class="material-icons">save</span>
 			<span class="menu-item-label">Save</span>
 		</div>
-		<div class="menu-item">
+		<label class="menu-item" for='upload'>
 			<span class="material-icons">upload_file</span>
 			<span class="menu-item-label">Load</span>
-		</div>
+		</label>
 	</div>
 </div>
+<input type="file" id="upload" accept=".xml,.json" style="display:none" (change) = "upload()"/>

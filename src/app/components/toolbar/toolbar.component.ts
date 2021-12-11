@@ -38,4 +38,8 @@ export class ToolbarComponent implements OnInit {
 
   }
 
+  upload(){
+    console.log("uploaded")
+  }
+
 }
