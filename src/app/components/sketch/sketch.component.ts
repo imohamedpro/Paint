@@ -76,15 +76,17 @@ export class SketchComponent implements OnInit {
 
        this.ctrl = true;
        this.manager.ctrlDown = true;
-
+      console.log(event.key);
        if(event.key == 'c'){
-        //  console.log("ctrl + c is done");
-        this.manager.ctrlC();
-        this.ctrlC = true;
+          console.log("ctrl + c is done");
+          this.manager.ctrlC();
+          this.ctrlC = true;
        }else if(event.key == 'a'){
+        // console.log("ctrl + a is done");
+
          event.preventDefault();
          this.manager.selectAll();
-       }else if(event.key === 'v' && this.ctrlC){
+       }else if(event.key === 'v' && this.ctrl){
           this.manager.paste();
        }
     //  }
@@ -177,7 +179,7 @@ export class SketchComponent implements OnInit {
           let offset: Point = new Point(e.clientX - this.manager.initialClick.x, e.clientY - this.manager.initialClick.y);
           console.log(offset);
           this.manager.initialClick = new Point(e.clientX, e.clientY);
-          this.manager.resize(this.manager.resizeId, this.manager.resizeLocation, offset, this.initialClick);
+          this.manager.resize(this.manager.resizeId, this.manager.resizeLocation, offset);
        }else if(this.manager.isDragging){
           let offset: Point = new Point(e.clientX - this.manager.initialClick.x, e.clientY - this.manager.initialClick.y);
           console.log(offset);

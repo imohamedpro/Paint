@@ -25,6 +25,7 @@ export class ControllerService {
   //                                     new RequestBody(expression));
   // }
   addShape(shapes: Shape[]): Observable<any>{
+    console.log("send request");
     return this.http.post(`${this.apiUrl}add`, shapes)
   }
 

@@ -1,6 +1,7 @@
 import { ThrowStmt } from '@angular/compiler';
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { ShapeManagerService } from '../../services/ShapeManager/shape-manager.service';
+import { StepsTrackerService } from '../../services/StepsTracker/steps-tracker.service';
 
 @Component({
   selector: 'app-toolbar',
@@ -9,8 +10,10 @@ import { ShapeManagerService } from '../../services/ShapeManager/shape-manager.s
 })
 export class ToolbarComponent implements OnInit {
   manager: ShapeManagerService;
-  constructor(manager: ShapeManagerService) {
+  stepsTracker: StepsTrackerService;
+  constructor(manager: ShapeManagerService, stepsTracker: StepsTrackerService) {
     this.manager = manager;
+    this.stepsTracker = stepsTracker;
    }
   @Output() actionEmitter:EventEmitter<string>
        = new EventEmitter<string>();

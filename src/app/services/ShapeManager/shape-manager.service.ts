@@ -90,7 +90,7 @@ export class ShapeManagerService {
   }
 
   selectAll(){
-    this.selectedShapes = new Map<number, Shape>();
+    this.clearSelected();
     this.shapes.forEach((shape) =>{
       this.select(shape);
     });
@@ -109,27 +109,36 @@ export class ShapeManagerService {
       shape.setFill(style.fillColor.color);
       shape.setStroke(style.strokeColor.color);
       shape.setStrokeWidth(style.strokeWidth.toNumber());
-    })
+    });
+    this.controller.addShape(Array.from(this.selectedShapes.values())).subscribe();
   }
 
   move(offset: Point){
     this.selectedShapes.forEach((shape) => {
       shape.move(offset);
     });
+
+    //after mouse up ????
+    // this.controller.addShape(Array.from(this.selectedShapes.values())).subscribe();
   }
   delete(): void{
-    this.controller.deleteShape(Array.from(this.selectedShapes.keys()));
+
     this.selectedShapes.forEach((shape) =>{
       this.availableIds.push(shape.id);
       this.deselect(shape);
       this.shapes.delete(shape.id);
     });
+    this.controller.deleteShape(Array.from(this.selectedShapes.keys())).subscribe(()=>{
+      console.log('delete');
+    });
   }
 
-  resize(id: number, location: string, offset: Point, mouse: Point){
+  resize(id: number, location: string, offset: Point){
     let shape: any = this.shapes.get(id);
-    console.log(id + " " + location + " " + offset + " " + mouse);
-    shape.resize(location, offset, mouse);
+    console.log(id + " " + location + " " + offset);
+    shape.resize(location, offset);
+    // after mouse up ???
+    this.controller.addShape([shape]).subscribe();
   }
   ctrlC(): void{
     let clone!: Shape;
@@ -149,13 +158,16 @@ export class ShapeManagerService {
   }
   paste(): void{
     let shifting:Point = new Point(15,15);
+    let toBeSent = new Array<Shape>();
     this.clipBoard.forEach((shape)=> {
       let clone = shape.copy();
       clone.move(shifting);
       clone.id = this.getAvailableId();
       this.select(clone);
       this.shapes.set(clone.id,clone);
+      toBeSent.push(clone);
     });
+    this.controller.addShape(toBeSent).subscribe();
   }
 
   draw(id: number, dim: number[]): void{
@@ -175,6 +187,7 @@ export class ShapeManagerService {
   clearDragging(){
     //shape.dragging = false;
     this.isDragging = false
+    this.controller.addShape(Array.from(this.selectedShapes.values())).subscribe();
   }
 
   finishCreation(id: number){
@@ -182,7 +195,9 @@ export class ShapeManagerService {
     if(this.validShape(id)){
       let shape = this.shapes.get(id);
       shape?.setCursor("pointer");
-      this.controller.addShape([shape!]);
+      this.controller.addShape([shape!]).subscribe(()=>{
+        console.log("done");
+      });
 
     }else{
       this.shapes.delete(id);
@@ -248,8 +263,6 @@ export class ShapeManagerService {
     shape.dimensions[0] = 0;
     shape.dimensions[1] = 0;
 
-
-
     // console.log(shape.initialDims[1]);
     }
   }
@@ -261,7 +274,7 @@ export class ShapeManagerService {
         prototype.push(shape.copy());
       });
       this.customShapes.set(this.customShapes.size + 1, prototype);
-      this.controller.addCustomShape(Array.from(this.selectedShapes.values()));
+      this.controller.addCustomShape(Array.from(this.selectedShapes.values())).subscribe();
     }
   }
 
@@ -272,6 +285,10 @@ export class ShapeManagerService {
   setCenter(center: Point, id: number){
     this.shapes.get(id)!.center = center.copy();
   }
-
-
+  // loadShape(response: any): Shape{
+  //   let shape = this.factory.createShape(response.type, response.id, new Point(response.center.x, response.center.y));
+  //   shape.dimensions = response.dimensions;
+  //   shape.style = new Style();
+  //   shape.style.cursor = response.style.cursor
+  // }
 }

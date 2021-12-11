@@ -13,7 +13,7 @@ import { LineComponent } from './components/line/line.component';
 import { TriangleComponent } from './components/triangle/triangle.component';
 import { SquareComponent } from './components/square/square.component';
 import { UserDefinedComponent } from './components/user-defined/user-defined.component';
-import { HttpClient } from '@angular/common/http';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -33,7 +33,7 @@ import { HttpClient } from '@angular/common/http';
   ],
   imports: [
     BrowserModule,
-    HttpClient
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]
