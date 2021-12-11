@@ -1,4 +1,4 @@
-import { FillColor } from './../../classes/Style';
+import { Cursor, Dimensions, FillColor, StrokeColor } from './../../classes/Style';
 import { Injectable } from '@angular/core';
 import { Point } from '../../classes/Point';
 import { Shape } from '../../classes/Shape';
@@ -7,6 +7,7 @@ import { IShape } from '../../interfaces/IShape';
 import { ShapeFactoryService } from '../ShapeFactory/shape-factory.service';
 import { UserDefined } from '../../classes/UserDefined';
 import { ControllerService } from '../controller/controller.service';
+import { ShapeResponse } from '../../classes/Responses/ShapeResponse';
 
 // Shape manager user the shape factory
 
@@ -285,10 +286,18 @@ export class ShapeManagerService {
   setCenter(center: Point, id: number){
     this.shapes.get(id)!.center = center.copy();
   }
-  // loadShape(response: any): Shape{
-  //   let shape = this.factory.createShape(response.type, response.id, new Point(response.center.x, response.center.y));
-  //   shape.dimensions = response.dimensions;
-  //   shape.style = new Style();
-  //   shape.style.cursor = response.style.cursor
-  // }
+  loadShape(obj: ShapeResponse): Shape{
+    let shape: Shape = this.factory.createShape(obj.type, obj.id, new Point(obj.center.x, obj.center.y));
+    shape.dimensions = obj.dimensions;
+    shape.style = new Style();
+    console.log(obj.style.fillColor.color.hex);
+    shape.style.fillColor = new FillColor(new Color(obj.style.fillColor.color.hex));
+    // shape.style.fillColor.color = new Color(obj.style.fillColor.color.hex);
+    shape.style.strokeColor = new StrokeColor(new Color(obj.style.strokeColor.color.hex));
+    shape.style.strokeWidth = new Dimensions(obj.style.strokeWidth.value);
+    shape.style.cursor = new Cursor(obj.style.cursor.type);
+    console.log(shape.style.toString());
+
+    return shape;
+  }
 }

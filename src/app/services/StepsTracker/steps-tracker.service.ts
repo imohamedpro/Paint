@@ -19,15 +19,15 @@ export class StepsTrackerService {
      this.controller.undo().subscribe((response)=>{
       console.log("undo recieved");
       console.log(response.shape);
-      let shape: Shape = this.manager.factory.loadShape(response.shape);
-      Object.assign(shape, response.shape);
+      let shape: Shape = this.manager.loadShape(response.shape);
+      if(response.shape == null) return;
       if(response.delete){
         console.log("delete");
         this.manager.shapes.delete(shape.id);
       }else if(response.create || response.change){
         console.log("no delete");
 
-        this.manager.shapes.set(shape.id, response.shape);
+        this.manager.shapes.set(shape.id, shape);
       }
       console.log(this.manager.shapes.get(shape.id));
 
@@ -37,15 +37,17 @@ export class StepsTrackerService {
      this.controller.redo().subscribe((response)=>{
        console.log("redo recieved");
 
-       let shape!: Shape;
-       Object.assign(shape, response.shape);
+       console.log(response.shape);
+       let shape: Shape = this.manager.loadShape(response.shape);
+      if(response.shape == null) return;
+
        if(response.delete){
          console.log("delete");
          this.manager.shapes.delete(shape.id);
        }else if(response.create || response.change){
          console.log("no delete");
  
-         this.manager.shapes.set(shape.id, response.shape);
+         this.manager.shapes.set(shape.id, shape);
        }
        console.log(this.manager.shapes.get(shape.id));
  

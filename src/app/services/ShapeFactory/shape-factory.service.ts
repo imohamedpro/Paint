@@ -10,6 +10,7 @@ import { Shape } from '../../classes/Shape';
 import { IShape } from '../../interfaces/IShape';
 import { UserDefined } from '../../classes/UserDefined';
 import { Color, Cursor, Dimensions, FillColor, StrokeColor, Style } from '../../classes/Style';
+import { ShapeResponse } from '../../classes/Responses/ShapeResponse';
 
 @Injectable({
   providedIn: 'root'
@@ -47,15 +48,18 @@ export class ShapeFactoryService {
 
     return shape;
   }
-  loadShape(obj: any): Shape{
-    let shape: Shape = this.createShape(obj.type, obj.id, obj.center);
+  loadShape(obj: ShapeResponse): Shape{
+    let shape: Shape = this.createShape(obj.type, obj.id, new Point(obj.center.x, obj.center.y));
     shape.dimensions = obj.dimensions;
     shape.style = new Style();
-    console.log(obj.type);
+    console.log(obj.style.fillColor.color.hex);
     shape.style.fillColor = new FillColor(new Color(obj.style.fillColor.color.hex));
+    // shape.style.fillColor.color = new Color(obj.style.fillColor.color.hex);
     shape.style.strokeColor = new StrokeColor(new Color(obj.style.strokeColor.color.hex));
     shape.style.strokeWidth = new Dimensions(obj.style.strokeWidth.value);
     shape.style.cursor = new Cursor(obj.style.cursor.type);
+    console.log(shape.style.toString());
+
     return shape;
   }
 }
