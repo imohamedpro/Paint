@@ -5,16 +5,15 @@ import com.PaintApp.PaintAppBackend.model.shape.UndoShape;
 import com.PaintApp.PaintAppBackend.model.shape.Shape;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Stack;
+import java.io.IOException;
+import java.util.*;
 
 @Service
 public class PaintService {
     private Map<Integer, Shape> shapes = new HashMap<Integer, Shape>();
     private Stack<UndoShape> undo = new Stack<UndoShape>();
     private Stack<UndoShape> redo = new Stack<UndoShape>();
+    private FileParser fileParser = new FileParser();
 
     public void add(Shape[] addedShapes){
         for(int i = 0; i < addedShapes.length; i++){
@@ -61,5 +60,18 @@ public class PaintService {
         return shapeArray;
     }
 
+    public void saveAsJson(){
+        fileParser.generateFile(getShapes(), "json");
+    }
+
+    public  void saveAsXml(){
+        fileParser.generateFile(getShapes(), "xml");
+    }
+
+    public Shape[] load(String fileName) throws IOException {
+        Shape[] loadedShapes = fileParser.readFile(fileName);
+        add(loadedShapes);
+        return loadedShapes;
+    }
 
 }
