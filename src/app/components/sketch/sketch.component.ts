@@ -50,6 +50,7 @@ export class SketchComponent implements OnInit {
    }
 
   ngOnInit(): void {
+    this.manager.init();
     // this.manager.createShape('circle', new Point(100, 100), this.style.fillColor.color, this.style.strokeColor.color, this.style.strokeWidth.toNumber());
     // this.manager.createShape('rectangle', new Point(300, 300), new Color(110, 100, 30, 0.5), new Color(0, 100, 30, 1), 5);
     // this.manager.createShape('circle', new Point(450, 450), new Color(110, 100, 30, 0.5), new Color(0, 100, 30, 1), 5);
@@ -209,7 +210,7 @@ export class SketchComponent implements OnInit {
       }else if(this.mode == 'Move' && this.manager.isDragging){
         this.manager.clearDragging();
       }else if(this.manager.isResizing){
-        this.manager.clearResize();
+        this.manager.clearResize(this.id);
       }
     }
   }

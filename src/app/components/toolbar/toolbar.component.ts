@@ -28,12 +28,13 @@ export class ToolbarComponent implements OnInit {
 
   createShape(){
     if(this.manager.selectedShapes.size > 0){
-      this.nShapes++;
 
-      this.emitAction("Custom Shape " + this.nShapes);
+      this.emitAction("Custom Shape " + Number(this.nShapes + 1));
       //Put Code Here
   
       this.manager.addCustomShape();
+      this.nShapes = this.manager.customShapes.size;
+
       // console.log(this.manager.customShapes);
     }
 

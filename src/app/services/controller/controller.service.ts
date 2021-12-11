@@ -5,6 +5,7 @@ import { Observable } from 'rxjs';
 import { Shape } from '../../classes/Shape';
 import { BooleanShape } from '../../classes/Responses/BooleanShape';
 import { FileShape } from '../../classes/Responses/FileShape';
+import { ShapeResponse } from '../../classes/Responses/ShapeResponse';
 
 
 @Injectable({
@@ -24,6 +25,12 @@ export class ControllerService {
   //   return this.http.post<IResponse>(`${this.apiUrl}/evaluateFunction/${expression.function.path}`,
   //                                     new RequestBody(expression));
   // }
+  loadShapes(): Observable<Array<ShapeResponse>>{
+    return this.http.get<Array<ShapeResponse>>(`${this.apiUrl}loadShapes`);
+  }
+  loadCustomShapes(): Observable<Array<Array<ShapeResponse>>>{
+    return this.http.get<Array<Array<ShapeResponse>>>(`${this.apiUrl}loadCustomShapes`);
+  }
   addShape(shapes: Shape[]): Observable<any>{
     console.log("send request");
     return this.http.post(`${this.apiUrl}add`, shapes)

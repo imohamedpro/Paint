@@ -69,7 +69,25 @@ export class ShapeManagerService {
     // console.log(shape.fill.toString());
       return id;
   }
+  init(){
+    this.controller.loadShapes().subscribe((shapes) =>{
+      shapes.forEach((shape)=>{
+        let load = this.loadShape(shape);
+        this.shapes.set(load.id, load);
+      });
+    });
+    this.controller.loadCustomShapes().subscribe((shapes)=>{
+      let count = 0;
+      shapes.forEach((custom)=>{
+        let customShape = new Array<Shape>();
+        custom.forEach((shape)=>{
+          customShape.push(this.loadShape(shape));
+        });
+        this.customShapes.set(count++, customShape);
+      });
+    });
 
+  }
   select(shape: Shape){
     if(!this.ctrlDown){
       console.log(shape);
@@ -139,7 +157,7 @@ export class ShapeManagerService {
     console.log(id + " " + location + " " + offset);
     shape.resize(location, offset);
     // after mouse up ???
-    this.controller.addShape([shape]).subscribe();
+    // this.controller.addShape([shape]).subscribe();
   }
   ctrlC(): void{
     let clone!: Shape;
@@ -228,8 +246,10 @@ export class ShapeManagerService {
     this.resizeLocation = location;
   }
 
-  clearResize(){
+  clearResize(id: number){
     this.isResizing = false;
+    this.controller.addShape([this.shapes.get(id)!]).subscribe();
+
   }
 
   createUserDefined(customId: number, shape: Shape){
