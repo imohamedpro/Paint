@@ -1,9 +1,13 @@
 package com.PaintApp.PaintAppBackend.Styles;
 
 public class Color {
-    final String hex ;
-
-    public Color(String hex){
+    private String hex;
+    
+    public void setHex(String hex) {
         this.hex = hex;
+    }
+
+    public String getHex() {
+        return hex;
     }
 }

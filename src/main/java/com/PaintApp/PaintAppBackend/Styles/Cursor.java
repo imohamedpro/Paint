@@ -1,9 +1,13 @@
 package com.PaintApp.PaintAppBackend.Styles;
 
 public class Cursor {
-  final String type;
+  private String type;
+  
+  public void setType(String type) {
+    this.type = type;
+  }
 
-  public Cursor(String type){
-      this.type = type;
+  public String getType() {
+    return type;
   }
 }

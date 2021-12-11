@@ -1,9 +1,13 @@
 package com.PaintApp.PaintAppBackend.Styles;
 
 public class Dimensions{
-    final int value;
+    private int value;
 
-    public Dimensions(int value){
+    public void setValue(int value) {
         this.value = value;
+    }
+
+    public int getValue() {
+        return value;
     }
 }
