@@ -19,6 +19,8 @@ export class Style {
         clone.strokeColor = this.strokeColor.copy();
         if(this.strokeWidth)
         clone.strokeWidth = this.strokeWidth.copy();
+        if(this.cursor)
+        clone.cursor = this.cursor;
         return clone;
     }
 }

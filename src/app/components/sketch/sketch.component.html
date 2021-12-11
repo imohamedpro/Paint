@@ -31,8 +31,7 @@
 
     </svg:g>
     <use *ngFor="let shape of this.manager.selectedShapes | keyvalue"
-            [attr.href] = "'#' + shape.key"
-            [attr.opacity] = '0'>
+            [attr.href] = "'#' + shape.key">
 
     </use>
 </svg>

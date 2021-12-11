@@ -75,6 +75,13 @@ export class ShapeManagerService {
     shape.setCursor("pointer"); 
   }
 
+  selectAll(){
+    this.selectedShapes = new Map<number, Shape>();
+    this.shapes.forEach((shape) =>{
+      this.select(shape);
+    });
+  }
+
   clearSelected(){
     this.selectedShapes.forEach((shape) => {
       this.deselect(shape);
@@ -112,7 +119,13 @@ export class ShapeManagerService {
   ctrlC(): void{
     let clone!: Shape;
     this.clipBoard = new Map<number, Shape>();
-    this.selectedShapes.forEach((shape)=>{
+    let sorted = Array.from(this.shapes.values()).sort((a, b)=>{
+      if(a >= b){
+        return 1;
+      }
+      return -1;
+    });
+    sorted.forEach((shape)=>{
       clone = shape.copy();
       console.log("original" + shape);
       console.log("clone" + clone);
@@ -120,7 +133,7 @@ export class ShapeManagerService {
     });
   }
   paste(): void{
-    let shifting:Point = new Point(5,5);
+    let shifting:Point = new Point(15,15);
     this.clipBoard.forEach((shape)=> {
       let clone = shape.copy();
       clone.move(shifting);
@@ -150,7 +163,28 @@ export class ShapeManagerService {
   }
 
   finishCreation(id: number){
-    this.shapes.get(id)?.setCursor("pointer")
+    // console.log(this.shapes.get(id));
+    if(this.validShape(id)){
+      this.shapes.get(id)?.setCursor("pointer");
+    }else{
+      this.shapes.delete(id);
+    }
+  }
+  validShape(id: number): boolean{
+    let shape = this.shapes.get(id), valid = false;
+    if(shape){
+      if(shape.type =='line'){
+        if((shape.getMaxX() - shape.getMinX()) > 5 || (shape.getMaxY() - shape.getMinY()) > 5){
+          valid = true;
+        }
+      }else if(shape.dimensions && (shape.dimensions[0] > 5 && shape.dimensions[1] > 5)){
+          valid = true;
+        }
+      }
+
+    console.log(shape);
+
+    return valid;
   }
 
   setResize(id: number, initialPoint: Point, location:string): void{
@@ -219,4 +253,6 @@ export class ShapeManagerService {
   setCenter(center: Point, id: number){
     this.shapes.get(id)!.center = center.copy();
   }
+
+
 }

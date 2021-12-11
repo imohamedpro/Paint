@@ -71,19 +71,25 @@ export class SketchComponent implements OnInit {
   
    @HostListener('window:keydown',['$event'])
    ctrlOrDeleteDown(event: KeyboardEvent){
-     if(event.ctrlKey && event.key === 'c'){
-      //  console.log("ctrl + c is done");
-       this.manager.ctrlC();
-       this.ctrlC = true;
-     }
-     else if(event.ctrlKey && event.key === 'v' && this.ctrlC){
-       this.manager.paste();
-     }
-     else if(event.ctrlKey){
+     if(event.ctrlKey){
        this.ctrl = true;
+       if(event.key == 'c'){
+        //  console.log("ctrl + c is done");
+        this.manager.ctrlC();
+        this.ctrlC = true;
+       }else if(event.key == 'a'){
+         event.preventDefault();
+         this.manager.selectAll();
+       }else if(event.key === 'v' && this.ctrlC){
+          this.manager.paste();
+       }
+    //  }
+    //  else if(event.ctrlKey && event.key === 'v' && this.ctrlC){
+    // //  }
+    //  else if(event.ctrlKey){
+      //  this.ctrl = true;
       //  console.log(this.ctrl);
-     }
-     else if(event.key === 'Delete'){
+     }else if(event.key === 'Delete'){
        this.manager.delete();
       //  console.log('delete is down');
      }
@@ -99,9 +105,9 @@ export class SketchComponent implements OnInit {
        this.ctrlC = false;
      }
    }
-  random():number{
-    return Math.random()*800;
-  }
+  // random():number{
+  //   return Math.random()*800;
+  // }
 
   // click():void{
   //   console.log(this.mode);
@@ -156,7 +162,8 @@ export class SketchComponent implements OnInit {
             this.dim = [this.dim[0],this.dim[0]];
           }
          }
-         this.manager.draw(this.id, this.dim);
+         console.log(this.dim);
+          this.manager.draw(this.id, this.dim);
 
      }else if(this.mode == 'Move'){
        if(this.manager.isResizing){
@@ -175,15 +182,26 @@ export class SketchComponent implements OnInit {
   }
 
   mouseUp(e: MouseEvent): void{
-    if(this.isMouseDown && this.mode != 'Move'){
-      this.svgCursor = new Cursor("auto");
-      this.manager.finishCreation(this.id);
-      this.isMouseDown = false;
-      this.dim = [0,0,0,0]
-    }else if(this.mode == 'Move' && this.manager.isDragging){
-      this.manager.clearDragging();
-    }else if(this.manager.isResizing){
-      this.manager.clearResize();
+    if(e.button == 0){
+      if(this.isMouseDown && this.mode != 'Move'){
+        this.svgCursor = new Cursor("auto");
+        // if(this.mode == 'Line')
+        // if(this.dim[0] > 5 && this.dim[1] > 5 || this.mode == 'Line' || this.mode == 'Triangle'){
+        //   if(this.manager.validShape(this.id)){
+        //   this.manager.finishCreation(this.id);
+
+        // }else{
+        //   this.manager.shapes.delete(this.id);
+        // }
+        this.manager.finishCreation(this.id);
+        this.isMouseDown = false;
+        this.dim = [0,0,0,0];
+
+      }else if(this.mode == 'Move' && this.manager.isDragging){
+        this.manager.clearDragging();
+      }else if(this.manager.isResizing){
+        this.manager.clearResize();
+      }
     }
   }
 
