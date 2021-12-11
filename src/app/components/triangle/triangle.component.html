@@ -1,4 +1,4 @@
 <svg:polygon  [attr.points] = "pointsGetter()"
               [attr.style] = "triangle.style.toString()"
-              (click)="clicked()"
-              (mousedown)="mouseDown($event)">
+              (click)="eventHandler.clicked(triangle)"
+              (mousedown)="eventHandler.mouseDown($event, triangle)">
