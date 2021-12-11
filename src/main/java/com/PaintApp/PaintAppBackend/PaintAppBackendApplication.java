@@ -12,5 +12,4 @@ public class PaintAppBackendApplication {
 	public static void main(String[] args) throws JsonMappingException, JsonProcessingException {
 		SpringApplication.run(PaintAppBackendApplication.class, args);
 	}
-
 }

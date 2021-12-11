@@ -65,15 +65,26 @@ public class PaintService {
     }
 
     public BooleanShape undo(){
-        UndoShape undoShape = undo.pop();
-        redo.push(undoShape);
-        return new BooleanShape(undoShape.getBefore(), undoShape.isCreated(), undoShape.isDeleted(), undoShape.isChanged());
+        BooleanShape response = new BooleanShape(null, false, false, false);
+        try{
+            UndoShape undoShape = undo.pop();
+            redo.push(undoShape);
+            response =  new BooleanShape(undoShape.getBefore(), undoShape.isCreated(), undoShape.isDeleted(), undoShape.isChanged());
+        }catch(Exception e){
+
+        }
+        return response;
+
     }
 
     public BooleanShape redo(){
-        UndoShape redoShape = redo.pop();
-        undo.push(redoShape);
-        return new BooleanShape(redoShape.getAfter(), redoShape.isDeleted(), redoShape.isCreated(), redoShape.isChanged());
+        BooleanShape response = new BooleanShape(null, false, false, false);
+        try{
+            UndoShape redoShape = redo.pop();
+            undo.push(redoShape);
+            response = new BooleanShape(redoShape.getAfter(), redoShape.isDeleted(), redoShape.isCreated(), redoShape.isChanged());
+        }catch(Exception e){}
+        return response;
     }
 
 //    public boolean isLastRedoDeleted(){
