@@ -67,12 +67,18 @@ export class ShapeManagerService {
   }
 
   select(shape: Shape){
-    if(this.selectedShapes.size == 0 || this.ctrlDown){
+    if(!this.ctrlDown){
+      console.log(shape);
+      this.clearSelected();
+    }
+    if(shape.isSelected){
+      this.deselect(shape);
+    }else{
       shape.isSelected = true;
       this.selectedShapes.set(shape.id, shape);
-      shape.setCursor("move"); 
+      shape.setCursor("move");
     }
-
+ 
   }
   deselect(shape: Shape){
     shape.isSelected = false;
