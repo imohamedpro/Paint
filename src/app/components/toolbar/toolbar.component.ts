@@ -43,7 +43,8 @@ export class ToolbarComponent implements OnInit {
   }
 
   upload(){
-    console.log("uploaded")
+    console.log("uploaded");
+    // this.manager.controller.uploadFile().subscribe();
   }
 
 }
