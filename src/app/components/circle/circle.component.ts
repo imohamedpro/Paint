@@ -78,7 +78,7 @@ export class CircleComponent implements OnInit{
 
   }
   mouseDown(e: MouseEvent):void {
-    if(e.button == 0){
+    if(e.button == 0 && this.circle.isSelected){
       this.initialClick = new Point(e.clientX, e.clientY);
       this.manager.setDragging(this.initialClick);
       console.log(this.initialClick);
