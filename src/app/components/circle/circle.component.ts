@@ -1,5 +1,5 @@
 import { Shape } from '../../classes/Shape';
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, HostBinding, Input, OnInit } from '@angular/core';
 import { ShapeManagerService } from '../../services/ShapeManager/shape-manager.service';
 import { EventHandler } from '../../classes/EventHandler';
 

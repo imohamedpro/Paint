@@ -4,5 +4,5 @@
             [attr.rx] = "ellipse.dimensions[0]"
             [attr.ry] = "ellipse.dimensions[1]"
             [attr.style] = "ellipse.style.toString()"
-            (click)="clicked()"
-            (mousedown)="mouseDown($event)"/>
+            (click)="eventHandler.clicked(ellipse)"
+            (mousedown)="eventHandler.mouseDown($event, ellipse)"/>

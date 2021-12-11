@@ -25,6 +25,7 @@ export class ShapeManagerService {
   resizeId!: number;
   resizeLocation!: string;
   initialClick: Point;
+  ctrlDown: boolean;
   constructor(factory: ShapeFactoryService) { 
     this.shapes = new Map<number, Shape>();
     this.selectedShapes = new Map<number, Shape>();
@@ -34,6 +35,7 @@ export class ShapeManagerService {
     this.factory = factory;
     this.isDragging = false;
     this.isResizing = false;
+    this.ctrlDown = false;
     this.initialClick = new Point(0,0);
   }
   getAvailableId(): number{
@@ -65,9 +67,12 @@ export class ShapeManagerService {
   }
 
   select(shape: Shape){
-    shape.isSelected = true;
-    this.selectedShapes.set(shape.id, shape);
-    shape.setCursor("move"); 
+    if(this.selectedShapes.size == 0 || this.ctrlDown){
+      shape.isSelected = true;
+      this.selectedShapes.set(shape.id, shape);
+      shape.setCursor("move"); 
+    }
+
   }
   deselect(shape: Shape){
     shape.isSelected = false;

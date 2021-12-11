@@ -73,6 +73,9 @@ export class SketchComponent implements OnInit {
    ctrlOrDeleteDown(event: KeyboardEvent){
      if(event.ctrlKey){
        this.ctrl = true;
+       this.manager.ctrlDown = true;
+       console.log('ctrl');
+
        if(event.key == 'c'){
         //  console.log("ctrl + c is done");
         this.manager.ctrlC();
@@ -99,6 +102,7 @@ export class SketchComponent implements OnInit {
    ctrlUp(event: KeyboardEvent){
      if(event.ctrlKey){
        this.ctrl = false;
+       this.manager.ctrlDown = false;
       //  console.log(this.ctrl);
      }
      else if(event.key === 'c'){
