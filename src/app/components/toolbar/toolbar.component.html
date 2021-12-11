@@ -29,14 +29,18 @@
 			<span class="material-icons">delete</span>
 			<span class="menu-item-label">Delete</span>
 		</div>
-		<div class="menu-item">
-			<span class="material-icons">save</span>
-			<span class="menu-item-label">Save</span>
-		</div>
 		<label class="menu-item" for='upload'>
 			<span class="material-icons">upload_file</span>
 			<span class="menu-item-label">Load</span>
 		</label>
+		<a class="menu-item" href="http://localhost:4050/api/download-json">
+			<span class="material-icons">save</span>
+			<span class="menu-item-label">Save JSON</span>
+		</a>
+		<a class="menu-item" href="http://localhost:4050/api/download-xml">
+			<span class="material-icons">save</span>
+			<span class="menu-item-label">Save XML</span>
+		</a>
 	</div>
 </div>
 <input type="file" id="upload" accept=".xml,.json" style="display:none" (change) = "upload()"/>
