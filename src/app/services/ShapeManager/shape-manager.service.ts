@@ -317,6 +317,10 @@ export class ShapeManagerService {
     shape.style.strokeWidth = new Dimensions(obj.style.strokeWidth.value);
     shape.style.cursor = new Cursor(obj.style.cursor.type);
     console.log(shape.style.toString());
+    shape.shapes = new Array<Shape>();
+    obj.shapes.forEach(element => {
+      shape.shapes.push(this.loadShape(element));
+    });
 
     return shape;
   }
