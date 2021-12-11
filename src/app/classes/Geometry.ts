@@ -18,17 +18,6 @@ export class Geometry {
         let dy = p2.y - p1.y;
         return this.Pythagoras(dx, dy);
     }
-    static helper(dimensions: Array<number>): Array<number>{
-        return [this.Pythagoras(dimensions[0], dimensions[1]), Math.atan(dimensions[1] / dimensions[0])];
-    }
-    static getXComponent(dimensions: Array<number>): number{
-        let [magnitude, angle] =  this.helper(dimensions);
-        return magnitude * Math.cos(angle);
-    }
-    static getYComponent(dimensions: Array<number>): number{
-        let [magnitude, angle] =  this.helper(dimensions);
-        return magnitude * Math.sin(angle);
-    }
     static getDirections(location: string, offset: Point): Point{
         let dx = 1, dy = 1;
         switch(location){

@@ -2,7 +2,6 @@ import { Component, Input, OnInit } from '@angular/core';
 import { Point } from '../../classes/Point';
 import { Resizer, ResizerFactory } from '../../classes/Resizers';
 import { Selection, SelectionFactory } from '../../classes/Selection';
-import { Shape } from '../../classes/Shape';
 
 @Component({
   selector: '[shape=selection]',
