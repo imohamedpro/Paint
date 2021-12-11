@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 public class FileShape {
     private ArrayList<Shape> shapes;
-    private ArrayList<Shape[]> customShapes;
+    private ArrayList<ArrayListShape> customShapes;
 
     public ArrayList<Shape> getShapes() {
         return shapes;
@@ -14,11 +14,11 @@ public class FileShape {
         this.shapes = shapes;
     }
 
-    public ArrayList<Shape[]> getCustomShapes() {
+    public ArrayList<ArrayListShape> getCustomShapes() {
         return customShapes;
     }
 
-    public void setCustomShapes(ArrayList<Shape[]> customShapes) {
+    public void setCustomShapes(ArrayList<ArrayListShape> customShapes) {
         this.customShapes = customShapes;
     }
 }

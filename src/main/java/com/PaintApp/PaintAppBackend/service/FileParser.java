@@ -1,5 +1,6 @@
 package com.PaintApp.PaintAppBackend.service;
 
+import com.PaintApp.PaintAppBackend.model.shape.ArrayListShape;
 import com.PaintApp.PaintAppBackend.model.shape.FileShape;
 import com.PaintApp.PaintAppBackend.model.shape.Shape;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -11,7 +12,7 @@ import java.nio.file.*;
 import java.util.ArrayList;
 
 public class FileParser {
-    public void generateFile(ArrayList<Shape> shapes, ArrayList<Shape[]> customShapes ,String extension){
+    public void generateFile(ArrayList<Shape> shapes, ArrayList<ArrayListShape> customShapes , String extension){
         FileShape fileShape = new FileShape();
         fileShape.setShapes(shapes);
         fileShape.setCustomShapes(customShapes);
@@ -49,6 +50,7 @@ public class FileParser {
         } else if(extension.equals("xml")){
             System.out.println("loading XML file");
             XmlMapper xmlMapper = new XmlMapper();
+            xmlMapper.enable(SerializationFeature.INDENT_OUTPUT);
             String xml = Files.readString(Paths.get(fileName), StandardCharsets.UTF_8);
             return xmlMapper.readValue(xml, FileShape.class);
         }

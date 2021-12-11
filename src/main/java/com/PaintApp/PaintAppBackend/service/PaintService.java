@@ -1,9 +1,6 @@
 package com.PaintApp.PaintAppBackend.service;
 
-import com.PaintApp.PaintAppBackend.model.shape.BooleanShape;
-import com.PaintApp.PaintAppBackend.model.shape.FileShape;
-import com.PaintApp.PaintAppBackend.model.shape.UndoShape;
-import com.PaintApp.PaintAppBackend.model.shape.Shape;
+import com.PaintApp.PaintAppBackend.model.shape.*;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
@@ -86,9 +83,9 @@ public class PaintService {
         return shapeArray;
     }
 
-    public ArrayList<Shape[]> getCustomShapes(){
-        ArrayList<Shape[]> customArray = new ArrayList<Shape[]>();
-        customShapes.forEach((k,s) -> customArray.add(s));
+    public ArrayList<ArrayListShape> getCustomShapes(){
+        ArrayList<ArrayListShape> customArray = new ArrayList<>();
+        customShapes.forEach((k,s) -> customArray.add(listToArrayList(s)));
         return customArray;
     }
 
@@ -104,9 +101,28 @@ public class PaintService {
         FileShape fileContent = fileParser.readFile(fileName);
         shapes.clear();
         customShapes.clear();
-        addCustomShapesList(fileContent.getCustomShapes());
+        addCustomShapesList(nestedListToArray(fileContent.getCustomShapes()));
         add(fileContent.getShapes());
         return fileContent;
     }
 
+    public ArrayListShape listToArrayList(Shape[] array){
+        ArrayListShape arrayList = new ArrayListShape();
+        for(int i = 0; i < array.length; i++){
+            arrayList.add(array[i]);
+        }
+        return  arrayList;
+    }
+
+    public ArrayList<Shape[]> nestedListToArray(ArrayList<ArrayListShape> arrayList){
+        ArrayList<Shape[]> array = new ArrayList<>();
+        for(int i = 0; i < arrayList.size(); i++){
+            Shape[] temp = new Shape[arrayList.get(i).size()];
+            for(int j = 0; j < arrayList.get(i).size(); j++){
+                temp[j] = arrayList.get(i).get(j);
+            }
+            array.add(temp);
+        }
+        return  array;
+    }
 }
