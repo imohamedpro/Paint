@@ -1,5 +1,6 @@
 package com.PaintApp.PaintAppBackend.service;
 
+import com.PaintApp.PaintAppBackend.model.shape.FileShape;
 import com.PaintApp.PaintAppBackend.model.shape.Shape;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
@@ -10,11 +11,15 @@ import java.nio.file.*;
 import java.util.ArrayList;
 
 public class FileParser {
-    public void generateFile(ArrayList<Shape> shapes, String extension){
+    public void generateFile(ArrayList<Shape> shapes, ArrayList<Shape[]> customShapes ,String extension){
+        FileShape fileShape = new FileShape();
+        fileShape.setShapes(shapes);
+        fileShape.setCustomShapes(customShapes);
+
         if(extension.equals("json")){
             ObjectMapper obj = new ObjectMapper();
             try {
-                obj.writeValue(new File("drawing.json"), shapes);
+                obj.writeValue(new File("drawing.json"), fileShape);
                 File file = new File("drawing.json");
             }
             catch (IOException e) {
@@ -25,7 +30,7 @@ public class FileParser {
             XmlMapper xmlMapper = new XmlMapper();
             xmlMapper.enable(SerializationFeature.INDENT_OUTPUT);
             try {
-                xmlMapper.writeValue(new File("drawing.xml"), shapes);
+                xmlMapper.writeValue(new File("drawing.xml"), fileShape);
                 File file = new File("drawing.xml");
             }
             catch (IOException e) {
@@ -35,22 +40,19 @@ public class FileParser {
         }
     }
 
-    public Shape[] readFile(String fileName) throws IOException {
+    public FileShape readFile(String fileName) throws IOException {
         String extension = fileName.split("\\.")[1].toLowerCase();
         if(extension.equals("json")) {
             System.out.println("loading JSON file");
             String json = Files.readString(Paths.get(fileName), StandardCharsets.UTF_8);
-            Shape[] shapes = new ObjectMapper().readValue(json, Shape[].class);
-            return shapes;
+            return new ObjectMapper().readValue(json, FileShape.class);
         } else if(extension.equals("xml")){
             System.out.println("loading XML file");
             XmlMapper xmlMapper = new XmlMapper();
             String xml = Files.readString(Paths.get(fileName), StandardCharsets.UTF_8);
-            Shape[] shapes = xmlMapper.readValue(xml, Shape[].class);
-            return shapes;
+            return xmlMapper.readValue(xml, FileShape.class);
         }
-        Shape[] shapes = {};
-        return shapes;
+        return new FileShape();
     }
 
 }

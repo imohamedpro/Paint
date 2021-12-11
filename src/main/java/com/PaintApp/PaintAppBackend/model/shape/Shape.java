@@ -9,6 +9,16 @@ public class Shape {
     private boolean isSelected;
     private Style style;
     private Integer[] dimensions;
+    private Shape[] shapes = {};
+    private int[] initialDims = {};
+
+    public Shape[] getShapes() {
+        return shapes;
+    }
+
+    public void setShapes(Shape[] shapes) {
+        this.shapes = shapes;
+    }
 
     public int getId() {
         return id;
@@ -56,6 +66,14 @@ public class Shape {
 
     public void setDimensions(Integer[] dimensions) {
         this.dimensions = dimensions;
+    }
+
+    public int[] getInitialDims() {
+        return initialDims;
+    }
+
+    public void setInitialDims(int[] initialDims) {
+        this.initialDims = initialDims;
     }
 
     //For testing purpose

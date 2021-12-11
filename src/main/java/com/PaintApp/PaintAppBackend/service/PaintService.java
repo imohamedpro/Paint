@@ -1,6 +1,7 @@
 package com.PaintApp.PaintAppBackend.service;
 
 import com.PaintApp.PaintAppBackend.model.shape.BooleanShape;
+import com.PaintApp.PaintAppBackend.model.shape.FileShape;
 import com.PaintApp.PaintAppBackend.model.shape.UndoShape;
 import com.PaintApp.PaintAppBackend.model.shape.Shape;
 import org.springframework.stereotype.Service;
@@ -11,6 +12,7 @@ import java.util.*;
 @Service
 public class PaintService {
     private Map<Integer, Shape> shapes = new HashMap<Integer, Shape>();
+    private Map<Integer, Shape[]> customShapes = new HashMap<>();
     private Stack<UndoShape> undo = new Stack<UndoShape>();
     private Stack<UndoShape> redo = new Stack<UndoShape>();
     private FileParser fileParser = new FileParser();
@@ -26,6 +28,30 @@ public class PaintService {
             }
             this.shapes.put(id, addedShapes[i]);
             undo.push(undoShape);
+        }
+    }
+
+    public void add(ArrayList<Shape> addedShapes){
+        for(int i = 0; i < addedShapes.size(); i++){
+            int id = addedShapes.get(i).getId();
+            UndoShape undoShape;
+            if(this.shapes.containsKey(id)){
+                undoShape = new UndoShape(this.shapes.get(id), addedShapes.get(i), false, false, true);
+            }else{
+                undoShape = new UndoShape(addedShapes.get(i), addedShapes.get(i), false, true, false);
+            }
+            this.shapes.put(id, addedShapes.get(i));
+            undo.push(undoShape);
+        }
+    }
+
+    public void addCustomShapes(Shape[] addedShape){
+        this.customShapes.put(this.customShapes.size()+1, addedShape);
+    }
+
+    public void addCustomShapesList(ArrayList<Shape[]> addedShapes){
+        for(int i = 0; i < addedShapes.size(); i++){
+            this.customShapes.put(this.customShapes.size()+1, addedShapes.get(i));
         }
     }
 
@@ -50,9 +76,9 @@ public class PaintService {
         return new BooleanShape(redoShape.getAfter(), redoShape.isDeleted(), redoShape.isCreated(), redoShape.isChanged());
     }
 
-    public boolean isLastRedoDeleted(){
-        return redo.pop().isDeleted();
-    }
+//    public boolean isLastRedoDeleted(){
+//        return redo.pop().isDeleted();
+//    }
 
     public ArrayList<Shape> getShapes(){
         ArrayList<Shape> shapeArray = new ArrayList<Shape>();
@@ -60,18 +86,27 @@ public class PaintService {
         return shapeArray;
     }
 
+    public ArrayList<Shape[]> getCustomShapes(){
+        ArrayList<Shape[]> customArray = new ArrayList<Shape[]>();
+        customShapes.forEach((k,s) -> customArray.add(s));
+        return customArray;
+    }
+
     public void saveAsJson(){
-        fileParser.generateFile(getShapes(), "json");
+        fileParser.generateFile(getShapes(), getCustomShapes() ,"json");
     }
 
     public  void saveAsXml(){
-        fileParser.generateFile(getShapes(), "xml");
+        fileParser.generateFile(getShapes(), getCustomShapes() ,"xml");
     }
 
-    public Shape[] load(String fileName) throws IOException {
-        Shape[] loadedShapes = fileParser.readFile(fileName);
-        add(loadedShapes);
-        return loadedShapes;
+    public FileShape load(String fileName) throws IOException {
+        FileShape fileContent = fileParser.readFile(fileName);
+        shapes.clear();
+        customShapes.clear();
+        addCustomShapesList(fileContent.getCustomShapes());
+        add(fileContent.getShapes());
+        return fileContent;
     }
 
 }

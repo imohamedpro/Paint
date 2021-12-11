@@ -1,6 +1,7 @@
 package com.PaintApp.PaintAppBackend.controller;
 
 import com.PaintApp.PaintAppBackend.model.shape.BooleanShape;
+import com.PaintApp.PaintAppBackend.model.shape.FileShape;
 import com.PaintApp.PaintAppBackend.model.shape.Shape;
 import com.PaintApp.PaintAppBackend.service.PaintService;
 
@@ -52,6 +53,12 @@ public class PaintController {
         return this.paintService.redo();
     }
 
+    @PostMapping("/define")
+    public void addCustomShape(@RequestBody Shape[] receivedShape) throws IOException {
+        this.paintService.addCustomShapes(receivedShape);
+        System.out.println("Defined");
+    }
+
     @GetMapping("/download-json")
     public ResponseEntity<Object> sendJsonFile() throws IOException  {
         System.out.println("Get JSON");
@@ -95,14 +102,13 @@ public class PaintController {
     }
 
     @PostMapping("/upload")
-    public Shape[] uploadFile(@RequestParam("file") MultipartFile file) throws IOException {
+    public FileShape uploadFile(@RequestParam("file") MultipartFile file) throws IOException {
         try {
             Files.copy(file.getInputStream(), Paths.get(file.getOriginalFilename()));
         } catch (Exception e) {
             throw new RuntimeException("Could not store the file. Error: " + e.getMessage());
         }
         return this.paintService.load(file.getOriginalFilename());
-
     }
 
 
