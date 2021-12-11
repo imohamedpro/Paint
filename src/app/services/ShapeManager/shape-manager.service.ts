@@ -85,6 +85,7 @@ export class ShapeManagerService {
         });
         this.customShapes.set(count++, customShape);
       });
+      console.log(this.customShapes);
     });
 
   }
@@ -310,7 +311,7 @@ export class ShapeManagerService {
     let shape: Shape = this.factory.createShape(obj.type, obj.id, new Point(obj.center.x, obj.center.y));
     shape.dimensions = obj.dimensions;
     shape.style = new Style();
-    console.log(obj.style.fillColor.color.hex);
+    console.log(obj.type);
     shape.style.fillColor = new FillColor(new Color(obj.style.fillColor.color.hex));
     // shape.style.fillColor.color = new Color(obj.style.fillColor.color.hex);
     shape.style.strokeColor = new StrokeColor(new Color(obj.style.strokeColor.color.hex));

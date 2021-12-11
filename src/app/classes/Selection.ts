@@ -32,15 +32,6 @@ export interface Selection {
     resizeSy(center: Point, dimensions: Array<number>): number 
     resizeWx(center: Point, dimensions: Array<number>): number 
     resizeWy(center: Point, dimensions: Array<number>): number 
-    resizeNx(center: Point, dimensions: Array<number>): number
-    resizeNy(center: Point, dimensions: Array<number>): number
-    resizeEx(center: Point, dimensions: Array<number>): number
-    resizeEy(center: Point, dimensions: Array<number>): number
-    resizeSx(center: Point, dimensions: Array<number>): number
-    resizeSy(center: Point, dimensions: Array<number>): number
-    resizeWx(center: Point, dimensions: Array<number>): number
-    resizeWy(center: Point, dimensions: Array<number>): number
-    
 }
 
 export class SelectionA implements Selection {

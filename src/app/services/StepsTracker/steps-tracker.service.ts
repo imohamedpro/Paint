@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Shape } from '../../classes/Shape';
 import { ControllerService } from '../controller/controller.service';
-import { ShapeFactoryService } from '../ShapeFactory/shape-factory.service';
 import { ShapeManagerService } from '../ShapeManager/shape-manager.service';
 
 @Injectable({
@@ -53,8 +52,4 @@ export class StepsTrackerService {
  
       });
     }
-    save(){}
-
-
-    load(){}
 }
