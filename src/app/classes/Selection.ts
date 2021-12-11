@@ -1,6 +1,4 @@
-import { Geometry } from './Geometry';
 import { Point } from './Point';
-import {Shape} from './Shape';
 
 export class SelectionFactory{
 
