@@ -78,13 +78,17 @@ export class ShapeManagerService {
     });
     this.controller.loadCustomShapes().subscribe((shapes)=>{
       let count = 0;
-      shapes.forEach((custom)=>{
-        let customShape = new Array<Shape>();
-        custom.forEach((shape)=>{
-          customShape.push(this.loadShape(shape));
+      if(shapes){
+        shapes.forEach((custom, id)=>{
+          let customShape = new Array<Shape>();
+          custom.forEach((shape)=>{
+            console.log(shape);
+            customShape.push(this.loadShape(shape));
+          });
+          this.customShapes.set(id, customShape);
         });
-        this.customShapes.set(count++, customShape);
-      });
+      }
+
       console.log(this.customShapes);
     });
 
@@ -163,7 +167,7 @@ export class ShapeManagerService {
   ctrlC(): void{
     let clone!: Shape;
     this.clipBoard = new Map<number, Shape>();
-    let sorted = Array.from(this.shapes.values()).sort((a, b)=>{
+    let sorted = Array.from(this.selectedShapes.values()).sort((a, b)=>{
       if(a >= b){
         return 1;
       }
@@ -253,14 +257,10 @@ export class ShapeManagerService {
 
   }
 
-  createUserDefined(customId: number, shape: Shape){
-    let prototype = this.customShapes.get(customId);
-    console.log('initDims');
-    console.log(shape);
-    if(prototype){
-      let minX = prototype[0].getMinX(), minY = prototype[0].getMinY(),
-        maxX = prototype[0].getMaxX(), maxY = prototype[0].getMaxY(),
-        minStroke = prototype[0].style.strokeWidth;
+  getboundries(prototype: Shape[], shape: Shape): Array<number>{
+    let minX = prototype[0].getMinX(), minY = prototype[0].getMinY(),
+    maxX = prototype[0].getMaxX(), maxY = prototype[0].getMaxY(),
+    minStroke = prototype[0].style.strokeWidth;
     shape.shapes.push(prototype[0].copy());
     for(let i = 1; i < prototype.length; i++){
       shape.shapes.push(prototype[i].copy());
@@ -268,25 +268,34 @@ export class ShapeManagerService {
       minY = Math.min(minY, prototype[i].getMinY());
       maxX = Math.max(maxX, prototype[i].getMaxX());
       maxY = Math.max(maxY, prototype[i].getMaxY());
+    }
+    return [minX, minY, maxX, maxY];
+}
 
+  createUserDefined(customId: number, shape: Shape){
+    let prototype = this.customShapes.get(customId);
+    let boundries: Array<number> = [];
+    console.log('initDims');
+    console.log(shape);
+    if(prototype){
+      boundries = this.getboundries(prototype, shape);
     }
     shape.shapes.sort((a, b)=>{
       if(a.id >= b.id) return 1;
       return -1;
     });
-    let offset = new Point(-1*minX, -1*minY);
+    let offset = new Point(-1*boundries[0], -1*boundries[1]);
     shape.shapes.forEach((shape) => {
         shape.move(offset);
         shape.move(new Point(15, 15));
     });
     shape.initialDims = [0, 0];
-    shape.initialDims[0] = maxX - minX + 30;
-    shape.initialDims[1] = maxY - minY + 30;
+    shape.initialDims[0] = boundries[2] - boundries[0] + 30;
+    shape.initialDims[1] = boundries[3] - boundries[1] + 30;
     shape.dimensions[0] = 0;
     shape.dimensions[1] = 0;
 
     // console.log(shape.initialDims[1]);
-    }
   }
 
   addCustomShape(){
@@ -308,20 +317,23 @@ export class ShapeManagerService {
     this.shapes.get(id)!.center = center.copy();
   }
   loadShape(obj: ShapeResponse): Shape{
-    let shape: Shape = this.factory.createShape(obj.type, obj.id, new Point(obj.center.x, obj.center.y));
+    let shape: Shape = this.factory.createShape(obj.type.toLowerCase(), obj.id, new Point(obj.center.x, obj.center.y));
     shape.dimensions = obj.dimensions;
     shape.style = new Style();
     console.log(obj.type);
-    shape.style.fillColor = new FillColor(new Color(obj.style.fillColor.color.hex));
-    // shape.style.fillColor.color = new Color(obj.style.fillColor.color.hex);
-    shape.style.strokeColor = new StrokeColor(new Color(obj.style.strokeColor.color.hex));
-    shape.style.strokeWidth = new Dimensions(obj.style.strokeWidth.value);
-    shape.style.cursor = new Cursor(obj.style.cursor.type);
-    console.log(shape.style.toString());
+    if(obj.type.toLocaleLowerCase() != 'userdefined'){
+      shape.style.fillColor = new FillColor(new Color(obj.style.fillColor.color.hex));
+      // shape.style.fillColor.color = new Color(obj.style.fillColor.color.hex);
+      shape.style.strokeColor = new StrokeColor(new Color(obj.style.strokeColor.color.hex));
+      shape.style.strokeWidth = new Dimensions(obj.style.strokeWidth.value);
+      shape.style.cursor = new Cursor(obj.style.cursor.type);
+      console.log(shape.style.toString());
+    }
     shape.shapes = new Array<Shape>();
     obj.shapes.forEach(element => {
       shape.shapes.push(this.loadShape(element));
     });
+
 
     return shape;
   }

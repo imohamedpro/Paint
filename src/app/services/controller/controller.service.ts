@@ -28,8 +28,8 @@ export class ControllerService {
   loadShapes(): Observable<Array<ShapeResponse>>{
     return this.http.get<Array<ShapeResponse>>(`${this.apiUrl}loadShapes`);
   }
-  loadCustomShapes(): Observable<Array<Array<ShapeResponse>>>{
-    return this.http.get<Array<Array<ShapeResponse>>>(`${this.apiUrl}loadCustomShapes`);
+  loadCustomShapes(): Observable<Map<number, ShapeResponse[]>>{
+    return this.http.get<Map<number, ShapeResponse[]>>(`${this.apiUrl}loadCustomShapes`);
   }
   addShape(shapes: Shape[]): Observable<any>{
     console.log("send request");

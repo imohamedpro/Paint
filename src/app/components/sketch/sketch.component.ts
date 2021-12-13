@@ -79,7 +79,7 @@ export class SketchComponent implements OnInit {
        this.manager.ctrlDown = true;
       console.log(event.key);
        if(event.key == 'c'){
-          console.log("ctrl + c is done");
+          console.log(this.manager.selectedShapes);
           this.manager.ctrlC();
           this.ctrlC = true;
        }else if(event.key == 'a'){
