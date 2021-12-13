@@ -1,5 +1,6 @@
 package com.PaintApp.PaintAppBackend.controller;
 
+import com.PaintApp.PaintAppBackend.model.shape.ArrayListShape;
 import com.PaintApp.PaintAppBackend.model.shape.BooleanShape;
 import com.PaintApp.PaintAppBackend.model.shape.FileShape;
 import com.PaintApp.PaintAppBackend.model.shape.Shape;
@@ -35,8 +36,9 @@ public class PaintController {
         System.out.println("init");
         return this.paintService.getShapes();
     }
+
     @GetMapping("/loadCustomShapes")
-    public ArrayList<Shape[]> loadCustomShapes(){
+    public ArrayList<ArrayListShape> loadCustomShapes(){
         System.out.println("init");
         return this.paintService.getCustomShapes();
     }

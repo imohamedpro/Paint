@@ -9,7 +9,7 @@ import java.util.*;
 @Service
 public class PaintService {
     private Map<Integer, Shape> shapes = new HashMap<Integer, Shape>();
-    private Map<Integer, Shape[]> customShapes = new HashMap<>();
+    public Map<Integer, Shape[]> customShapes = new HashMap<>();
     private Stack<UndoShape> undo = new Stack<UndoShape>();
     private Stack<UndoShape> redo = new Stack<UndoShape>();
     private FileParser fileParser = new FileParser();
