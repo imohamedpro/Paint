@@ -19,6 +19,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.Map;
 
 @RestController
 @CrossOrigin()
@@ -38,9 +39,9 @@ public class PaintController {
     }
 
     @GetMapping("/loadCustomShapes")
-    public ArrayList<ArrayListShape> loadCustomShapes(){
+    public Map<Integer, Shape[]> loadCustomShapes(){
         System.out.println("init");
-        return this.paintService.getCustomShapes();
+        return this.paintService.customShapes;
     }
     @PostMapping("/add")
     public void add(@RequestBody Shape[] receivedShapes) throws IOException {
